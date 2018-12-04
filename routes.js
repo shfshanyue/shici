@@ -1,5 +1,5 @@
 const routes = require('next-routes')
 
 module.exports = routes()                           
-.add('about')
-.add('poems', '/hello')
+  .add('home', '/', 'home')
+  .add('poems', '/hello')

@@ -1,9 +1,3 @@
-import App from '../components/App'
-import Header from '../components/Header'
+import Home from './home'
 
-export default () => (
-  <App>
-    <Header />
-    Hello, APP
-  </App>
-)
+export default Home
