@@ -9,7 +9,7 @@ export default ({ children }) => (
       }
       body {
         margin: 0;
-        padding: 25px 50px;
+        background-color: #f6f6f6;
       }
       a {
         color: #22bad9;
@@ -36,6 +36,10 @@ export default ({ children }) => (
       }
       button:focus {
         outline: none;
+      }
+      .container {
+        width: 960px; 
+        margin: 0 auto;
       }
     `}</style>
   </main>
