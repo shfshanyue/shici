@@ -19,11 +19,9 @@ const Header = ({ router: { pathname } }) => (
       a {
         font-size: 18px;
         margin-right: 15px;
-        text-decoration: none;
       }
       .is-active {
         color: red;
-        text-decoration: none;
       }
     `}</style>
   </header>

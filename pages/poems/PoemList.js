@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
+import { withRouter } from 'next/router'
+import { Link } from '../../routes'
 
 const POEMS = gql`
   query POEMS {
     poems {
       id
+      uuid
       title
       paragraphs
       kind
@@ -28,17 +31,17 @@ class PoemList extends Component {
   }
 
   render () {
-    const { poems } = this.props
+    const { poems, loading } = this.props
     const { activeIds } = this.state
 
     return (
-      <div className="poems container">
+      <div className="container">
         <style jsx>{`
-          .poems {
+          .container {
             display: flex;
           }
 
-          .poem-container {
+          .poems {
             flex-grow: 1; 
           }
 
@@ -70,12 +73,16 @@ class PoemList extends Component {
             margin-top: 10px; 
           }
         `}</style>
-        <div className="poem-container">
+        <div className="poems">
           {
-            poems.map(poem => (
+            !loading && poems.map(poem => (
               <div key={poem.id} className="poem">
                 <h2>
-                  { poem.title }
+                  <Link route="poem" params={{ uuid: poem.uuid }}>
+                    <a>
+                      { poem.title }
+                    </a>
+                  </Link>
                 </h2>
                 <div>
                   { poem.author.dynasty }·{ poem.author.name }
@@ -122,7 +129,8 @@ export default compose(
   graphql(POEMS, {
     props ({ data, ...rest }) {
       return {
-        poems: data.poems || []
+        poems: data.poems || [],
+        loading: data.loading
       }
     }
   }),

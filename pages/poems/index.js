@@ -7,7 +7,7 @@ import PoemList from './PoemList'
 
 export default () => (
   <App>
-    <Header></Header>
-    <PoemList></PoemList>
+    <Header />
+    <PoemList />
   </App>
 )
