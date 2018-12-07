@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 
+import QR from '../../components/QR'
+import Author from './Author'
+
 const POEM = gql`
   query POEM ($uuid: ID!) {
     poem (uuid: $uuid) {
@@ -13,6 +16,7 @@ const POEM = gql`
       author {
         name
         dynasty
+        intro
       }
     }
   }
@@ -43,6 +47,7 @@ class Poem extends Component {
           .side {
             flex-basis: 300px; 
             flex-shrink: 0;
+            margin-left: 20px;
           }
         `}</style>
       <div className={`poem ${loading ? 'loading' : ''}`}>
@@ -69,7 +74,10 @@ class Poem extends Component {
         }
       </div>
       <div className="side">
-      
+        <QR />
+        {
+          !loading && <Author author={poem.author} />
+        }
       </div>
     </div>
     )

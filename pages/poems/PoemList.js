@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
+import QR from '../../components/QR'
 import { Link } from '../../routes'
 
 const POEMS = gql`
@@ -61,17 +62,6 @@ class PoemList extends Component {
             margin-left: 20px;
           }
 
-          .cunyin {
-            padding: 30px 0;
-            background-color: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .cunyin span {
-            margin-top: 10px; 
-          }
         `}</style>
         <div className="poems">
           {
@@ -115,10 +105,7 @@ class PoemList extends Component {
           }
         </div>
         <div className="side">
-          <div className="cunyin">
-            <img src="/static/cunyin.jpg" width="200px" height="200px" />
-            <span>每天一首古诗词</span>
-          </div>
+          <QR />
         </div>
       </div>
     )  
