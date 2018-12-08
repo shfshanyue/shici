@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
+import _ from 'lodash'
 
 import QR from '../../components/QR'
 import Card from '../../components/Card'
@@ -34,15 +35,7 @@ class Poem extends Component {
           }
 
           .poem {
-            padding: 20px; 
-            background-color: #fff;
-            margin-bottom: 20px;
             flex-grow: 1;
-            transition: all ease-out 0.2s;
-          }
-
-          .poem.loading {
-            opacity: 0;
           }
 
           .side {
@@ -57,15 +50,15 @@ class Poem extends Component {
             { poem.title }
           </h2>
           <div>
-            { poem.author.dynasty }·{ poem.author.name }
+            { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
           </div>
           <div>
             {
-              poem.paragraphs.map((p, index) => (
+              _.map(poem.paragraphs, (p, index) => (
                 <p key={index}>
                   { p } 
                 </p>
-              )) 
+              ))
             }
           </div>
         </Card>

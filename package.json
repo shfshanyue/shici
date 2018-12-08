@@ -10,6 +10,7 @@
     "apollo-boost": "^0.1.16",
     "graphql": "^14.0.2",
     "isomorphic-unfetch": "^3.0.0",
+    "lodash": "^4.17.11",
     "next": "^7.0.2",
     "next-routes": "^1.4.2",
     "prop-types": "^15.6.2",
