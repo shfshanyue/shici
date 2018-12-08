@@ -18,9 +18,12 @@ const POEM = gql`
       appreciation
       translation
       kind
+      annotations
       author {
         name
         dynasty
+        birthYear
+        deathYear
         intro
       }
     }
@@ -56,6 +59,24 @@ class Poem extends Component {
         { _.map(translation, (t, index) => <p key={index}>{t}</p>) }
       </Card>
     )
+  }
+
+  renderAnnotations () {
+    const { poem: { annotations = [] }, loading } = this.props
+    return annotations.length && (
+      <Card loading={loading}>
+        <h3>注释</h3>
+        <ul>
+          { _.map(annotations, (a, index) => (
+            <li key={index}>
+              <p>
+                <i>{a.key}:</i> {a.value}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Card>
+    ) 
   }
 
   render () {
@@ -95,8 +116,9 @@ class Poem extends Component {
             }
           </div>
         </Card>
-        { this.renderIntro() }
+        { this.renderAnnotations() }
         { this.renderTranslation() }
+        { this.renderIntro() }
         { this.renderAppreciation() }
       </div>
       <div className="side">
