@@ -14,7 +14,8 @@ export default ({ children, loading }) => (
       }
 
       .card.loading {
-        opacity: 0;
+        opacity: 0.4;
+        height: 200px;
       }
     `}</style>
   </div>

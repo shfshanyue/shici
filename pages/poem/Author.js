@@ -1,5 +1,6 @@
 export default ({ author }) => (
   <div>
-    <div className="name">{ author.name }</div>
+    <h3>{ author.name }</h3>
+    <p>{ author.intro }</p>
   </div>
 )

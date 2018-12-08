@@ -13,7 +13,10 @@ const POEM = gql`
       id
       uuid
       title
+      intro
       paragraphs
+      appreciation
+      translation
       kind
       author {
         name
@@ -25,6 +28,36 @@ const POEM = gql`
 `
 
 class Poem extends Component {
+  renderIntro () {
+    const { poem: { intro }, loading } = this.props
+    return intro && (
+      <Card loading={loading}>
+        <h3>简析</h3>
+        <p>{ intro }</p>
+      </Card>
+    )
+  }
+
+  renderAppreciation () {
+    const { poem: { appreciation }, loading } = this.props
+    return appreciation && (
+      <Card loading={loading}>
+        <h3>赏析</h3>
+        { _.map(appreciation, (t, index) => <p key={index}>{t}</p>) }
+      </Card>
+    )
+  }
+
+  renderTranslation () {
+    const { poem: { translation }, loading } = this.props
+    return translation && (
+      <Card loading={loading}>
+        <h3>翻译</h3>
+        { _.map(translation, (t, index) => <p key={index}>{t}</p>) }
+      </Card>
+    )
+  }
+
   render () {
     const { poem, loading } = this.props
     return (
@@ -62,12 +95,15 @@ class Poem extends Component {
             }
           </div>
         </Card>
+        { this.renderIntro() }
+        { this.renderTranslation() }
+        { this.renderAppreciation() }
       </div>
       <div className="side">
+        <Card loading={loading}>
+          <Author author={poem.author || {}} />
+        </Card>
         <QR />
-        {
-          !loading && <Author author={poem.author} />
-        }
       </div>
     </div>
     )
