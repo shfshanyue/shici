@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 
 import QR from '../../components/QR'
+import Card from '../../components/Card'
 import Author from './Author'
 
 const POEM = gql`
@@ -50,28 +51,24 @@ class Poem extends Component {
             margin-left: 20px;
           }
         `}</style>
-      <div className={`poem ${loading ? 'loading' : ''}`}>
-        {
-          !loading && (
-            <div>
-              <h2>
-                { poem.title }
-              </h2>
-              <div>
-                { poem.author.dynasty }·{ poem.author.name }
-              </div>
-              <div>
-                {
-                  poem.paragraphs.map((p, index) => (
-                    <p key={index}>
-                      { p } 
-                    </p>
-                  )) 
-                }
-              </div>
-            </div>
-          )
-        }
+      <div className="poem">
+        <Card loading={loading}>
+          <h2>
+            { poem.title }
+          </h2>
+          <div>
+            { poem.author.dynasty }·{ poem.author.name }
+          </div>
+          <div>
+            {
+              poem.paragraphs.map((p, index) => (
+                <p key={index}>
+                  { p } 
+                </p>
+              )) 
+            }
+          </div>
+        </Card>
       </div>
       <div className="side">
         <QR />
