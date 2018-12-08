@@ -15,6 +15,10 @@ export default ({ children }) => (
         color: #22bad9;
         text-decoration: none;
       }
+      a.active,
+      a:hover {
+        color: #289871;
+      }
       p {
         font-size: 14px;
         line-height: 24px;

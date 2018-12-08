@@ -4,8 +4,8 @@ import { withRouter } from 'next/router'
 const Header = ({ router: { pathname } }) => (
   <header>
     <div className="container">
-      <Link prefetch href='/poems'>
-        <a className={pathname === '/poems' ? 'is-active' : ''}>首页</a>
+      <Link prefetch href='/'>
+        <a>首页</a>
       </Link>
     </div>
     <style jsx>{`
@@ -19,9 +19,6 @@ const Header = ({ router: { pathname } }) => (
       a {
         font-size: 18px;
         margin-right: 15px;
-      }
-      .is-active {
-        color: red;
       }
     `}</style>
   </header>
