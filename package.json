@@ -1,6 +1,6 @@
 {
-  "name": "with-apollo",
-  "version": "2.0.0",
+  "name": "poem",
+  "version": "1.0.0",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
