@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
-    "antd": "^3.8.2",
+    "antd": "^3.11.2",
     "apollo-boost": "^0.1.16",
     "babel-plugin-import": "^1.11.0",
     "graphql": "^14.0.2",

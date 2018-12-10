@@ -59,6 +59,9 @@ class PoemList extends Component {
             margin-left: 20px;
           }
 
+          .author {
+            font-size: 1.1em; 
+          }
         `}</style>
         <div className="poems">
           {
@@ -72,7 +75,7 @@ class PoemList extends Component {
                       </a>
                     </Link>
                   </h2>
-                  <div>
+                  <div className="author">
                     { poem.author.dynasty }·{ poem.author.name }
                   </div>
                   <div>

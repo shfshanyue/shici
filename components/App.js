@@ -12,6 +12,7 @@ export default ({ children }) => (
       body {
         margin: 0;
         background-color: #f6f6f6;
+        color: rgba(0,0,0,0.8);
       }
       a {
         text-decoration: none;
@@ -22,6 +23,10 @@ export default ({ children }) => (
       p {
         font-size: 14px;
         line-height: 24px;
+        margin: 1em 0;
+      }
+      .ant-skeleton-paragraph {
+        padding: 0; 
       }
       article {
         margin: 0 auto;
