@@ -5,6 +5,8 @@ import _ from 'lodash'
 
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import Paragraph from '../../components/Paragraph'
+
 import Author from './Author'
 
 const POEM = gql`
@@ -63,7 +65,7 @@ class Poem extends Component {
 
   renderAnnotations () {
     const { poem: { annotations = [] }, loading } = this.props
-    return annotations.length && (
+    return annotations.length ? (
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
@@ -76,7 +78,7 @@ class Poem extends Component {
           ))}
         </ul>
       </Card>
-    ) 
+    ) : ''
   }
 
   render () {
@@ -117,9 +119,9 @@ class Poem extends Component {
           </div>
         </Card>
         { this.renderAnnotations() }
-        { this.renderTranslation() }
-        { this.renderIntro() }
-        { this.renderAppreciation() }
+        <Paragraph text={poem.translation} title="翻译" loading={loading} />
+        <Paragraph text={poem.intro} title="简介" loading={loading} />
+        <Paragraph text={poem.appreciation} title="赏析" loading={loading} />
       </div>
       <div className="side">
         <Card loading={loading}>
