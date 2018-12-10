@@ -1,3 +1,5 @@
+import 'antd/dist/antd.less'
+
 export default ({ children }) => (
   <main>
     {children}
@@ -12,12 +14,10 @@ export default ({ children }) => (
         background-color: #f6f6f6;
       }
       a {
-        color: #22bad9;
         text-decoration: none;
       }
       a.active,
       a:hover {
-        color: #289871;
       }
       p {
         font-size: 14px;
