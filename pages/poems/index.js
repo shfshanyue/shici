@@ -7,7 +7,7 @@ import Header from '../../components/Header'
 import PoemList from './PoemList'
 
 export default () => (
-  <App>
+  <App title="首页">
     <PoemList />
   </App>
 )

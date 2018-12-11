@@ -3,7 +3,7 @@ import Header from './Header'
 
 import 'antd/dist/antd.less'
 
-export default ({ children, title = '诗词学习网' }) => (
+export default ({ children, title='', description='' }) => (
   <div>
     <style jsx global>{`
       * {
@@ -55,9 +55,10 @@ export default ({ children, title = '诗词学习网' }) => (
       }
     `}</style>
     <Head>
-      <title>{ title }</title>
-      <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+      <title>{ `${title} - 诗词学习网` }</title>
+      <meta charSet="utf-8" />
+      <meta name="description" content={description} />
+      <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
     </Head>
     <Header />
     <main>{ children }</main>
