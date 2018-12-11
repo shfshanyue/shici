@@ -8,7 +8,6 @@ import PoemList from './PoemList'
 
 export default () => (
   <App>
-    <Header />
     <PoemList />
   </App>
 )

@@ -13,7 +13,6 @@ export default class extends React.Component {
   render () {
     return (
       <App>
-        <Header />
         <Poem uuid={this.props.uuid} />
       </App>
     )

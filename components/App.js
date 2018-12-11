@@ -1,8 +1,10 @@
+import Head from 'next/head'
+import Header from './Header'
+
 import 'antd/dist/antd.less'
 
-export default ({ children }) => (
-  <main>
-    {children}
+export default ({ children, title = '诗词学习网' }) => (
+  <div>
     <style jsx global>{`
       * {
         font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
@@ -52,5 +54,12 @@ export default ({ children }) => (
         margin: 0 auto;
       }
     `}</style>
-  </main>
+    <Head>
+      <title>{ title }</title>
+      <meta charSet='utf-8' />
+      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+    </Head>
+    <Header />
+    <main>{ children }</main>
+  </div>
 )
