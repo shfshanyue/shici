@@ -104,6 +104,10 @@ class Poem extends Component {
             flex-shrink: 0;
             margin-left: 20px;
           }
+
+          .author {
+            font-size: 1.1em; 
+          }
         `}</style>
       <div className="container">
         <div className="poem">
@@ -111,7 +115,7 @@ class Poem extends Component {
             <h2>
               { poem.title }
             </h2>
-            <div>
+            <div className="author">
               { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
             </div>
             <div>
