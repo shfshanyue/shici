@@ -48,9 +48,34 @@ export default ({ children, title='', description='' }) => (
       button:focus {
         outline: none;
       }
+
       .container {
-        width: 960px; 
         margin: 0 auto;
+        padding: 0 15px;
+      }
+
+      @media (max-width: 575px) {
+        aside {
+          display: none; 
+        }
+      }
+
+      @media (min-width: 576px) {
+        .container {
+          max-width: 540px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .container {
+          max-width: 720px;
+        }
+      }
+
+      @media (min-width: 992px) {
+        .container {
+          max-width: 960px;
+        }
       }
     `}</style>
     <Head>
