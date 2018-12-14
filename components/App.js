@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Header from './Header'
-
-import 'antd/dist/antd.less'
+import Footer from './Footer'
 
 export default ({ children, title='', description='' }) => (
   <div>
@@ -62,5 +61,6 @@ export default ({ children, title='', description='' }) => (
     </Head>
     <Header />
     <main>{ children }</main>
+    <Footer />
   </div>
 )
