@@ -74,7 +74,7 @@ export default ({ children, title='', description='' }) => (
 
       @media (min-width: 992px) {
         .container {
-          max-width: 960px;
+          max-width: 980px;
         }
       }
     `}</style>

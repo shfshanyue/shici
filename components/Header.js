@@ -7,6 +7,9 @@ const Header = ({ router: { pathname } }) => (
       <Link prefetch href='/'>
         <a>首页</a>
       </Link>
+      <Link prefetch href='/authors'>
+        <a>作者</a>
+      </Link>
     </div>
     <style jsx>{`
       header {

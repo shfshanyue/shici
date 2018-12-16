@@ -4,6 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import { Tooltip, Pagination } from 'antd'
+import _ from 'lodash'
 
 import { Link, Router } from '../../routes'
 
@@ -92,19 +93,19 @@ class Poems extends Component {
                     </Link>
                   </h2>
                   <div className="author">
-                    { poem.author.dynasty }·{ poem.author.name }
+                    { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
                   </div>
                   <div>
                     {
                       // 只显示四段
-                      poem.paragraphs.slice(0, activeIds[poem.id] ? undefined : 4).map((p, index) => (
+                      !loading && poem.paragraphs.slice(0, activeIds[poem.id] ? undefined : 4).map((p, index) => (
                         <p key={index}>
                           { p } 
                         </p>
                       )) 
                     } 
                     {
-                      poem.paragraphs.length > 4 && !activeIds[poem.id] && <p className="more" onClick={
+                      !loading && poem.paragraphs.length > 4 && !activeIds[poem.id] && <p className="more" onClick={
                         e => {
                           this.setState({
                             activeIds: {
@@ -141,7 +142,7 @@ export default compose(
   graphql(POEMS, {
     props ({ data, ...rest }) {
       return {
-        poems: data.poems || [],
+        poems: data.poems || [1, 2, 3, 4, 5],
         poemsCount: data.poemsCount || 500,
         loading: data.loading
       }
