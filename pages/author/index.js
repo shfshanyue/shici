@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
+import { Link } from '../../routes'
 import _ from 'lodash'
 
 import App from '../../components/App'
@@ -14,6 +15,12 @@ const AUTHOR = gql`
       uuid
       name
       intro
+      poems {
+        id 
+        uuid
+        title
+        paragraphs
+      }
     }
   }
 `
@@ -44,7 +51,7 @@ class Author extends Component {
   render () {
     const { author, loading } = this.props
     return (
-      <App title={author.title}>
+      <App title={_.get(author, 'name')} description={author.intro && author.intro.slice(0, 255)}>
         <style jsx>{`
           .container {
             display: flex;
@@ -58,10 +65,6 @@ class Author extends Component {
             flex-basis: 300px; 
             flex-shrink: 0;
             margin-left: 20px;
-          }
-
-          .author {
-            font-size: 1.1em; 
           }
         `}</style>
       <div className="container">
@@ -79,6 +82,20 @@ class Author extends Component {
               }
             </div>
           </Card>
+          {
+            _.get(author, 'poems', [1, 2, 3, 4, 5]).map(poem => (
+              <Card key={poem.id || poem} loading={loading}>
+                <h3>
+                  <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
+                    <a>
+                      { poem.title }
+                    </a>
+                  </Link>
+                </h3>
+                <p>{ _.get(poem, 'paragraphs.0') }</p>
+              </Card>
+            ))
+          }
         </div>
         <aside className="side">
           <QR />

@@ -67,7 +67,7 @@ class Authors extends Component {
         <div className="authors">
           {
             authors.map(author => (
-              <Card loading={loading} key={author.id}>
+              <Card loading={loading} key={author.id || author}>
                 <div className="author">
                   <h2>
                     <Link route="author" params={{ uuid: author.uuid }} prefetch>

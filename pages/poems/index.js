@@ -74,10 +74,6 @@ class Poems extends Component {
             flex-shrink: 0;
             margin-left: 20px;
           }
-
-          .author {
-            font-size: 1.1em; 
-          }
         `}</style>
       <div className="container">
         <div className="poems">

@@ -45,7 +45,7 @@ class Poem extends Component {
         <h3>注释</h3>
         <ul>
           { _.map(annotations, (a, index) => (
-            <li key={index}>
+            <li key={index} key={index}>
               <p>
                 <i>{a.key}:</i> {a.value}
               </p>
@@ -59,7 +59,7 @@ class Poem extends Component {
   render () {
     const { poem, loading } = this.props
     return (
-      <App title={poem.title}>
+      <App title={poem.title} description={poem.paragraphs && poem.paragraphs.join('').slice(0, 255)}>
         <style jsx>{`
           .container {
             display: flex;
@@ -73,10 +73,6 @@ class Poem extends Component {
             flex-basis: 300px; 
             flex-shrink: 0;
             margin-left: 20px;
-          }
-
-          .author {
-            font-size: 1.1em; 
           }
         `}</style>
       <div className="container">

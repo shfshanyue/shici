@@ -10,9 +10,15 @@ export default ({ children, loading }) => (
       .card {
         padding: 20px; 
         background-color: #fff;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         transition: all ease-out 0.2s;
         opacity: 1;
+      }
+
+      @media (max-width: 575px) {
+        .card {
+          margin-bottom: 1px;
+        }
       }
 
       .card.loading {

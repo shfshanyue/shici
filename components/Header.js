@@ -13,15 +13,22 @@ const Header = ({ router: { pathname } }) => (
     </div>
     <style jsx>{`
       header {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
         height: 53px;
         line-height: 53px;
         background-color: #fff;
         box-shadow: 0 1px 3px rgba(26,26,26,.1);
       }
+
+      @media (max-width: 575px) {
+        header {
+          margin-bottom: 1px; 
+        }
+      }
+
       a {
         font-size: 18px;
-        margin-right: 15px;
+        margin-left: 20px;
       }
     `}</style>
   </header>

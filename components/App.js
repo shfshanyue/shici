@@ -14,6 +14,7 @@ export default ({ children, title='', description='' }) => (
         margin: 0;
         background-color: #f6f6f6;
         color: rgba(0,0,0,0.8);
+        font-size: 16px;
       }
       a {
         text-decoration: none;
@@ -22,9 +23,9 @@ export default ({ children, title='', description='' }) => (
       a:hover {
       }
       p {
-        font-size: 14px;
-        line-height: 24px;
-        margin: 1em 0;
+        font-size: 16px;
+        line-height: 1.8em;
+        margin: .8em 0;
       }
       .ant-skeleton-paragraph {
         padding: 0; 
@@ -57,6 +58,12 @@ export default ({ children, title='', description='' }) => (
       @media (max-width: 575px) {
         aside {
           display: none; 
+        }
+        .container {
+          padding: 0; 
+        }
+        ul {
+          padding-left: 20px; 
         }
       }
 
