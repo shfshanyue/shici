@@ -1,33 +1,44 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { Link } from '../../routes'
+import { Tooltip, Pagination } from 'antd'
 import _ from 'lodash'
+
+import { Router, Link } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 
 const AUTHOR = gql`
-  query AUTHOR ($uuid: ID!) {
+  query AUTHOR ($uuid: ID!, $page: Int) {
     author (uuid: $uuid) {
       id
       uuid
       name
       intro
-      poems {
+      poems (page: $page) {
         id 
         uuid
         title
         paragraphs
       }
+      poemsCount
     }
   }
 `
 
 class Author extends Component {
   static async getInitialProps({ query }) {
-    return query
+    return {
+      page: 1,
+      ...query, 
+    }
+  }
+
+  constructor (props) {
+    super(props) 
+    this.handleChange = this.handleChange.bind(this)
   }
 
   renderAnnotations () {
@@ -46,6 +57,10 @@ class Author extends Component {
         </ul>
       </Card>
     ) : ''
+  }
+
+  handleChange (page) {
+    Router.pushRoute(`/authors/${this.props.uuid}?page=${page}`)
   }
 
   render () {
@@ -96,6 +111,9 @@ class Author extends Component {
               </Card>
             ))
           }
+          {
+            _.get(this.props, 'author.poemsCount', 10) > 10 && <Pagination current={Number(this.props.page)} total={_.get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
+          }
         </div>
         <aside className="side">
           <QR />
@@ -108,10 +126,11 @@ class Author extends Component {
 
 export default compose(
   graphql(AUTHOR, {
-    options ({ uuid }) {
+    options ({ uuid, page }) {
       return {
         variables: {
-          uuid
+          uuid,
+          page
         }
       }
     },

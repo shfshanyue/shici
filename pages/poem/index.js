@@ -10,6 +10,8 @@ import Paragraph from '../../components/Paragraph'
 
 import Author from './Author'
 
+import { Link, Router } from '../../routes'
+
 const POEM = gql`
   query POEM ($uuid: ID!) {
     poem (uuid: $uuid) {

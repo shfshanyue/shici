@@ -128,7 +128,7 @@ class Poems extends Component {
               </Card>
             ))
           }
-          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount / 10} onChange={this.handleChange} />
+          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />
