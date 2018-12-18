@@ -1,3 +1,5 @@
+import { Link, Router } from '../../routes'
+
 export default ({ author }) => (
   <div>
     <style>{`
@@ -6,7 +8,11 @@ export default ({ author }) => (
       } 
     `}</style>
     <h3>
-      { author.name }
+      <Link route="author" params={{ uuid: author.uuid }} prefetch>
+        <a>
+          { author.name }
+        </a>
+      </Link>
     </h3>
     <span className="author">
       { author.dynasty }

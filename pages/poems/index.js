@@ -21,6 +21,7 @@ const POEMS = gql`
       paragraphs
       kind
       author {
+        uuid
         name
         dynasty
       }
@@ -89,7 +90,11 @@ class Poems extends Component {
                     </Link>
                   </h2>
                   <div className="author">
-                    { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
+                    <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }} prefetch>
+                      <a>
+                        { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
+                      </a>
+                    </Link>
                   </div>
                   <div>
                     {

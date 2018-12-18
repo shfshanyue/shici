@@ -23,6 +23,7 @@ const POEM = gql`
       kind
       annotations
       author {
+        uuid
         name
         dynasty
         birthYear
