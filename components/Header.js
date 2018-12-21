@@ -24,7 +24,7 @@ const Header = ({ router: { pathname, query } }) => (
         defaultValue={query.q}
         placeholder={query.q || '将进酒'}
         onSearch={handleSearch}
-        style={{ width: 280, marginLeft: 20 }}
+        style={{ marginLeft: 20 }}
         enterButton
       />
     </div>
@@ -34,6 +34,9 @@ const Header = ({ router: { pathname, query } }) => (
         line-height: 53px;
         background-color: #fff;
         box-shadow: 0 1px 3px rgba(26,26,26,.1);
+        position: fixed;
+        width: 100%;
+        z-index: 1;
       }
 
       @media (max-width: 575px) {

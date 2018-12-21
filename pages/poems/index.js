@@ -30,7 +30,7 @@ const POEMS = gql`
   }
 `
 
-function hightlight (string, word) {
+function hightlight (string = '', word) {
   if (!word || string.indexOf(word) === -1) {
     return string
   }
@@ -113,7 +113,7 @@ class Poems extends Component {
                     </Link>
                   </h2>
                   <div className="author">
-                    <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }} prefetch>
+                    <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }}>
                       <a>
                         { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
                       </a>

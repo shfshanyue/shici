@@ -30,6 +30,9 @@ export default ({ children, title='', description='' }) => (
       .ant-skeleton-paragraph {
         padding: 0; 
       }
+      .ant-input-search {
+        width: 280px; 
+      }
       article {
         margin: 0 auto;
         max-width: 650px;
@@ -59,6 +62,10 @@ export default ({ children, title='', description='' }) => (
         color: #f60; 
       }
 
+      main {
+        padding-top: 73px; 
+      }
+
       @media (max-width: 575px) {
         aside {
           display: none; 
@@ -68,6 +75,12 @@ export default ({ children, title='', description='' }) => (
         }
         ul {
           padding-left: 20px; 
+        }
+        main {
+          padding-top: 54px; 
+        }
+        .ant-input-search {
+          width: 200px; 
         }
       }
 

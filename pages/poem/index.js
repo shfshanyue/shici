@@ -84,9 +84,11 @@ class Poem extends Component {
             <h2>
               { poem.title }
             </h2>
-            <div className="author">
-              { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
-            </div>
+            <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }} prefetch>
+              <span>
+                { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
+              </span>
+            </Link>
             <div>
               {
                 _.map(poem.paragraphs, (p, index) => (
