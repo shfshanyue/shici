@@ -55,6 +55,10 @@ export default ({ children, title='', description='' }) => (
         padding: 0 15px;
       }
 
+      .highlight {
+        color: #f60; 
+      }
+
       @media (max-width: 575px) {
         aside {
           display: none; 

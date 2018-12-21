@@ -1,7 +1,17 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
+import { Input } from 'antd'
+import { Router } from '../routes'
 
-const Header = ({ router: { pathname } }) => (
+const Search = Input.Search;
+
+const handleSearch = (value) => {
+  Router.pushRoute('poems', {
+    q: value 
+  })
+}
+
+const Header = ({ router: { pathname, query } }) => (
   <header>
     <div className="container">
       <Link prefetch href='/'>
@@ -10,11 +20,17 @@ const Header = ({ router: { pathname } }) => (
       <Link prefetch href='/authors'>
         <a>作者</a>
       </Link>
+      <Search
+        defaultValue={query.q}
+        placeholder={query.q || '将进酒'}
+        onSearch={handleSearch}
+        style={{ width: 280, marginLeft: 20 }}
+        enterButton
+      />
     </div>
     <style jsx>{`
       header {
         margin-bottom: 20px;
-        height: 53px;
         line-height: 53px;
         background-color: #fff;
         box-shadow: 0 1px 3px rgba(26,26,26,.1);

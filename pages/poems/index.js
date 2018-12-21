@@ -13,8 +13,8 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 
 const POEMS = gql`
-  query POEMS ($page: Int) {
-    poems (page: $page) {
+  query POEMS ($page: Int, $q: String) {
+    poems (page: $page, q: $q) {
       id
       uuid
       title
@@ -26,14 +26,28 @@ const POEMS = gql`
         dynasty
       }
     }
-    poemsCount
+    poemsCount (q: $q)
   }
 `
+
+function hightlight (string, word) {
+  if (!word || string.indexOf(word) === -1) {
+    return string
+  }
+  const blocks = string.split(word)
+  return blocks.map((block, index) => (
+    <span key={index}>
+      { block }
+      { index < blocks.length - 1 && <i className="highlight">{word}</i> }
+    </span> 
+  ))
+}
 
 class Poems extends Component {
   static async getInitialProps({ query }) {
     return {
-      page: query.page || 1 
+      page: 1,
+      ...query
     }
   }
 
@@ -48,11 +62,14 @@ class Poems extends Component {
   }
 
   handleChange (page) {
-    Router.pushRoute(`/poems?page=${page}`)
+    Router.pushRoute('poems', {
+      page,
+      q: this.props.q, 
+    })
   }
 
   render () {
-    const { poems, loading } = this.props
+    const { poems, loading, q } = this.props
     const { activeIds } = this.state
 
     return (
@@ -75,6 +92,10 @@ class Poems extends Component {
             flex-shrink: 0;
             margin-left: 20px;
           }
+
+          .highlight {
+            color: #f60; 
+          }
         `}</style>
       <div className="container">
         <div className="poems">
@@ -85,7 +106,9 @@ class Poems extends Component {
                   <h2>
                     <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
                       <a>
-                        { poem.title }
+                        { 
+                          hightlight(poem.title, q)
+                        }
                       </a>
                     </Link>
                   </h2>
@@ -101,7 +124,7 @@ class Poems extends Component {
                       // 只显示四段
                       !loading && poem.paragraphs.slice(0, activeIds[poem.id] ? undefined : 4).map((p, index) => (
                         <p key={index}>
-                          { p } 
+                          { hightlight(p, q) } 
                         </p>
                       )) 
                     } 
@@ -128,7 +151,9 @@ class Poems extends Component {
               </Card>
             ))
           }
-          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
+          {
+            this.props.poemsCount > 10 && <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
+          }
         </div>
         <aside className="side">
           <QR />
@@ -144,14 +169,15 @@ export default compose(
     props ({ data, ...rest }) {
       return {
         poems: data.poems || [1, 2, 3, 4, 5],
-        poemsCount: data.poemsCount || 500,
+        poemsCount: data.poemsCount || 10,
         loading: data.loading
       }
     },
-    options ({ page }) {
+    options ({ page, q }) {
       return {
         variables: {
-          page
+          page,
+          q
         } 
       } 
     }
