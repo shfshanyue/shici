@@ -111,9 +111,7 @@ class Author extends Component {
               </Card>
             ))
           }
-          {
-            _.get(this.props, 'author.poemsCount', 10) > 10 && <Pagination current={Number(this.props.page)} total={_.get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
-          }
+      <Pagination hideOnSinglePage current={Number(this.props.page)} total={_.get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />

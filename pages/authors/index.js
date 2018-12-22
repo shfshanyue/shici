@@ -86,7 +86,7 @@ class Authors extends Component {
               </Card>
             ))
           }
-          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.authorsCount / 10} onChange={this.handleChange} />
+          <Pagination showQuickJumper hideOnSinglePage current={Number(this.props.page)} total={this.props.authorsCount / 10} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />
