@@ -73,7 +73,7 @@ class Poems extends Component {
     const { activeIds } = this.state
 
     return (
-      <App title="首页">
+      <App title="首页" description="">
         <style jsx>{`
           .container {
             display: flex;

@@ -20,6 +20,9 @@ const Header = ({ router: { pathname, query } }) => (
       <Link prefetch href='/authors'>
         <a>作者</a>
       </Link>
+      <Link prefetch href='/phrases'>
+        <a>名句</a>
+      </Link>
       <Search
         defaultValue={query.q}
         placeholder={query.q || '将进酒'}
