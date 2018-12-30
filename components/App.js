@@ -108,6 +108,7 @@ export default ({ children, title='', description='' }) => (
       <meta name="description" content={description} />
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
       <meta name="google-site-verification" content="2H9Cp-hVZdcskG17TqEvZp8zOzY2WA1rX8-m2q2YHLQ" />
+      <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
     </Head>
     <Header />
     <main>{ children }</main>
