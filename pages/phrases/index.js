@@ -55,7 +55,7 @@ class Phrases extends Component {
     const { phrases, loading } = this.props
 
     return (
-      <App title="首页">
+      <App title="名句">
         <style jsx>{`
           .container {
             display: flex;

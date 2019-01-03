@@ -62,7 +62,7 @@ class Poem extends Component {
   render () {
     const { poem, loading, phrase } = this.props
     return (
-      <App title={poem.title} description={poem.paragraphs && poem.paragraphs.join('').slice(0, 255)}>
+      <App title={poem.title} description={poem.paragraphs && poem.paragraphs.join('')}>
         <style jsx>{`
           .container {
             display: flex;

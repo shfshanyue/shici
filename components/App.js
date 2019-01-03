@@ -1,8 +1,13 @@
 import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
+import Router, { withRouter } from 'next/router'
 
-export default ({ children, title='', description='' }) => (
+Router.events.on('routeChangeComplete', url => {
+  _hmt && _hmt.push(['_trackPageview', url])
+})
+
+const App = ({ children, title='', description='', router }) => (
   <div>
     <style jsx global>{`
       * {
@@ -103,13 +108,20 @@ export default ({ children, title='', description='' }) => (
       }
     `}</style>
     <Head>
-      <title>{ `${title} - 诗词学习网` }</title>
+      <title>{ `${title}_诗词学习网` }</title>
       <meta charSet="utf-8" />
-      <meta name="description" content={description} />
+      <meta name="description" content={description.slice(0, 100)} />
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
       <meta name="google-site-verification" content="2H9Cp-hVZdcskG17TqEvZp8zOzY2WA1rX8-m2q2YHLQ" />
       <meta name="360-site-verification" content="6fa6e9245d777295b81853aeaaa51ab3" />
       <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+      
+      <meta property="og:url" content={`https://shici.xiange.tech${router.asPath}`} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description.slice(0, 100)} />
+      <meta property="og:image" content="/static/favicon.ico" />
+      <meta property="og:site_name" content="诗词弦歌" />
+      <meta property="og:type" content="article" />
       <script
         dangerouslySetInnerHTML={{
           __html: `
@@ -129,3 +141,5 @@ export default ({ children, title='', description='' }) => (
     <Footer />
   </div>
 )
+
+export default withRouter(App)

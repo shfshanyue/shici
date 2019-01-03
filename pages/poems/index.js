@@ -73,7 +73,7 @@ class Poems extends Component {
     const { activeIds } = this.state
 
     return (
-      <App title="首页" description="诗词学习网致力于古诗文的收集，为每一个人传递中国诗词之美">
+      <App title="首页" description="诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美">
         <style jsx>{`
           .container {
             display: flex;
