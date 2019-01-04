@@ -4,7 +4,6 @@ const path = require('path')
 
 const theme = require('./theme.json')
 
-
 // fix: prevents error when .less files are required by node
 if (typeof require !== 'undefined') {
   require.extensions['.less'] = (file) => {}

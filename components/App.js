@@ -108,7 +108,7 @@ const App = ({ children, title='', description='', router }) => (
       }
     `}</style>
     <Head>
-      <title>{ `${title}_诗词学习网` }</title>
+      <title>{ `${title}_诗词弦歌网` }</title>
       <meta charSet="utf-8" />
       <meta name="description" content={description.slice(0, 100)} />
       <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
@@ -119,8 +119,8 @@ const App = ({ children, title='', description='', router }) => (
       <meta property="og:url" content={`https://shici.xiange.tech${router.asPath}`} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description.slice(0, 100)} />
-      <meta property="og:image" content="/static/favicon.ico" />
-      <meta property="og:site_name" content="诗词弦歌" />
+      <meta property="og:image" content="https://shici.xiange.tech/static/shici.png" />
+      <meta property="og:site_name" content="诗词弦歌网" />
       <meta property="og:type" content="article" />
       <script
         dangerouslySetInnerHTML={{
