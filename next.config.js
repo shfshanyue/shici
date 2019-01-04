@@ -1,6 +1,7 @@
 const withLess = require('@zeit/next-less')
 const fs = require('fs')
 const path = require('path')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 const theme = require('./theme.json')
 
@@ -14,4 +15,20 @@ module.exports = withLess({
     javascriptEnabled: true,
     modifyVars: theme
   },
+  webpack: (config) => {
+    config.plugins.push(
+      new SWPrecacheWebpackPlugin({
+        verbose: true,
+        staticFileGlobsIgnorePatterns: [/\.next\//],
+        runtimeCaching: [
+          {
+            handler: 'networkFirst',
+            urlPattern: /^https?.*/
+          }
+        ]
+      })
+    )
+
+    return config
+  }
 })
