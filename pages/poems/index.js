@@ -101,7 +101,7 @@ class Poems extends Component {
         <div className="poems">
           {
             poems.map(poem => (
-              <Card loading={loading} key={poem.id}>
+              <Card loading={loading} key={poem.id || poem}>
                 <div className="poem">
                   <h2>
                     <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
