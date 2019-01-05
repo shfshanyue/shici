@@ -15,6 +15,9 @@ const handleSearch = (value) => {
 const Header = ({ router: { query, asPath } }) => (
   <header>
     <div className="container">
+      <Link href="/">
+        <span className="title">诗词弦歌</span>
+      </Link>
       <Link prefetch href='/'>
         <a className={_.startsWith(asPath, '/poems') || asPath === '/' ? 'active' : ''}>首页</a>
       </Link>
@@ -47,6 +50,12 @@ const Header = ({ router: { query, asPath } }) => (
         header {
           margin-bottom: 1px; 
         }
+      }
+
+      .title {
+        font-size: 25px; 
+        color: #f60;
+        cursor: pointer;
       }
 
       a {
