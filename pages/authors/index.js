@@ -10,24 +10,26 @@ import { Link, Router } from '../../routes'
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import SearchBar from '../../components/SearchBar'
 
 const AUTHORS = gql`
-  query AUTHORS ($page: Int) {
-    authors (page: $page) {
+  query AUTHORS ($page: Int, $q: String) {
+    authors (page: $page, q: $q) {
       id
       uuid
       name
       intro
       dynasty
     }
-    authorsCount
+    authorsCount (q: $q)
   }
 `
 
 class Authors extends Component {
   static async getInitialProps({ query }) {
     return {
-      page: query.page || 1 
+      page: 1,
+      ...query
     }
   }
 
@@ -36,11 +38,14 @@ class Authors extends Component {
   }
 
   handleChange (page) {
-    Router.pushRoute(`/authors?page=${page}`)
+    Router.pushRoute('authors', {
+      page,
+      q: this.props.q, 
+    })
   }
 
   render () {
-    const { authors, loading } = this.props
+    const { authors, loading, q } = this.props
 
     return (
       <App title="作者">
@@ -65,6 +70,7 @@ class Authors extends Component {
         `}</style>
       <div className="container">
         <div className="authors">
+          <SearchBar q={q} />
           {
             authors.map(author => (
               <Card loading={loading} key={author.id || author}>
@@ -102,14 +108,15 @@ export default compose(
     props ({ data, ...rest }) {
       return {
         authors: data.authors || [1, 2, 3, 4, 5],
-        authorsCount: data.authorsCount || 500,
+        authorsCount: data.authorsCount || 10,
         loading: data.loading
       }
     },
-    options ({ page }) {
+    options ({ page, q }) {
       return {
         variables: {
-          page
+          page,
+          q
         } 
       } 
     }

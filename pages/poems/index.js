@@ -11,6 +11,7 @@ import { Link, Router } from '../../routes'
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import SearchBar from '../../components/SearchBar'
 
 const POEMS = gql`
   query POEMS ($page: Int, $q: String) {
@@ -99,6 +100,7 @@ class Poems extends Component {
         `}</style>
       <div className="container">
         <div className="poems">
+          <SearchBar q={q} />
           {
             poems.map(poem => (
               <Card loading={loading} key={poem.id || poem}>
@@ -122,14 +124,14 @@ class Poems extends Component {
                   <div>
                     {
                       // 只显示四段
-                      !loading && poem.paragraphs.slice(0, activeIds[poem.id] ? undefined : 4).map((p, index) => (
+                      !loading && poem.paragraphs.slice(0, activeIds[poem.id] || q ? undefined : 4).map((p, index) => (
                         <p key={index}>
                           { hightlight(p, q) } 
                         </p>
                       )) 
                     } 
                     {
-                      !loading && poem.paragraphs.length > 4 && !activeIds[poem.id] && <p className="more" onClick={
+                      !q && !loading && poem.paragraphs.length > 4 && !activeIds[poem.id] && <p className="more" onClick={
                         e => {
                           this.setState({
                             activeIds: {
