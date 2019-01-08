@@ -21,6 +21,7 @@ const AUTHOR = gql`
         id 
         uuid
         title
+        kind
         paragraphs
       }
       poemsCount
@@ -107,7 +108,7 @@ class Author extends Component {
                     </a>
                   </Link>
                 </h3>
-                <p>{ _.get(poem, 'paragraphs.0') }</p>
+                <div>{ _.get(poem, 'kink') === '文' ? _.get(poem, 'paragraphs.0') : _.get(poem, 'paragraphs', []).map(p => <p key={p}>{p}</p>) }</div>
               </Card>
             ))
           }

@@ -6,7 +6,7 @@ import { Router, Link } from '../routes'
 const SearchBar = ({ q, router: { pathname }}) => q ? (
   <Card>
     <style jsx>{`
-      .container {
+      .bar {
         display: flex; 
         justify-content: space-between;
       }
@@ -20,7 +20,7 @@ const SearchBar = ({ q, router: { pathname }}) => q ? (
         color: #f60; 
       }
     `}</style>
-    <div className="container">
+    <div className="bar">
       <h3>{ q }</h3>
       <div>
         <Link route="poems" params={{ q }}>
