@@ -26,8 +26,11 @@ const App = ({ children, title='', description, router }) => {
         a {
           text-decoration: none;
         }
-        a.active,
+        a:visited {
+          color: #444; 
+        }
         a:hover {
+          color: #f60; 
         }
         p {
           font-size: 16px;
