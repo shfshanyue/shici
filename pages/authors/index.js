@@ -3,8 +3,6 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
-import { Tooltip } from 'antd'
-
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'

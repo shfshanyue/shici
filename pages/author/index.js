@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { Tooltip } from 'antd'
 import { get, map } from '../../lib/utils'
 
 import { Router, Link } from '../../routes'

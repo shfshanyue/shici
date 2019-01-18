@@ -16,6 +16,7 @@ const App = ({ children, title='', description, router }) => {
           font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
             'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
             monospace, serif;
+          box-sizing: border-box;
         }
         body {
           margin: 0;
@@ -25,10 +26,12 @@ const App = ({ children, title='', description, router }) => {
         }
         a {
           text-decoration: none;
+          transition: all .3s ease;
         }
         a:visited {
           color: #444; 
         }
+        a,
         a:hover {
           color: #f60; 
         }
@@ -59,6 +62,7 @@ const App = ({ children, title='', description, router }) => {
           background-color: #1b9db7;
           transition: background-color 0.3s;
         }
+        input:focus,
         button:focus {
           outline: none;
         }

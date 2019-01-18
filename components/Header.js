@@ -1,10 +1,9 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
-import { Input } from 'antd'
 import { startsWith } from '../lib/utils'
 import { Router } from '../routes'
 
-const Search = Input.Search;
+import Search from './Search'
 
 const handleSearch = (value) => {
   Router.pushRoute('poems', {
@@ -32,7 +31,6 @@ const Header = ({ router: { query, asPath } }) => (
         placeholder={query.q || '将进酒'}
         onSearch={handleSearch}
         style={{ marginLeft: 20 }}
-        enterButton
       />
     </div>
     <style jsx>{`
@@ -50,6 +48,10 @@ const Header = ({ router: { query, asPath } }) => (
         header {
           margin-bottom: 1px; 
         }
+      }
+
+      .container {
+        display: flex;  
       }
 
       .title {

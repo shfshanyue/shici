@@ -14,7 +14,6 @@ if (typeof require !== 'undefined') {
 module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
-    modifyVars: theme
   },
   webpack: (config, { isServer }) => {
     config.plugins.push(

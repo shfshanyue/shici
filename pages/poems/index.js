@@ -3,7 +3,6 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
-import { Tooltip } from 'antd'
 import Pagination from '../../components/Pagination'
 import { get } from '../../lib/utils'
 import { Link, Router } from '../../routes'
@@ -141,11 +140,7 @@ class Poems extends Component {
                           }) 
                         }
                       }>
-                      <Tooltip title="展开全文" placement="bottom">
-                        <span>
-                          ...
-                        </span>
-                      </Tooltip>
+                      ...
                     </p>
                     }
                   </div>
