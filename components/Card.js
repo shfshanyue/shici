@@ -1,5 +1,5 @@
 import React from 'react'
-import { Skeleton } from 'antd'
+import Skeleton from './Skeleton'
 
 export default ({ children, loading }) => (
   <div className={`card ${loading ? 'loading' : ''}`}>
