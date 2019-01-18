@@ -3,7 +3,8 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
-import { Tooltip, Pagination } from 'antd'
+import { Tooltip } from 'antd'
+import Pagination from '../../components/Pagination'
 import { get } from '../../lib/utils'
 import { Link, Router } from '../../routes'
 
@@ -152,7 +153,7 @@ class Poems extends Component {
               </Card>
             ))
           }
-          <Pagination showQuickJumper hideOnSinglePage current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
+          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />

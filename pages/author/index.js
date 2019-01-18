@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { Tooltip, Pagination } from 'antd'
+import { Tooltip } from 'antd'
 import { get, map } from '../../lib/utils'
 
 import { Router, Link } from '../../routes'
@@ -9,6 +9,7 @@ import { Router, Link } from '../../routes'
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import Pagination from '../../components/Pagination'
 
 const AUTHOR = gql`
   query AUTHOR ($uuid: ID!, $page: Int) {
@@ -112,7 +113,7 @@ class Author extends Component {
               </Card>
             ))
           }
-      <Pagination hideOnSinglePage current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
+      <Pagination current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />

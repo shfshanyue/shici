@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
-import { Tooltip, Pagination } from 'antd'
+import { Tooltip } from 'antd'
 
 import { Link, Router } from '../../routes'
 
@@ -11,6 +11,7 @@ import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
+import Pagination from '../../components/Pagination'
 
 const AUTHORS = gql`
   query AUTHORS ($page: Int, $q: String) {
@@ -93,7 +94,7 @@ class Authors extends Component {
               </Card>
             ))
           }
-          <Pagination showQuickJumper hideOnSinglePage current={Number(this.props.page)} total={this.props.authorsCount / 10} onChange={this.handleChange} />
+          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.authorsCount / 10} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />
