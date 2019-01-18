@@ -4,6 +4,12 @@ const { parse } = require('url')
 const { join } = require('path')
 
 const routes = require('./routes')
+const LRUCache = require('lru-cache')
+
+const ssrCache = new LRUCache({
+  max: 100,
+  maxAge: 1000 * 60 * 60 * 24 * 365
+})
 
 const app = next({
   dev: process.env.NODE_ENV !== 'production'
@@ -13,7 +19,6 @@ const handler = routes.getRequestHandler(app)
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    console.log(req.url)
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
 
@@ -24,8 +29,37 @@ app.prepare().then(() => {
     } else if (pathname === '/service-worker.js') {
       const filePath = join(__dirname, '.next', pathname)
       app.serveStatic(req, res, filePath)
+    } else if (pathname === '/') {
+      renderAndCache(req, res, '/poems', {})
     } else {
       handler(req, res)
     }
   }).listen(3000)
 })
+
+async function renderAndCache (req, res, pagePath, queryParams) {
+  const key = req.url
+
+  // If we have a page in the cache, let's serve it
+  if (ssrCache.has(key)) {
+    res.setHeader('x-cache', 'HIT')
+    res.end(ssrCache.get(key))
+    return
+  }
+
+  try {
+    const html = await app.renderToHTML(req, res, pagePath, queryParams)
+
+    if (res.statusCode !== 200) {
+      res.end(html)
+      return
+    }
+
+    ssrCache.set(key, html)
+
+    res.setHeader('x-cache', 'MISS')
+    res.end(html)
+  } catch (err) {
+    app.renderError(err, req, res, pagePath, queryParams)
+  }
+}
