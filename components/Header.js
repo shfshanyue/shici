@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { Input } from 'antd'
-import _ from 'lodash'
+import { startsWith } from '../lib/utils'
 import { Router } from '../routes'
 
 const Search = Input.Search;
@@ -19,13 +19,13 @@ const Header = ({ router: { query, asPath } }) => (
         <span className="title">诗词弦歌</span>
       </Link>
       <Link prefetch href='/'>
-        <a className={_.startsWith(asPath, '/poems') || asPath === '/' ? 'active' : ''}>首页</a>
+        <a className={startsWith(asPath, '/poems') || asPath === '/' ? 'active' : ''}>首页</a>
       </Link>
       <Link prefetch href='/authors'>
-        <a className={_.startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
+        <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
       </Link>
       <Link prefetch href='/phrases'>
-        <a className={_.startsWith(asPath, '/phrases') ? 'active' : ''}>名句</a>
+        <a className={startsWith(asPath, '/phrases') ? 'active' : ''}>名句</a>
       </Link>
       <Search
         defaultValue={query.q}

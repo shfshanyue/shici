@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import { withRouter } from 'next/router'
 import Card from './Card'
 import { Router, Link } from '../routes'

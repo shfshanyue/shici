@@ -7,3 +7,8 @@
 + 使用 next-routes 进行路由
 + 使用 docker，docker-compose 进行部署
 + sitemap and robots
+
+## common.js 优化
+
++ 330.76
++ 306.75 -> 去除lodash后

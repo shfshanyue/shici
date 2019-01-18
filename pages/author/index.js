@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { Tooltip, Pagination } from 'antd'
-import _ from 'lodash'
+import { get, map } from '../../lib/utils'
 
 import { Router, Link } from '../../routes'
 
@@ -48,7 +48,7 @@ class Author extends Component {
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
-          { _.map(annotations, (a, index) => (
+          { map(annotations, (a, index) => (
             <li key={index}>
               <p>
                 <i>{a.key}:</i> {a.value}
@@ -67,7 +67,7 @@ class Author extends Component {
   render () {
     const { author, loading } = this.props
     return (
-      <App title={`${_.get(author, 'name')}_作者`} description={author.intro}>
+      <App title={`${get(author, 'name')}_作者`} description={author.intro}>
         <style jsx>{`
           .container {
             display: flex;
@@ -90,7 +90,7 @@ class Author extends Component {
               { author.name }
             </h2>
             <div className="author">
-              { _.get(author, 'dynasty') }
+              { get(author, 'dynasty') }
             </div>
             <div>
               {
@@ -99,7 +99,7 @@ class Author extends Component {
             </div>
           </Card>
           {
-            _.get(author, 'poems', [1, 2, 3, 4, 5]).map(poem => (
+            get(author, 'poems', [1, 2, 3, 4, 5]).map(poem => (
               <Card key={poem.id || poem} loading={loading}>
                 <h3>
                   <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
@@ -108,11 +108,11 @@ class Author extends Component {
                     </a>
                   </Link>
                 </h3>
-                <div>{ _.get(poem, 'kink') === '文' ? _.get(poem, 'paragraphs.0') : _.get(poem, 'paragraphs', []).map(p => <p key={p}>{p}</p>) }</div>
+                <div>{ get(poem, 'kink') === '文' ? get(poem, 'paragraphs.0') : get(poem, 'paragraphs', []).map(p => <p key={p}>{p}</p>) }</div>
               </Card>
             ))
           }
-      <Pagination hideOnSinglePage current={Number(this.props.page)} total={_.get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
+      <Pagination hideOnSinglePage current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />

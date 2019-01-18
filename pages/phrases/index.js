@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import { Tooltip, Pagination } from 'antd'
-import _ from 'lodash'
+import { get } from '../../lib/utils'
 
 import { Link, Router } from '../../routes'
 
@@ -77,17 +77,17 @@ class Phrases extends Component {
             phrases.map(phrase => (
               <Card loading={loading} key={phrase.id || phrase}>
                 <div className="phrase">
-                  <Link route="poem" params={{ uuid: _.get(phrase, 'poem.uuid'), phrase: phrase.phrase }}>
+                  <Link route="poem" params={{ uuid: get(phrase, 'poem.uuid'), phrase: phrase.phrase }}>
                     <a>
                       { phrase.phrase }
                     </a>
                   </Link>
                   <div style={{ marginTop: '10px' }}>
                     <span>
-                      { _.get(phrase, 'poem.author.dynasty') }·{ _.get(phrase, 'poem.author.name') }
+                      { get(phrase, 'poem.author.dynasty') }·{ get(phrase, 'poem.author.name') }
                     </span>
                     <span>
-                      《{ _.get(phrase, 'poem.title') }》
+                      《{ get(phrase, 'poem.title') }》
                     </span>
                   </div>
                 </div>

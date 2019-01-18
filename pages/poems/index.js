@@ -4,8 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import { Tooltip, Pagination } from 'antd'
-import _ from 'lodash'
-
+import { get } from '../../lib/utils'
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
@@ -115,9 +114,9 @@ class Poems extends Component {
                     </Link>
                   </h2>
                   <div className="author">
-                    <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }}>
+                    <Link route="author" params={{ uuid: get(poem, 'author.uuid') }}>
                       <a>
-                        { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
+                        { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
                       </a>
                     </Link>
                   </div>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import _ from 'lodash'
+import { get, map } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -47,7 +47,7 @@ class Poem extends Component {
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
-          { _.map(annotations, (a, index) => (
+          { map(annotations, (a, index) => (
             <li key={index} key={index}>
               <p>
                 <i>{a.key}:</i> {a.value}
@@ -84,14 +84,14 @@ class Poem extends Component {
             <h2>
               { poem.title }
             </h2>
-            <Link route="author" params={{ uuid: _.get(poem, 'author.uuid') }} prefetch>
+            <Link route="author" params={{ uuid: get(poem, 'author.uuid') }} prefetch>
               <span>
-                { _.get(poem, 'author.dynasty') }·{ _.get(poem, 'author.name') }
+                { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
               </span>
             </Link>
             <div>
               {
-                _.map(poem.paragraphs, (p, index) => (
+                map(poem.paragraphs, (p, index) => (
                   <p key={index}>
                     { p } 
                   </p>
