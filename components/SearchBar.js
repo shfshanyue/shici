@@ -8,6 +8,7 @@ const SearchBar = ({ q, router: { pathname }}) => q ? (
       .bar {
         display: flex; 
         justify-content: space-between;
+        align-items: center;
       }
       a {
         font-size: 18px;
@@ -17,6 +18,10 @@ const SearchBar = ({ q, router: { pathname }}) => q ? (
 
       a.active {
         color: #f60; 
+      }
+
+      h3 {
+        margin: 0; 
       }
     `}</style>
     <div className="bar">

@@ -40,27 +40,9 @@ const App = ({ children, title='', description, router }) => {
           line-height: 1.8em;
           margin: .8em 0;
         }
-        .ant-skeleton-paragraph {
-          padding: 0; 
-        }
-        .ant-input-search {
-          width: 280px; 
-        }
         article {
           margin: 0 auto;
           max-width: 650px;
-        }
-        button {
-          align-items: center;
-          background-color: #22bad9;
-          border: 0;
-          color: white;
-          display: flex;
-          padding: 5px 7px;
-        }
-        button:active {
-          background-color: #1b9db7;
-          transition: background-color 0.3s;
         }
         input:focus,
         button:focus {
@@ -93,8 +75,11 @@ const App = ({ children, title='', description, router }) => {
           main {
             padding-top: 54px; 
           }
-          .ant-input-search {
-            width: 200px; 
+          .hidden-xs {
+            display: none; 
+          }
+          .visible-xs {
+            display: flex; 
           }
         }
 
