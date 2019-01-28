@@ -67,7 +67,7 @@ class Author extends Component {
   render () {
     const { author, loading } = this.props
     return (
-      <App title={`${get(author, 'name')}_作者`} description={author.intro}>
+      <App title={`${get(author, 'name', '')}_作者`} description={author.intro}>
         <style jsx>{`
           .container {
             display: flex;
