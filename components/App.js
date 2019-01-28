@@ -108,6 +108,7 @@ const App = ({ children, title='', description, router }) => {
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
         <meta name="google-site-verification" content="2H9Cp-hVZdcskG17TqEvZp8zOzY2WA1rX8-m2q2YHLQ" />
         <meta name="360-site-verification" content="6fa6e9245d777295b81853aeaaa51ab3" />
+        <meta name="msvalidate.01" content="84A630C76DA80A680E0EDC5B7D4EBCE3" />
         <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
         
         <meta property="og:url" content={`https://shici.xiange.tech${router.asPath}`} />
