@@ -8,6 +8,11 @@ const getIcon = ({ fill='currentColor' } = {}) => {
 const Icon = ({ type, fill }) => (
   <div className="icon">
     <style jsx>{`
+    .icon {
+      display: flex; 
+      justify-content: center;
+      align-items: center;
+    }
     `}</style>
     { getIcon({ fill })[type] }
   </div>

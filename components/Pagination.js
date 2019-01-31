@@ -17,6 +17,7 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
 
   function handleChange(to) {
     if (to >= 1 && to <= pageCount && to !== current) {
+      window && window.scrollTo(0, 0)
       onChange(to);
     }
   }
@@ -29,12 +30,12 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
         }
 
         .pagination-item {
+          display: flex;
+          justify-content: center;
+          align-items: center;
           user-select: none;
           height: 32px;
           width: 32px;
-          line-height: 32px;
-          text-align: center;
-          vertical-align: middle;
           background: #ffffff;
           border: 1px solid #d9d9d9;
           cursor: pointer;
@@ -44,6 +45,22 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
           font-size: 14px;
           color: rgba(0, 0, 0, .65);
           transition: all 0.4s ease;
+        }
+
+        @media (max-width: 575px) {
+          .pagination-item {
+            display: none; 
+            height: 50px;
+          }
+          .pagination-direction-left,
+          .pagination-direction-right {
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            border: 0;
+            border-radius: 0;
+            flex-grow: 1; 
+          }
         }
 
         .pagination-item.active,

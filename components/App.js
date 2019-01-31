@@ -60,6 +60,7 @@ const App = ({ children, title='', description, router }) => {
 
         main {
           padding-top: 73px; 
+          min-height: 85vh;
         }
 
         @media (max-width: 575px) {
