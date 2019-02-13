@@ -106,7 +106,7 @@ class Poem extends Component {
         </div>
         <aside className="side">
           <Card loading={loading}>
-            <Author author={poem.author || {}} />
+            <Author author={poem.author} />
           </Card>
           <QR />
         </aside>

@@ -10,6 +10,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Pagination from '../../components/Pagination'
+import Author from '../poem/Author'
 
 const AUTHORS = gql`
   query AUTHORS ($page: Int, $q: String) {
@@ -19,6 +20,8 @@ const AUTHORS = gql`
       name
       intro
       dynasty
+      birthYear
+      deathYear
     }
     authorsCount (q: $q)
   }
@@ -74,21 +77,7 @@ class Authors extends Component {
           {
             authors.map(author => (
               <Card loading={loading} key={author.id || author}>
-                <div className="author">
-                  <h2>
-                    <Link route="author" params={{ uuid: author.uuid }} prefetch>
-                      <a>
-                        { author.name }
-                      </a>
-                    </Link>
-                  </h2>
-                  <div className="dynasty">
-                    { author.dynasty }
-                  </div>
-                  <div>
-                    { author.intro }
-                  </div>
-                </div>
+                <Author author={author} />
               </Card>
             ))
           }

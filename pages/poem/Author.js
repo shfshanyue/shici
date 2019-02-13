@@ -1,6 +1,6 @@
 import { Link, Router } from '../../routes'
 
-export default ({ author }) => (
+export default ({ author = {} }) => (
   <div>
     <style>{`
       .author {
@@ -16,7 +16,7 @@ export default ({ author }) => (
     </h3>
     <span className="author">
       { author.dynasty }
-      { author.birthYear && author.deathYear ? `（${author.birthYear}~${author.deathYear}）` : ''}
+      { author.birthYear && author.deathYear ? `（${author.birthYear}年 ~ ${author.deathYear}年）` : ''}
     </span>
     <p>{ author.intro }</p>
   </div>
