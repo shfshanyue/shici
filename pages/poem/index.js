@@ -7,8 +7,8 @@ import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
+import Author from '../../components/Author'
 
-import Author from './Author'
 
 import { Link, Router } from '../../routes'
 

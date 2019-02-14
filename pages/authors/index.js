@@ -10,7 +10,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Pagination from '../../components/Pagination'
-import Author from '../poem/Author'
+import Author from '../../components/Author'
 
 const AUTHORS = gql`
   query AUTHORS ($page: Int, $q: String) {

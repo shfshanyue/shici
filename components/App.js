@@ -13,16 +13,32 @@ const App = ({ children, title='', description, router }) => {
     <div>
       <style jsx global>{`
         * {
-          font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-            'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New',
-            monospace, serif;
           box-sizing: border-box;
+        }
+        html {
+          font-family: Menlo, Monaco, 'Lucida Console', 'Liberation Mono', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace, serif;
+          font-size: 16px;
         }
         body {
           margin: 0;
           background-color: #f6f6f6;
           color: rgba(0,0,0,0.8);
-          font-size: 16px;
+          font-size: 1rem;
+        }
+        h1, .h1 {
+          font-size: 2rem;
+        }
+
+        h2, .h2 {
+          font-size: 1.5rem;
+        }
+
+        h3, .h3 {
+          font-size: 1.2rem;
+        }
+
+        h4, .h4 {
+          font-size: 1rem;
         }
         a {
           text-decoration: none;

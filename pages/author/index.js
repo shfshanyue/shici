@@ -9,6 +9,7 @@ import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
+import AuthorComponent from '../../components/Author'
 
 const AUTHOR = gql`
   query AUTHOR ($uuid: ID!, $page: Int) {
@@ -17,6 +18,10 @@ const AUTHOR = gql`
       uuid
       name
       intro
+      birthYear
+      deathYear
+      dynasty
+      baikeUrl
       poems (page: $page) {
         id 
         uuid
@@ -40,24 +45,6 @@ class Author extends Component {
   constructor (props) {
     super(props) 
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  renderAnnotations () {
-    const { author: { annotations = [] }, loading } = this.props
-    return annotations.length ? (
-      <Card loading={loading}>
-        <h3>注释</h3>
-        <ul>
-          { map(annotations, (a, index) => (
-            <li key={index}>
-              <p>
-                <i>{a.key}:</i> {a.value}
-              </p>
-            </li>
-          ))}
-        </ul>
-      </Card>
-    ) : ''
   }
 
   handleChange (page) {
@@ -86,17 +73,7 @@ class Author extends Component {
       <div className="container">
         <div className="author">
           <Card loading={loading}>
-            <h2>
-              { author.name }
-            </h2>
-            <div className="author">
-              { get(author, 'dynasty') }
-            </div>
-            <div>
-              {
-                author.intro 
-              }
-            </div>
+            <AuthorComponent author={author} />
           </Card>
           {
             get(author, 'poems', [1, 2, 3, 4, 5]).map(poem => (
