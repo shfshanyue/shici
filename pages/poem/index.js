@@ -24,6 +24,10 @@ const POEM = gql`
       translation
       kind
       annotations
+      phrases {
+        id 
+        phrase
+      }
       author {
         uuid
         name
@@ -108,6 +112,15 @@ class Poem extends Component {
           <Card loading={loading}>
             <Author author={poem.author} />
           </Card>
+          {
+            get(poem, 'phrases', []).map(phrase =>
+              <Card>
+                <Link route="poem" params={{ uuid: poem.uuid, phrase: phrase.phrase }}>
+                  { phrase.phrase } 
+                </Link>
+              </Card>
+            )
+          }
           <QR />
         </aside>
       </div>

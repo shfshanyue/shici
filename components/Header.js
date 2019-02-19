@@ -44,7 +44,7 @@ class Header extends Component {
             <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
           </Link>
           <Link prefetch href='/phrases'>
-            <a className={startsWith(asPath, '/phrases') ? 'active' : ''}>名句</a>
+            <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
           </Link>
           <div className="search-box">
             <Search
