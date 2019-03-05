@@ -38,7 +38,7 @@ class Header extends Component {
             <span className="title">诗词弦歌</span>
           </Link>
           <Link prefetch href='/'>
-            <a className={startsWith(asPath, '/poems') || asPath === '/' ? 'active' : ''}>首页</a>
+            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
           </Link>
           <Link prefetch href='/authors'>
             <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
