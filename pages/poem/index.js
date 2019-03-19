@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { get, map } from '../../lib/utils'
+import { get, map, highlight } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -64,7 +64,7 @@ class Poem extends Component {
   }
 
   render () {
-    const { poem, loading, phrase } = this.props
+    const { poem, loading } = this.props
     return (
       <App title={`${poem.title || ''}_诗词`} description={poem.paragraphs && poem.paragraphs.join('')}>
         <style jsx>{`
@@ -97,7 +97,9 @@ class Poem extends Component {
               {
                 map(poem.paragraphs, (p, index) => (
                   <p key={index}>
-                    { p } 
+                    {
+                      highlight(p, this.props.phrase || map(poem.phrases, phrase => phrase.phrase))
+                    }
                   </p>
                 ))
               }

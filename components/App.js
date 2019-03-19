@@ -72,6 +72,7 @@ const App = ({ children, title='', description, router }) => {
 
         .highlight {
           color: #f60; 
+          font-style: italic;
         }
 
         main {

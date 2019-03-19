@@ -4,7 +4,7 @@ import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import Pagination from '../../components/Pagination'
-import { get } from '../../lib/utils'
+import { get, highlight } from '../../lib/utils'
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
@@ -29,19 +29,6 @@ const POEMS = gql`
     poemsCount (q: $q)
   }
 `
-
-function hightlight (string = '', word) {
-  if (!word || string.indexOf(word) === -1) {
-    return string
-  }
-  const blocks = string.split(word)
-  return blocks.map((block, index) => (
-    <span key={index}>
-      { block }
-      { index < blocks.length - 1 && <i className="highlight">{word}</i> }
-    </span> 
-  ))
-}
 
 class Poems extends Component {
   static async getInitialProps({ query }) {
@@ -108,7 +95,7 @@ class Poems extends Component {
                     <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
                       <a>
                         { 
-                          hightlight(poem.title, q)
+                          highlight(poem.title, q)
                         }
                       </a>
                     </Link>
@@ -125,7 +112,7 @@ class Poems extends Component {
                       // 只显示四段
                       !loading && poem.paragraphs.slice(0, activeIds[poem.id] || q ? undefined : 4).map((p, index) => (
                         <p key={index}>
-                          { hightlight(p, q) } 
+                          { highlight(p, q) } 
                         </p>
                       )) 
                     } 
