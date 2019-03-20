@@ -13,7 +13,7 @@ export default () => (
         margin-top: 10px; 
       }
     `}</style>
-    <img src="/static/cunyin.jpg" width="180px" height="180px" />
+    <img src="/static/wechat.jpg" width="180px" height="180px" />
     <span>每天一首古诗词</span>
   </div>
 )
