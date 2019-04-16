@@ -75,6 +75,10 @@ const App = ({ children, title='', description, router }) => {
           font-style: italic;
         }
 
+        .text-center {
+          text-align: center; 
+        }
+
         main {
           padding-top: 73px; 
           min-height: 85vh;
