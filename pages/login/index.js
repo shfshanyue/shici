@@ -12,23 +12,25 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
-const PHRASES = gql`
-  query PHRASES ($page: Int, $pageSize: Int) {
-    phrases (page: $page, pageSize: $pageSize) {
-      id
-      phrase
-      authorName
-      poem {
-        uuid
-        title
-        author {
-          uuid
-          name
-          dynasty
-        }
-      }
-    }
-    phrasesCount
+const REGISTER = gql`
+  mutation REGISTER (
+    $email: String!
+    $name: String!
+    $password: String!
+  ) {
+    id 
+  }
+`
+
+const LOGIN = gql`
+  mutation LOGIN ($email: String!, $password: String!) {
+    createUserToken (email: $email, password: $password) 
+  }
+`
+
+const SEND_VERIFY_CODE = gql`
+  mutation SEND_VERIFY_CODE ($email: String!) {
+    token: sendEmailVerifyCode(email: $email)
   }
 `
 
@@ -39,25 +41,54 @@ class Login extends Component {
       email: '',
       password: '',
       verifyCode: '',
+      username: '',
       canSend: true
     }
-    this.handleSendEmail = this.handleSendEmail.bind(this)
+    this.sendVerifyCode = this.sendVerifyCode.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this._token = ''
   }
 
-  handleSendEmail () {
+  sendVerifyCode () {
+    this.props.sendVerifyCode({
+      variables: {
+        email: this.state.email 
+      }
+    }).then(({ data }) => {
+      this._token = data.token
+    })
     this.setState({
       canSend: false 
     }) 
   }
 
-  handleSubmit (isLogin) {
-  
+  handleSubmit (e) {
+    e.preventDefault()
+    const { email, username, password, token, verifyCode } = this.state
+    const isLogin = this.props.router.asPath.indexOf('/login') !== -1
+    if (isLogin) {
+      this.props.login({
+        variables: {
+          email,
+          password
+        } 
+      }) 
+    } else {
+      this.props.register({
+        variables: {
+          email,
+          name: username,
+          password,
+          token: this._token,
+          verifyCode
+        } 
+      }) 
+    }
   }
 
   render () {
-    const { email, password, verifyCode, canSend } = this.state
-    const isLogin = this.props.router.route === '/login'
+    const { email, password, verifyCode, canSend, username } = this.state
+    const isLogin = this.props.router.asPath.indexOf('/login') !== -1
     return (
       <App title="登录">
         <style jsx>{`
@@ -120,7 +151,8 @@ class Login extends Component {
           }
 
           input:focus + label,
-          input:not([value=""]) + label {
+          input:not([value=""]) + label,
+          input:valid + label {
             color: #f60; 
             font-size: 0.8em;
             transform: translateY(-150%);
@@ -139,14 +171,14 @@ class Login extends Component {
             color: #999; 
           }
         `}</style>
-        <form className="container login">
+        <form className="container login" onSubmit={this.handleSubmit} >
           <Card>
             <div className="input-wrapper">
               <input type="email" required onChange={(e) => this.setState({ email: e.target.value })} value={email} />
               <label className={email ? 'active' : ''}>邮箱</label>
               {
                 isLogin ||
-                  <span className={`verifyCode ${canSend ? '': 'disactive'}`} onClick={this.handleSendEmail}>
+                  <span className={`verifyCode ${canSend ? '': 'disactive'}`} onClick={this.sendVerifyCode}>
                     {
                       canSend ? '发送邮件' : '稍后再发'
                     }
@@ -159,11 +191,24 @@ class Login extends Component {
                   <input
                     required
                     type="text"
+                    min="6"
+                    max="6"
                     onChange={(e) => this.setState({ verifyCode: e.target.value })}
                     value={verifyCode}
                   />
                   <label className={verifyCode ? 'active' : ''}>邮箱验证码</label>
                 </div>
+            }
+            {
+              isLogin || <div className="input-wrapper">
+                <input
+                  required
+                  type="text"
+                  onChange={(e) => this.setState({ username: e.target.value })}
+                  value={username}
+                />
+                <label className={password ? 'active' : ''}>昵称</label>
+              </div>
             }
             <div className="input-wrapper">
               <input
@@ -174,7 +219,9 @@ class Login extends Component {
               />
               <label className={password ? 'active' : ''}>密码</label>
             </div>
-            <input type="submit" value={ isLogin ? '登录' : '注册' } onClick={this.handleSubmit(isLogin)} className="button" />
+            <button className="button">
+              { isLogin ? '登录' : '注册' } 
+            </button>
             <div className="text-center">
               {
                 isLogin ? 
@@ -193,4 +240,15 @@ class Login extends Component {
   }
 }
 
-export default withRouter(Login)
+export default compose(
+  withRouter,
+  graphql(LOGIN, {
+    name: 'login'
+  }),
+  graphql(REGISTER, {
+    name: 'register' 
+  }),
+  graphql(SEND_VERIFY_CODE, {
+    name: 'sendVerifyCode' 
+  })
+)(Login)
