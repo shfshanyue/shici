@@ -1,0 +1,7 @@
+deploy:
+  only:
+    - master
+  script:
+    - docker-compose up --build -d
+  tags:
+    - shell

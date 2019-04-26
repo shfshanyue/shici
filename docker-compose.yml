@@ -1,9 +1,7 @@
 version: "3"
 services:
   shici:
-    build:
-      context: ..
-      dockerfile: deploy/Dockerfile
+    build: .
     expose:
       - 3000
     restart: always
