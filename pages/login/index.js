@@ -17,8 +17,12 @@ const REGISTER = gql`
     $email: String!
     $name: String!
     $password: String!
+    $token: String!
+    $verifyCode: String!
   ) {
-    id 
+    createUser (email: $email, name: $name, password: $password, token: $token, verifyCode: $verifyCode) {
+      id 
+    }
   }
 `
 
@@ -72,7 +76,12 @@ class Login extends Component {
           email,
           password
         } 
-      }) 
+      }).then(({ data: { createUserToken }}) => {
+        if (createUserToken) {
+          localStorage.token = createUserToken 
+          Router.pushRoute('/')
+        }
+      })
     } else {
       this.props.register({
         variables: {
@@ -82,7 +91,11 @@ class Login extends Component {
           token: this._token,
           verifyCode
         } 
-      }) 
+      }).then(({ data: { createUser } })=> {
+        if (get(createUser, 'id')) {
+          Router.pushRoute('/login')
+        }
+      })
     }
   }
 
