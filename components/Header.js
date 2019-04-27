@@ -66,13 +66,16 @@ class Header extends Component {
             />
           </div>
           {
-            username ? <a className="active" style={{ marginLeft: 'auto' }}>{username}</a> :
+            username ? <a className="active user" style={{ marginLeft: 'auto' }}>{username}</a> :
               <Link prefetch href='/login'>
                 <a className="active" style={{ marginLeft: 'auto' }}>登录</a>
               </Link>
           }
           <div className="button more" onTouchStart={this.handleTouchStart} >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#888" d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+          </div>
+          <div className="dropdown-menu">
+            <a className="dropdown-item" href="" onClick={() => localStorage.token = ""}>注销</a>
           </div>
         </div>
         <div className={`container mobile-container ${this.state.toggle ? 'active' : ''}`}>
@@ -123,6 +126,7 @@ class Header extends Component {
 
           .container {
             display: flex;
+            position: relative;
           }
 
           .mobile-container {
@@ -154,6 +158,23 @@ class Header extends Component {
 
           .more {
             display: none;
+          }
+
+          .user:hover ~ .dropdown-menu,
+          .dropdown-menu:hover {
+            display: block; 
+          }
+
+          .dropdown-menu {
+            display: none;
+            width: 10rem;
+            position: absolute; 
+            right: 0;
+            top: 100%;
+            background-color: #fff;
+            border: 1px solid rgba(177,180,185,.45);
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
+            // border-radius: 4px;
           }
         `}</style>
       </header>
