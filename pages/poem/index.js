@@ -104,6 +104,10 @@ class Poem extends Component {
                 ))
               }
             </div>
+            <div>
+              <span>收藏</span>
+              <span>点赞</span>
+            </div>
           </Card>
           { this.renderAnnotations() }
           <Paragraph text={poem.translation} title="翻译" loading={loading} />

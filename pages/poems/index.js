@@ -11,6 +11,7 @@ import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
+import Tag from '../../components/Tag'
 
 const POEMS = gql`
   query POEMS ($page: Int, $q: String) {
@@ -132,6 +133,8 @@ class Poems extends Component {
                     }
                   </div>
                 </div>
+                <Tag>喜欢</Tag>
+                <Tag>会背</Tag>
               </Card>
             ))
           }
