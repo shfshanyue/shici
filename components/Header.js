@@ -189,6 +189,7 @@ export default compose(
       return {
         username: get(data, 'me.name')
       }
-    }
+    },
+    skip: !process.browser
   })
 )(Header)

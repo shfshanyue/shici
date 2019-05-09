@@ -17,7 +17,8 @@ const Tag = ({ checked, onChange, children }) => {
         } 
 
         .tag.active {
-          background-color: #f603;
+          background-color: #f60;
+          color: #fff;
         }
       `}</style>
       { children } 

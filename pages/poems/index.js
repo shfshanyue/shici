@@ -31,6 +31,34 @@ const POEMS = gql`
   }
 `
 
+const POEMS_USER_STAR = gql`
+  query POEMS_USER_STAR ($page: Int, $q: String) {
+    poems (page: $page, q: $q) {
+      id 
+      userIsStar
+      userIsRecite
+    }
+  }
+`
+
+const RECITE_POEM = gql`
+  mutation RECITE_POEM($poemId: ID!, $recite: Boolean) {
+    recitePoem (id: $poemId, recite: $recite) {
+      id 
+      userIsRecite
+    }
+  }
+`
+
+const STAR_POEM = gql`
+  mutation STAR_POEM($poemId: ID!, $star: Boolean) {
+    starPoem (id: $poemId, star: $star) {
+      id 
+      userIsStar
+    }
+  }
+`
+
 class Poems extends Component {
   static async getInitialProps({ query }) {
     return {
@@ -42,6 +70,7 @@ class Poems extends Component {
   constructor (props) {
     super(props) 
     this.state = {
+      // 代表展开的诗词
       activeIds: {
       
       }
@@ -54,6 +83,24 @@ class Poems extends Component {
       page,
       q: this.props.q, 
     })
+  }
+
+  handleStar (poemId, star) {
+    this.props.starPoem({
+      variables: {
+        poemId,
+        star
+      } 
+    }) 
+  }
+
+  handleRecite (poemId, recite) {
+    this.props.recitePoem({
+      variables: {
+        poemId,
+        recite
+      } 
+    }) 
   }
 
   render () {
@@ -133,8 +180,8 @@ class Poems extends Component {
                     }
                   </div>
                 </div>
-                <Tag>喜欢</Tag>
-                <Tag>会背</Tag>
+                <Tag onChange={() => poem.userIsStar != null && this.handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
+                <Tag onChange={() => poem.userIsStar != null && this.handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
               </Card>
             ))
           }
@@ -150,6 +197,12 @@ class Poems extends Component {
 }
 
 export default compose(
+  graphql(STAR_POEM, {
+    name: 'starPoem'
+  }),
+  graphql(RECITE_POEM, {
+    name: 'recitePoem'
+  }),
   graphql(POEMS, {
     props ({ data, ...rest }) {
       return {
@@ -166,5 +219,16 @@ export default compose(
         } 
       } 
     }
+  }),
+  graphql(POEMS_USER_STAR, {
+    options ({ page, q }) {
+      return {
+        variables: {
+          page,
+          q
+        } 
+      } 
+    },
+    skip: !process.browser
   }),
 )(Poems)
