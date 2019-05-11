@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'next/router'
 
 import Pagination from '../../components/Pagination'
-import { get, highlight } from '../../lib/utils'
+import { get, highlight, merge } from '../../lib/utils'
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
@@ -198,15 +197,52 @@ class Poems extends Component {
 
 export default compose(
   graphql(STAR_POEM, {
-    name: 'starPoem'
+    name: 'starPoem',
+    options: {
+      optimisticResponse ({ poemId, star }) {
+        return {
+          __typename: 'Mutation',
+          starPoem: {
+            id: poemId,
+            userIsStar: star,
+            __typename: 'Poem'
+          }
+        }
+      }
+    } 
   }),
   graphql(RECITE_POEM, {
-    name: 'recitePoem'
+    name: 'recitePoem',
+    options: {
+      optimisticResponse ({ poemId, recite }) {
+        return {
+          __typename: 'Mutation',
+          recitePoem: {
+            id: poemId,
+            userIsRecite: recite,
+            __typename: 'Poem'
+          }
+        }
+      }
+    } 
+  }),
+  graphql(POEMS_USER_STAR, {
+    options ({ page, q }) {
+      return {
+        variables: {
+          page,
+          q
+        } 
+      } 
+    },
+    skip: !process.browser
   }),
   graphql(POEMS, {
-    props ({ data, ...rest }) {
+    props ({ data, ownProps }) {
+      const lastPoems = get(ownProps, 'data.poems', [])
+      const poems = get(data, 'poems', [1, 2, 3, 4, 5].map(id => ({ id })))
       return {
-        poems: data.poems || [1, 2, 3, 4, 5],
+        poems: merge(lastPoems, poems),
         poemsCount: data.poemsCount || 10,
         loading: data.loading
       }
@@ -219,16 +255,5 @@ export default compose(
         } 
       } 
     }
-  }),
-  graphql(POEMS_USER_STAR, {
-    options ({ page, q }) {
-      return {
-        variables: {
-          page,
-          q
-        } 
-      } 
-    },
-    skip: !process.browser
   }),
 )(Poems)
