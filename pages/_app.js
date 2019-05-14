@@ -5,7 +5,8 @@ import { ApolloProvider } from 'react-apollo'
 
 class MyApp extends App {
   componentDidMount () {
-    if ('serviceWorker' in navigator) {
+    const dev = process.env.NODE_ENV === 'development'
+    if (process.browser && !dev && navigator.serviceWorker) {
       navigator.serviceWorker
         .register('/service-worker.js')
         .then(registration => {

@@ -27,9 +27,6 @@ app.prepare().then(() => {
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       res.write('User-agent: *\nSitemap: https://shici.xiange.tech/sitemap/site.xml')
       res.end()
-    } else if (pathname === '/service-worker.js') {
-      const filePath = join(__dirname, '.next', pathname)
-      app.serveStatic(req, res, filePath)
     } else if (pathname === '/') {
       renderAndCache(req, res, '/poems', {})
     } else {

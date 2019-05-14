@@ -15,19 +15,22 @@ module.exports = withLess({
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
-  webpack: (config, { isServer }) => {
-    config.plugins.push(
-      new SWPrecacheWebpackPlugin({
-        verbose: true,
-        staticFileGlobsIgnorePatterns: [/\.next\//],
-        runtimeCaching: [
-          {
-            handler: 'networkFirst',
-            urlPattern: /^https?.*/
-          }
-        ]
-      })
-    )
+  webpack: (config, { isServer, ...rest }) => {
+    if (!config.dev) {
+      // config.plugins.push(
+        // new SWPrecacheWebpackPlugin({
+        //   verbose: true,
+        //   stripPrefix: '.next',
+        //   replacePrefix: 'next',
+          // runtimeCaching: [
+          //   {
+          //     handler: 'networkFirst',
+          //     urlPattern: /^https?.*/
+          //   }
+          // ]
+        // })
+      // )
+    }
 
     if (process.env.ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({
