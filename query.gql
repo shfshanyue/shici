@@ -1,0 +1,101 @@
+query POEMS ($page: Int, $q: String) {
+  poems (page: $page, q: $q) {
+    id
+    uuid
+    title
+    paragraphs
+    kind
+    author {
+      uuid
+      name
+      dynasty
+    }
+  }
+  poemsCount (q: $q)
+}
+
+query POEMS_USER_STAR ($page: Int, $q: String) {
+  poems (page: $page, q: $q) {
+    id 
+    userIsStar
+    userIsRecite
+  }
+}
+
+mutation RECITE_POEM($poemId: ID!, $recite: Boolean) {
+  recitePoem (id: $poemId, recite: $recite) {
+    id 
+    userIsRecite
+  }
+}
+
+mutation STAR_POEM($poemId: ID!, $star: Boolean) {
+  starPoem (id: $poemId, star: $star) {
+    id 
+    userIsStar
+  }
+}
+
+query POEM ($uuid: ID!) {
+  poem (uuid: $uuid) {
+    id
+    uuid
+    title
+    intro
+    paragraphs
+    appreciation
+    translation
+    kind
+    annotations
+    phrases {
+      id 
+      phrase
+    }
+    author {
+      uuid
+      name
+      dynasty
+      birthYear
+      deathYear
+      intro
+    }
+  }
+}
+
+mutation REGISTER (
+  $email: String!
+  $name: String!
+  $password: String!
+  $token: String!
+  $verifyCode: String!
+) {
+  createUser (email: $email, name: $name, password: $password, token: $token, verifyCode: $verifyCode) {
+    id 
+  }
+}
+
+mutation LOGIN ($email: String!, $password: String!) {
+  createUserToken (email: $email, password: $password) 
+}
+
+mutation SEND_VERIFY_CODE ($email: String!) {
+  token: sendEmailVerifyCode(email: $email)
+}
+
+query PHRASES ($page: Int, $pageSize: Int) {
+  phrases (page: $page, pageSize: $pageSize) {
+    id
+    phrase
+    authorName
+    poem {
+      uuid
+      title
+      author {
+        uuid
+        name
+        dynasty
+      }
+    }
+  }
+  phrasesCount
+}

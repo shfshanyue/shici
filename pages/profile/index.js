@@ -17,16 +17,19 @@ const STAR_POEMS = gql`
     user (id: $userId) {
       id
       name
-      starPoems {
-        id
-        uuid
-        title
-        kind
-        author {
+      starPoemsWithDate {
+        poem {
           id
           uuid
-          name
+          title
+          kind
+          author {
+            id
+            uuid
+            name
+          }
         }
+        updateTime
       }
     }
   }
@@ -37,16 +40,19 @@ const RECITE_POEMS = gql`
     user (id: $userId) {
       id
       name
-      recitePoems {
-        id
-        uuid
-        title
-        kind
-        author {
+      recitePoemsWithDate {
+        poem {
           id
           uuid
-          name
+          title
+          kind
+          author {
+            id
+            uuid
+            name
+          }
         }
+        updateTime
       }
     }
   }

@@ -12,33 +12,7 @@ import Author from '../../components/Author'
 
 import { Link, Router } from '../../routes'
 
-const POEM = gql`
-  query POEM ($uuid: ID!) {
-    poem (uuid: $uuid) {
-      id
-      uuid
-      title
-      intro
-      paragraphs
-      appreciation
-      translation
-      kind
-      annotations
-      phrases {
-        id 
-        phrase
-      }
-      author {
-        uuid
-        name
-        dynasty
-        birthYear
-        deathYear
-        intro
-      }
-    }
-  }
-`
+import { POEM } from '../../query.qgl'
 
 class Poem extends Component {
   static async getInitialProps({ query }) {

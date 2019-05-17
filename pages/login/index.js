@@ -12,31 +12,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
-const REGISTER = gql`
-  mutation REGISTER (
-    $email: String!
-    $name: String!
-    $password: String!
-    $token: String!
-    $verifyCode: String!
-  ) {
-    createUser (email: $email, name: $name, password: $password, token: $token, verifyCode: $verifyCode) {
-      id 
-    }
-  }
-`
-
-const LOGIN = gql`
-  mutation LOGIN ($email: String!, $password: String!) {
-    createUserToken (email: $email, password: $password) 
-  }
-`
-
-const SEND_VERIFY_CODE = gql`
-  mutation SEND_VERIFY_CODE ($email: String!) {
-    token: sendEmailVerifyCode(email: $email)
-  }
-`
+import { REGISTER, LOGIN, SEND_VERIFY_CODE } from '../../query.gql'
 
 class Login extends Component {
   constructor (props) {

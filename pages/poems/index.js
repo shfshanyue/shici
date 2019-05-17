@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 
 import Pagination from '../../components/Pagination'
@@ -12,51 +11,7 @@ import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Tag from '../../components/Tag'
 
-const POEMS = gql`
-  query POEMS ($page: Int, $q: String) {
-    poems (page: $page, q: $q) {
-      id
-      uuid
-      title
-      paragraphs
-      kind
-      author {
-        uuid
-        name
-        dynasty
-      }
-    }
-    poemsCount (q: $q)
-  }
-`
-
-const POEMS_USER_STAR = gql`
-  query POEMS_USER_STAR ($page: Int, $q: String) {
-    poems (page: $page, q: $q) {
-      id 
-      userIsStar
-      userIsRecite
-    }
-  }
-`
-
-const RECITE_POEM = gql`
-  mutation RECITE_POEM($poemId: ID!, $recite: Boolean) {
-    recitePoem (id: $poemId, recite: $recite) {
-      id 
-      userIsRecite
-    }
-  }
-`
-
-const STAR_POEM = gql`
-  mutation STAR_POEM($poemId: ID!, $star: Boolean) {
-    starPoem (id: $poemId, star: $star) {
-      id 
-      userIsStar
-    }
-  }
-`
+import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query.gql'
 
 class Poems extends Component {
   static async getInitialProps({ query }) {

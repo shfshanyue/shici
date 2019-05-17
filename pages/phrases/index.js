@@ -12,25 +12,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
-const PHRASES = gql`
-  query PHRASES ($page: Int, $pageSize: Int) {
-    phrases (page: $page, pageSize: $pageSize) {
-      id
-      phrase
-      authorName
-      poem {
-        uuid
-        title
-        author {
-          uuid
-          name
-          dynasty
-        }
-      }
-    }
-    phrasesCount
-  }
-`
+import { PHRASES } from '../../query.gql'
 
 class Phrases extends Component {
   static async getInitialProps({ query }) {

@@ -12,6 +12,7 @@ if (typeof require !== 'undefined') {
 }
 
 module.exports = withLess({
+  // TODO: 移除 less 支持
   lessLoaderOptions: {
     javascriptEnabled: true,
   },
@@ -37,6 +38,14 @@ module.exports = withLess({
         analyzerPort: 8888 + Number(isServer)
       }))
     }
+
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      use: {
+        loader: 'graphql-tag/loader'
+      }
+    })
 
     return config
   }
