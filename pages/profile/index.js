@@ -1,70 +1,33 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 
-import Pagination from '../../components/Pagination'
-import { get, highlight, merge } from '../../lib/utils'
-import { Link, Router } from '../../routes'
+import { get } from '../../lib/utils'
+import { Link } from '../../routes'
 
+import Poem from '../../components/Poem'
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
-import SearchBar from '../../components/SearchBar'
-import Tag from '../../components/Tag'
 
-const STAR_POEMS = gql`
-  query STAR_POEMS ($userId: ID!) {
-    user (id: $userId) {
-      id
-      name
-      starPoemsWithDate {
-        poem {
-          id
-          uuid
-          title
-          kind
-          author {
-            id
-            uuid
-            name
-          }
-        }
-        updateTime
-      }
-    }
-  }
-`
+import { STAR_POEMS, RECITE_POEMS } from '../../query.gql'
 
-const RECITE_POEMS = gql`
-  query RECITE_POEMS ($userId: ID!) {
-    user (id: $userId) {
-      id
-      name
-      recitePoemsWithDate {
-        poem {
-          id
-          uuid
-          title
-          kind
-          author {
-            id
-            uuid
-            name
-          }
-        }
-        updateTime
-      }
-    }
-  }
-`
-
-class Poems extends Component {
+class Profile extends Component {
   static async getInitialProps({ query }) {
     return query
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      activeIds: {}
+    }
+  }
+
   render () {
-    const { tag, userId } = this.props
+    const { tag, userId, recitePoems, starPoems } = this.props
+    const { activeIds } = this.state
+
+    const poems = tag === 'stars' ? starPoems : recitePoems
 
     return (
       <App title="我的主页" description="诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美">
@@ -75,8 +38,6 @@ class Poems extends Component {
 
           .profile {
             flex-grow: 1; 
-            background-color: #fff;
-            
           }
 
           .side {
@@ -92,6 +53,7 @@ class Poems extends Component {
             margin: 0 auto;
             white-space: nowrap;
             border-bottom: 1px solid #eee;
+            background-color: #fff;
           }
 
           .nav-item {
@@ -120,6 +82,28 @@ class Poems extends Component {
               <a className={`nav-item ${tag === 'recitations' ? 'active' : ''}`}>会背</a>
             </Link>
           </div>
+          <div className="content">
+            {
+              poems.map(poem =>
+                <div className="poem" key={poem.poem.id}>
+                  <Card loading={!poem.poem.id}>
+                    <Poem
+                      poem={poem.poem}
+                      active={Boolean(activeIds[poem.poem.id])}
+                      onMore={() => {
+                        this.setState({
+                          activeIds: {
+                            ...activeIds,
+                            [poem.poem.id]: 1
+                          }
+                        })
+                      }}
+                    />
+                  </Card>
+                </div>
+              )
+            }        
+          </div>
         </div>
         <aside className="side">
           <QR />
@@ -131,6 +115,25 @@ class Poems extends Component {
 }
 
 export default compose(
-  graphql(STAR_POEMS),
-  graphql(RECITE_POEMS),
-)(Poems)
+  graphql(STAR_POEMS, {
+    props ({ data }) {
+      return {
+        starPoems: get(data, 'user.starPoemsWithDate', [{ poem: { id: 0 } }]),
+      }
+    },
+    options: {
+      ssr: false
+    }
+  }),
+  graphql(RECITE_POEMS, {
+    props ({ data }) {
+      return {
+        recitePoems: get(data, 'user.recitePoemsWithDate', [{ poem: { id: 0 } }])
+      }
+    },
+    options: {
+      ssr: false,
+      fetchPolicy: 'cache-and-network'
+    }
+  })
+)(Profile)

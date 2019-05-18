@@ -72,10 +72,6 @@ class Poems extends Component {
             flex-grow: 1; 
           }
 
-          .more {
-            cursor: pointer; 
-          }
-
           .side {
             flex-basis: 300px;
             flex-shrink: 0;
@@ -92,7 +88,18 @@ class Poems extends Component {
           {
             poems.map(poem => (
               <Card loading={loading} key={poem.id}>
-                <Poem poem={poem}/>
+                <Poem
+                  poem={poem}
+                  active={Boolean(activeIds[poem.id])}
+                  onMore={() => {
+                    this.setState({
+                      activeIds: {
+                        ...activeIds,
+                        [poem.id]: 1
+                      }
+                    })
+                  }}
+                />
               </Card>
             ))
           }

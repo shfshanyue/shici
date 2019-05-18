@@ -40,7 +40,7 @@ class Header extends Component {
   }
 
   render () {
-    const { router: { query, asPath }, username } = this.props
+    const { router: { query, asPath }, username, userId } = this.props
   
     return (
       <header>
@@ -75,6 +75,9 @@ class Header extends Component {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#888" d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </div>
           <div className="dropdown-menu">
+            <Link href={`/users/${userId}/stars`}>
+              <a className="dropdown-item">个人中心</a>
+            </Link>
             <a className="dropdown-item" href="" onClick={() => localStorage.token = ""}>注销</a>
           </div>
         </div>
@@ -165,16 +168,19 @@ class Header extends Component {
             display: block; 
           }
 
+          .dropdown-item {
+            display: block;
+          }
+
           .dropdown-menu {
             display: none;
-            width: 10rem;
+            width: 8rem;
             position: absolute; 
             right: 0;
             top: 100%;
             background-color: #fff;
             border: 1px solid rgba(177,180,185,.45);
             box-shadow: 0 1px 2px 0 rgba(0,0,0,.1);
-            // border-radius: 4px;
           }
         `}</style>
       </header>
@@ -185,9 +191,10 @@ class Header extends Component {
 export default compose(
   withRouter,
   graphql(USER, {
-    props ({ data, ...rest }) {
+    props ({ data }) {
       return {
-        username: get(data, 'me.name')
+        username: get(data, 'me.name'),
+        userId: get(data, 'me.id')
       }
     },
     skip: !process.browser

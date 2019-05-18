@@ -99,3 +99,41 @@ query PHRASES ($page: Int, $pageSize: Int) {
   }
   phrasesCount
 }
+
+query STAR_POEMS ($userId: ID!) {
+  user (id: $userId) {
+    id
+    name
+    starPoemsWithDate {
+      poem {
+        id
+        uuid
+        title
+        kind
+        paragraphs
+        userIsRecite
+        userIsStar
+      }
+      updateTime
+    }
+  }
+}
+
+query RECITE_POEMS ($userId: ID!) {
+  user (id: $userId) {
+    id
+    name
+    recitePoemsWithDate {
+      poem {
+        id
+        uuid
+        title
+        kind
+        paragraphs
+        userIsRecite
+        userIsStar
+      }
+      updateTime
+    }
+  }
+}
