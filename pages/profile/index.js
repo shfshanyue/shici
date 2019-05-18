@@ -75,10 +75,10 @@ class Profile extends Component {
       <div className="container">
         <div className="profile">
           <div className="nav">
-            <Link route="profile" params={{ userId, tag: "stars" }}>
+            <Link route="profile" params={{ userId, tag: 'stars' }}>
               <a className={`nav-item ${tag === 'stars' ? 'active' : ''}`}>喜欢</a>
             </Link>
-            <Link route="profile" params={{ userId, tag: "recitations" }}>
+            <Link route="profile" params={{ userId, tag: 'recitations' }}>
               <a className={`nav-item ${tag === 'recitations' ? 'active' : ''}`}>会背</a>
             </Link>
           </div>
@@ -122,7 +122,11 @@ export default compose(
       }
     },
     options: {
-      ssr: false
+      ssr: false,
+      fetchPolicy: 'network-only',
+    },
+    skip ({ tag }) {
+      return tag !== 'stars'
     }
   }),
   graphql(RECITE_POEMS, {
@@ -133,7 +137,10 @@ export default compose(
     },
     options: {
       ssr: false,
-      fetchPolicy: 'cache-and-network'
+      fetchPolicy: 'network-only'
+    },
+    skip ({ tag }) {
+      return tag !== 'recitations'
     }
   })
 )(Profile)

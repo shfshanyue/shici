@@ -3,7 +3,7 @@ import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 import { graphql, compose } from 'react-apollo'
 
-import { STAR_POEM, RECITE_POEM, STAR_POEMS, RECITE_POEMS } from '../query.gql'
+import { STAR_POEM, RECITE_POEM } from '../query.gql'
 
 function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem }) {
   const handleStar = (poemId, star) => {
@@ -85,8 +85,7 @@ export default compose(
             __typename: 'Poem'
           }
         }
-      },
-      refetchQueries: [STAR_POEMS]
+      }
     } 
   }),
   graphql(RECITE_POEM, {

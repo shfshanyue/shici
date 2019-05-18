@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import Link from 'next/link'
 import { withRouter } from 'next/router'
 import { startsWith, get } from '../lib/utils'
-import { Router } from '../routes'
+import { Router, Link } from '../routes'
 
 import Search from './Search'
 
@@ -48,13 +47,13 @@ class Header extends Component {
           <Link href="/">
             <span className="title">诗词弦歌</span>
           </Link>
-          <Link prefetch href='/'>
+          <Link prefetch route="poems">
             <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
           </Link>
-          <Link prefetch href='/authors'>
+          <Link prefetch route="authors">
             <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
           </Link>
-          <Link prefetch href='/phrases'>
+          <Link prefetch route="phrases">
             <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
           </Link>
           <div className="search-box">
@@ -75,7 +74,7 @@ class Header extends Component {
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#888" d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </div>
           <div className="dropdown-menu">
-            <Link href={`/users/${userId}/stars`}>
+            <Link route="profile" params={{ userId: String(userId), tag: 'stars' }}>
               <a className="dropdown-item">个人中心</a>
             </Link>
             <a className="dropdown-item" href="" onClick={() => localStorage.token = ""}>注销</a>

@@ -44,9 +44,9 @@ const App = ({ children, title='', description, router }) => {
           text-decoration: none;
           transition: all .3s ease;
         }
-        a:visited {
-          color: #444; 
-        }
+        // a:visited {
+        //   color: #444; 
+        // }
         a,
         a:hover {
           color: #f60; 
