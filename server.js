@@ -11,8 +11,10 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60 * 24 * 365
 })
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 const app = next({
-  dev: process.env.NODE_ENV !== 'production'
+  dev: isDev
 })
 
 const handler = routes.getRequestHandler(app)
@@ -39,7 +41,7 @@ async function renderAndCache (req, res, pagePath, queryParams) {
   const key = req.url
 
   // If we have a page in the cache, let's serve it
-  if (ssrCache.has(key)) {
+  if (ssrCache.has(key) && !isDev) {
     res.setHeader('x-cache', 'HIT')
     res.end(ssrCache.get(key))
     return

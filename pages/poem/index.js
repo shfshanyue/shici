@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { get, map, highlight } from '../../lib/utils'
 
@@ -10,9 +9,9 @@ import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
 
 
-import { Link, Router } from '../../routes'
+import { Link } from '../../routes'
 
-import { POEM } from '../../query.qgl'
+import { POEM } from '../../query.gql'
 
 class Poem extends Component {
   static async getInitialProps({ query }) {
@@ -94,9 +93,9 @@ class Poem extends Component {
           </Card>
           {
             get(poem, 'phrases', []).map(phrase =>
-              <Card>
+              <Card key={phrase.id}>
                 <Link route="poem" params={{ uuid: poem.uuid, phrase: phrase.phrase }}>
-                  { phrase.phrase } 
+                  <a>{ phrase.phrase }</a>
                 </Link>
               </Card>
             )

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
 
 import Pagination from '../../components/Pagination'
-import { get, highlight, merge } from '../../lib/utils'
-import { Link, Router } from '../../routes'
+import { get, merge } from '../../lib/utils'
+import { Router } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
-import Tag from '../../components/Tag'
+import Poem from '../../components/Poem'
 
 import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query.gql'
 
@@ -91,51 +91,8 @@ class Poems extends Component {
           <SearchBar q={q} />
           {
             poems.map(poem => (
-              <Card loading={loading} key={poem.id || poem}>
-                <div className="poem">
-                  <h2>
-                    <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
-                      <a>
-                        { 
-                          highlight(poem.title, q)
-                        }
-                      </a>
-                    </Link>
-                  </h2>
-                  <div className="author">
-                    <Link route="author" params={{ uuid: get(poem, 'author.uuid') }}>
-                      <a>
-                        { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
-                      </a>
-                    </Link>
-                  </div>
-                  <div>
-                    {
-                      // 只显示四段
-                      !loading && poem.paragraphs.slice(0, activeIds[poem.id] || q ? undefined : 4).map((p, index) => (
-                        <p key={index}>
-                          { highlight(p, q) } 
-                        </p>
-                      )) 
-                    } 
-                    {
-                      !q && !loading && poem.paragraphs.length > 4 && !activeIds[poem.id] && <p className="more" onClick={
-                        e => {
-                          this.setState({
-                            activeIds: {
-                              ...activeIds,
-                              [poem.id]: 1
-                            }
-                          }) 
-                        }
-                      }>
-                      ...
-                    </p>
-                    }
-                  </div>
-                </div>
-                <Tag onChange={() => poem.userIsStar != null && this.handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
-                <Tag onChange={() => poem.userIsStar != null && this.handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
+              <Card loading={loading} key={poem.id}>
+                <Poem poem={poem}/>
               </Card>
             ))
           }
