@@ -1,11 +1,12 @@
+import { graphql, compose } from 'react-apollo'
+import dayjs from 'dayjs'
+
 import { Link } from '../routes'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
-import { graphql, compose } from 'react-apollo'
-
 import { STAR_POEM, RECITE_POEM } from '../query.gql'
 
-function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem }) {
+function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time }) {
   const handleStar = (poemId, star) => {
     starPoem({
       variables: {
@@ -28,8 +29,28 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem }) {
 
   return <div>
     <style jsx>{`
+      time {
+        color: #aaa;
+        margin-left: auto;
+      }
       .more {
         cursor: pointer; 
+      }
+      .footer {
+        color: #aaa;
+        display: flex; 
+        align-items: center;
+      }
+      .tag-item {
+        cursor: pointer; 
+      }
+      .tag-item:hover {
+        color: #f60c;
+      }
+      .tag-item:not(:last-child):after {
+          content: "/";
+          margin: 0 .2em;
+          color: #b2bac2;
       }
     `}</style>
     <div className="poem">
@@ -67,8 +88,16 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem }) {
         }
       </div>
     </div>
-    <Tag onChange={() => poem.userIsStar != null && handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
-    <Tag onChange={() => poem.userIsStar != null && handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
+    <div className="footer">
+      <Tag onChange={() => poem.userIsStar != null && handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
+      <Tag onChange={() => poem.userIsStar != null && handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
+      {
+        get(poem, 'tags', []).map(tag => <div className="tag-item">{tag.name}</div>)
+      }
+      {
+        time && <time>{ dayjs(time).format('YYYY-MM-DD HH:mm') }</time>
+      }
+    </div>
   </div>
 }
  

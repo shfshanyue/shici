@@ -88,6 +88,7 @@ class Profile extends Component {
                 <div className="poem" key={poem.poem.id}>
                   <Card loading={!poem.poem.id}>
                     <Poem
+                      time={poem.updateTime}
                       poem={poem.poem}
                       active={Boolean(activeIds[poem.poem.id])}
                       onMore={() => {

@@ -5,6 +5,10 @@ query POEMS ($page: Int, $q: String) {
     title
     paragraphs
     kind
+    tags {
+      id
+      name
+    }
     author {
       uuid
       name
