@@ -1,7 +1,7 @@
 import { graphql, compose } from 'react-apollo'
 import dayjs from 'dayjs'
 
-import { Link } from '../routes'
+import { Link, Router } from '../routes'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 import { STAR_POEM, RECITE_POEM } from '../query.gql'
@@ -23,6 +23,10 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
         recite
       } 
     }) 
+  }
+
+  const goLogin = () => {
+    Router.pushRoute('/login')
   }
 
   const author = get(poem, 'author.uuid')
@@ -89,8 +93,8 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
       </div>
     </div>
     <div className="footer">
-      <Tag onChange={() => poem.userIsStar != null && handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
-      <Tag onChange={() => poem.userIsStar != null && handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
+      <Tag onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
+      <Tag onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
       {
         get(poem, 'tags', []).map(tag => <div className="tag-item">{tag.name}</div>)
       }
