@@ -44,6 +44,7 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
         color: #aaa;
         display: flex; 
         align-items: center;
+        flex-wrap: wrap;
       }
       .tag-item {
         cursor: pointer; 
@@ -97,7 +98,7 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
       <Tag onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
       {
         get(poem, 'tags', []).map(tag => 
-          <Link route="poems" params={{ tagId: tag.id }} key={tag.id}>
+          <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>
             <div className="tag-item">{tag.name}</div>
           </Link>
         )

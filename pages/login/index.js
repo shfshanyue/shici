@@ -101,7 +101,7 @@ class Login extends Component {
             border-bottom: 1px solid #ebebeb;
             width: 100%;
             font-size: 1.2em;
-            margin-top: 10px;
+            margin-top: 16px;
           }
 
           input::before {
@@ -148,7 +148,7 @@ class Login extends Component {
           input:valid + label {
             color: #f60; 
             font-size: 0.8em;
-            transform: translateY(-150%);
+            transform: translateY(-180%);
           }
 
           .verifyCode {

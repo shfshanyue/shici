@@ -1,5 +1,5 @@
-query POEMS ($page: Int, $q: String) {
-  poems (page: $page, q: $q) {
+query POEMS ($page: Int, $q: String, $tagId: ID) {
+  poems (page: $page, q: $q, tagId: $tagId) {
     id
     uuid
     title
@@ -18,8 +18,8 @@ query POEMS ($page: Int, $q: String) {
   poemsCount (q: $q)
 }
 
-query POEMS_USER_STAR ($page: Int, $q: String) {
-  poems (page: $page, q: $q) {
+query POEMS_USER_STAR ($page: Int, $q: String, $tagId: ID) {
+  poems (page: $page, q: $q, tagId: $tagId) {
     id 
     userIsStar
     userIsRecite

@@ -10,6 +10,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Poem from '../../components/Poem'
+import Tag from '../../components/Tag'
 
 import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query.gql'
 
@@ -58,7 +59,7 @@ class Poems extends Component {
   }
 
   render () {
-    const { poems, loading, q } = this.props
+    const { poems, loading, q, tagId, tagName } = this.props
     const { activeIds } = this.state
 
     return (
@@ -85,6 +86,12 @@ class Poems extends Component {
       <div className="container">
         <div className="poems">
           <SearchBar q={q} />
+          {
+            tagId &&
+              <Card>
+                <Tag>{ tagName }</Tag>
+              </Card>
+          }
           {
             poems.map(poem => (
               <Card loading={loading} key={poem.id}>
@@ -146,11 +153,12 @@ export default compose(
     } 
   }),
   graphql(POEMS_USER_STAR, {
-    options ({ page, q }) {
+    options ({ page, q, tagId }) {
       return {
         variables: {
           page,
-          q
+          q,
+          tagId
         } 
       } 
     },
@@ -166,11 +174,12 @@ export default compose(
         loading: data.loading
       }
     },
-    options ({ page, q }) {
+    options ({ page, q, tagId }) {
       return {
         variables: {
           page,
-          q
+          q,
+          tagId
         } 
       } 
     }
