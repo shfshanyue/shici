@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 
@@ -8,9 +7,7 @@ import { get } from '../../lib/utils'
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
-import QR from '../../components/QR'
 import Card from '../../components/Card'
-import Pagination from '../../components/Pagination'
 
 import { REGISTER, LOGIN, SEND_VERIFY_CODE } from '../../query.gql'
 
@@ -44,7 +41,7 @@ class Login extends Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    const { email, username, password, token, verifyCode } = this.state
+    const { email, username, password, verifyCode } = this.state
     const isLogin = this.props.router.asPath.indexOf('/login') !== -1
     if (isLogin) {
       this.props.login({
@@ -84,6 +81,13 @@ class Login extends Component {
           .login {
             margin-top: 50px;
             width: 480px;
+          }
+
+          @media (max-width: 575px) {
+            .login {
+              margin-top: 0;
+              width: 100%;
+            }
           }
 
           input:-webkit-autofill {

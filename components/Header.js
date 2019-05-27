@@ -38,6 +38,63 @@ class Header extends Component {
     })
   }
 
+  renderMobile () {
+    const { router: { query, asPath } } = this.props
+    return (
+      <div className={`container mobile-container ${this.state.toggle ? 'active' : ''}`}>
+        <style jsx>{`
+          .item {
+            height: 53px; 
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            border-top: 1px solid #f6f6f6;
+            padding: 0 20px;
+          }
+
+          .container {
+            display: flex;
+            position: relative;
+          }
+
+          .mobile-container {
+            display: none; 
+            opacity: 0;
+            transition: all ease .3s;
+          }
+
+          .mobile-container.active {
+            opacity: 1;
+            display: flex; 
+            flex-direction: column;
+          }
+        `}</style>
+        <div className="item">
+          <Link prefetch route="poems">
+            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
+          </Link>
+        </div>
+        <div className="item">
+          <Link prefetch route="authors">
+            <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
+          </Link>
+        </div>
+        <div className="item">
+          <Link prefetch route="phrases">
+            <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
+          </Link>
+        </div>
+        <div className="item">
+          <Search
+            defaultValue={query.q}
+            placeholder={query.q || '将进酒'}
+            onSearch={this.handleSearch}
+          />
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const { router: { query, asPath }, username, userId } = this.props
   
@@ -48,13 +105,13 @@ class Header extends Component {
             <span className="title">诗词弦歌</span>
           </Link>
           <Link prefetch route="poems">
-            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
+            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
           </Link>
           <Link prefetch route="authors">
-            <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
+            <a className={startsWith(asPath, '/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>
           </Link>
           <Link prefetch route="phrases">
-            <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
+            <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
           </Link>
           <div className="search-box">
             <Search
@@ -80,15 +137,7 @@ class Header extends Component {
             <a className="dropdown-item" href="" onClick={() => localStorage.token = ""}>注销</a>
           </div>
         </div>
-        <div className={`container mobile-container ${this.state.toggle ? 'active' : ''}`}>
-          <div className="item">
-            <Search
-              defaultValue={query.q}
-              placeholder={query.q || '将进酒'}
-              onSearch={this.handleSearch}
-            />
-          </div>
-        </div>
+        { this.renderMobile() }
         <style jsx>{`
           header {
             margin-bottom: 20px;
@@ -119,27 +168,9 @@ class Header extends Component {
             }
           }
 
-          .item {
-            height: 53px; 
-            width: 100%;
-            display: flex;
-            border-top: 1px solid #f6f6f6;
-          }
-
           .container {
             display: flex;
             position: relative;
-          }
-
-          .mobile-container {
-            display: none; 
-            opacity: 0;
-            transition: all ease .3s;
-          }
-
-          .mobile-container.active {
-            opacity: 1;
-            display: flex; 
           }
 
           .title {
