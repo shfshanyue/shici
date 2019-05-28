@@ -36,7 +36,9 @@ class Poems extends Component {
   handleChange (page) {
     Router.pushRoute('poems', {
       page,
-      q: this.props.q, 
+      q: this.props.q,
+      tagId: this.props.tagId,
+      tagName: this.props.tagName
     })
   }
 

@@ -1,20 +1,11 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { withRouter } from 'next/router'
 import { startsWith, get } from '../lib/utils'
 import { Router, Link } from '../routes'
 
 import Search from './Search'
-
-const USER = gql`
-  query USER {
-    me {
-      id 
-      name
-    } 
-  }
-`
+import { ME } from '../query.gql'
 
 class Header extends Component {
   constructor (props) {
@@ -220,7 +211,7 @@ class Header extends Component {
 
 export default compose(
   withRouter,
-  graphql(USER, {
+  graphql(ME, {
     props ({ data }) {
       return {
         username: get(data, 'me.name'),

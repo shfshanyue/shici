@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose, withApollo } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import { get } from '../../lib/utils'
@@ -9,7 +9,7 @@ import { Link, Router } from '../../routes'
 import App from '../../components/App'
 import Card from '../../components/Card'
 
-import { REGISTER, LOGIN, SEND_VERIFY_CODE } from '../../query.gql'
+import { REGISTER, LOGIN, SEND_VERIFY_CODE, ME } from '../../query.gql'
 
 class Login extends Component {
   constructor (props) {
@@ -51,6 +51,9 @@ class Login extends Component {
         } 
       }).then(({ data: { createUserToken }}) => {
         if (createUserToken) {
+          // 登录时注意清空以前的 cache
+          // TODO: 只需要清空带有权限信息 Query 的 cache
+          this.props.client.resetStore()
           localStorage.token = createUserToken 
           Router.pushRoute('/')
         }
@@ -235,6 +238,7 @@ class Login extends Component {
 
 export default compose(
   withRouter,
+  withApollo,
   graphql(LOGIN, {
     name: 'login'
   }),

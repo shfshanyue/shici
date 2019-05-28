@@ -141,3 +141,10 @@ query RECITE_POEMS ($userId: ID!) {
     }
   }
 }
+
+query ME {
+  me {
+    id 
+    name
+  } 
+}

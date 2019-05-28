@@ -1,10 +1,14 @@
 import { graphql, compose } from 'react-apollo'
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/zh-cn'
 
 import { Link, Router } from '../routes'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 import { STAR_POEM, RECITE_POEM } from '../query.gql'
+
+dayjs.extend(relativeTime)
 
 function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time }) {
   const handleStar = (poemId, star) => {
@@ -36,6 +40,7 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
       time {
         color: #aaa;
         margin-left: auto;
+        font-family: defalut;
       }
       .more {
         cursor: pointer; 
@@ -104,7 +109,10 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
         )
       }
       {
-        time && <time>{ dayjs(time).format('YYYY-MM-DD HH:mm') }</time>
+        time && <time>{
+          dayjs(new Date()).diff(time, 'day') > 60 ?
+            dayjs(time).format('YYYY-MM-DD HH:mm') : dayjs(time).locale('zh-cn').fromNow()
+        }</time>
       }
     </div>
   </div>
