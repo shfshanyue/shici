@@ -15,7 +15,7 @@ query POEMS ($page: Int, $q: String, $tagId: ID) {
       dynasty
     }
   }
-  poemsCount (q: $q)
+  poemsCount (q: $q, tagId: $tagId)
 }
 
 query POEMS_USER_STAR ($page: Int, $q: String, $tagId: ID) {
