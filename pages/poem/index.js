@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { get, map, highlight } from '../../lib/utils'
+import { get, map, omit, merge } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
-
-
+import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
-
-import { POEM } from '../../query.gql'
+import { POEM, POEM_USER_STAR } from '../../query.gql'
 
 class Poem extends Component {
   static async getInitialProps({ query }) {
@@ -58,25 +56,10 @@ class Poem extends Component {
       <div className="container">
         <div className="poem">
           <Card loading={loading}>
-            <h2>
-              { poem.title }
-            </h2>
-            <Link route="author" params={{ uuid: get(poem, 'author.uuid') }} prefetch>
-              <span>
-                { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
-              </span>
-            </Link>
-            <div>
-              {
-                map(poem.paragraphs, (p, index) => (
-                  <p key={index}>
-                    {
-                      highlight(p, this.props.phrase || map(poem.phrases, phrase => phrase.phrase))
-                    }
-                  </p>
-                ))
-              }
-            </div>
+            <PoemComponent
+              poem={omit(poem, ['author', 'uuid'])}
+              highlightWords={this.props.phrase || map(poem.phrases, phrase => phrase.phrase)}
+            />
           </Card>
           { this.renderAnnotations() }
           <Paragraph text={poem.translation} title="翻译" loading={loading} />
@@ -105,6 +88,16 @@ class Poem extends Component {
 }
 
 export default compose(
+  graphql(POEM_USER_STAR, {
+    options ({ uuid }) {
+      return {
+        variables: {
+          uuid
+        } 
+      } 
+    },
+    skip: !process.browser
+  }),
   graphql(POEM, {
     options ({ uuid }) {
       return {
@@ -113,9 +106,10 @@ export default compose(
         }
       }
     },
-    props ({ data, ...rest }) {
+    props ({ data, ownProps }) {
+      const lastPoem = get(ownProps, 'data.poem', {})
       return {
-        poem: data.poem || {},
+        poem: merge(lastPoem, data.poem),
         loading: data.loading
       } 
     }

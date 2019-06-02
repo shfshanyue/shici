@@ -26,6 +26,14 @@ query POEMS_USER_STAR ($page: Int, $q: String, $tagId: ID) {
   }
 }
 
+query POEM_USER_STAR ($uuid: ID!) {
+  poem (uuid: $uuid) {
+    id
+    userIsStar
+    userIsRecite
+  }
+}
+
 mutation RECITE_POEM($poemId: ID!, $recite: Boolean) {
   recitePoem (id: $poemId, recite: $recite) {
     id 
@@ -54,6 +62,10 @@ query POEM ($uuid: ID!) {
     phrases {
       id 
       phrase
+    }
+    tags {
+      id
+      name
     }
     author {
       uuid

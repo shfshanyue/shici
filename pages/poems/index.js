@@ -100,6 +100,7 @@ class Poems extends Component {
                 <Poem
                   poem={poem}
                   active={Boolean(activeIds[poem.id])}
+                  highlightWords={[q]}
                   onMore={() => {
                     this.setState({
                       activeIds: {

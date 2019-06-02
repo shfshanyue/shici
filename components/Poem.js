@@ -10,7 +10,7 @@ import { STAR_POEM, RECITE_POEM } from '../query.gql'
 
 dayjs.extend(relativeTime)
 
-function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time }) {
+function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem, recitePoem, time }) {
   const handleStar = (poemId, star) => {
     starPoem({
       variables: {
@@ -65,13 +65,16 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
     `}</style>
     <div className="poem">
       <h2>
-        <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
-          <a>
-            { 
-              highlight(poem.title, q)
-            }
-          </a>
-        </Link>
+        {
+          poem.uuid ?
+            <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
+              <a>
+                { 
+                  highlight(poem.title, highlightWords)
+                }
+              </a>
+            </Link> : highlight(poem.title, highlightWords)
+        }
       </h2>
       {
         author && <div className="author">
@@ -87,7 +90,7 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
           // 当折叠时，只显示四段
           slice(poem.paragraphs, 0, active ? undefined : 4).map((p, index) => (
             <p key={index}>
-              { highlight(p, q) } 
+              { highlight(p, highlightWords) } 
             </p>
           )) 
         } 
@@ -99,8 +102,20 @@ function Poem ({ poem = {}, q, active = true, onMore, starPoem, recitePoem, time
       </div>
     </div>
     <div className="footer">
-      <Tag onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)} checked={poem.userIsStar}>喜欢</Tag>
-      <Tag onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)} checked={poem.userIsRecite}>会背</Tag>
+      {
+        poem.userIsStar !== undefined &&
+          <Tag
+            onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)}
+            checked={poem.userIsStar}
+          >喜欢</Tag>
+      }
+      {
+        poem.userIsRecite !== undefined &&
+          <Tag
+            onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)}
+            checked={poem.userIsRecite}
+          >会背</Tag>
+      }
       {
         get(poem, 'tags', []).map(tag => 
           <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>

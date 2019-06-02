@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { get, map } from '../../lib/utils'
+import { get } from '../../lib/utils'
 
 import { Router, Link } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import Poem from '../../components/Poem'
 import Pagination from '../../components/Pagination'
 import AuthorComponent from '../../components/Author'
 
@@ -27,6 +28,10 @@ const AUTHOR = gql`
         uuid
         title
         kind
+        tags {
+          id
+          name
+        }
         paragraphs
       }
       poemsCount
@@ -53,6 +58,7 @@ class Author extends Component {
 
   render () {
     const { author, loading } = this.props
+    const poems = get(author, 'poems', [1, 2, 3, 4, 5].map(x => ({ id: x })))
     return (
       <App title={`${get(author, 'name', '')}_作者`} description={author.intro}>
         <style jsx>{`
@@ -76,20 +82,13 @@ class Author extends Component {
             <AuthorComponent author={author} />
           </Card>
           {
-            get(author, 'poems', [1, 2, 3, 4, 5]).map(poem => (
-              <Card key={poem.id || poem} loading={loading}>
-                <h3>
-                  <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
-                    <a>
-                      { poem.title }
-                    </a>
-                  </Link>
-                </h3>
-                <div>{ get(poem, 'kink') === '文' ? get(poem, 'paragraphs.0') : get(poem, 'paragraphs', []).map(p => <p key={p}>{p}</p>) }</div>
+            poems.map(poem => (
+              <Card key={poem.id} loading={loading}>
+                <Poem poem={poem} />
               </Card>
             ))
           }
-      <Pagination current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
+        <Pagination current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />
@@ -110,7 +109,7 @@ export default compose(
         }
       }
     },
-    props ({ data, ...rest }) {
+    props ({ data }) {
       return {
         author: data.author || {},
         loading: data.loading
