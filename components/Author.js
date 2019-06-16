@@ -8,7 +8,7 @@ export default ({ author = {} }) => (
       } 
     `}</style>
     <h2>
-      <Link route="author" params={{ uuid: author.uuid }} prefetch>
+      <Link route="author" params={{ uuid: author.uuid }}>
         <a>
           { author.name }
         </a>

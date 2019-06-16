@@ -53,14 +53,15 @@ function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem
       }
       .tag-item {
         cursor: pointer; 
+        font-size: 1rem;
       }
       .tag-item:hover {
         color: #f60c;
       }
       .tag-item:not(:last-child):after {
-          content: "/";
-          margin: 0 .2em;
-          color: #b2bac2;
+        content: "/";
+        margin: 0 .2em;
+        color: #b2bac2;
       }
     `}</style>
     <div className="poem">

@@ -10,6 +10,7 @@ query POEMS ($page: Int, $q: String, $tagId: ID) {
       name
     }
     author {
+      id
       uuid
       name
       dynasty
@@ -68,6 +69,7 @@ query POEM ($uuid: ID!) {
       name
     }
     author {
+      id
       uuid
       name
       dynasty
