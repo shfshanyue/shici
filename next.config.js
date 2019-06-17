@@ -1,7 +1,7 @@
 const withLess = require('@zeit/next-less')
 const fs = require('fs')
 const path = require('path')
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+// const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 const theme = require('./theme.json')
@@ -17,7 +17,7 @@ module.exports = withLess({
     javascriptEnabled: true,
   },
   webpack: (config, { isServer, ...rest }) => {
-    if (!config.dev) {
+    // if (!config.dev) {
       // config.plugins.push(
         // new SWPrecacheWebpackPlugin({
         //   verbose: true,
@@ -31,7 +31,7 @@ module.exports = withLess({
           // ]
         // })
       // )
-    }
+    // }
 
     if (process.env.ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({

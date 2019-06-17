@@ -21,7 +21,6 @@ const handler = routes.getRequestHandler(app)
 
 app.prepare().then(() => {
   createServer((req, res) => {
-    console.log(req.url)
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
 
