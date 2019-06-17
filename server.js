@@ -59,6 +59,7 @@ async function renderAndCache (req, res, pagePath, queryParams) {
     res.setHeader('x-cache', 'MISS')
     res.end(html)
   } catch (err) {
+    res.statusCode = 404
     app.renderError(err, req, res, pagePath, queryParams)
   }
 }
