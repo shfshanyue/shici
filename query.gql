@@ -132,6 +132,7 @@ query STAR_POEMS ($userId: ID!) {
         userIsRecite
         userIsStar
         author {
+          id
           uuid
           name
           dynasty
@@ -156,6 +157,7 @@ query RECITE_POEMS ($userId: ID!) {
         userIsRecite
         userIsStar
         author {
+          id
           uuid
           name
           dynasty
