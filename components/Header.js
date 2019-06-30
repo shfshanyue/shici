@@ -5,6 +5,7 @@ import { startsWith, get } from '../lib/utils'
 import { Router, Link } from '../routes'
 
 import Search from './Search'
+import Avator from './Avator'
 import { ME } from '../query.gql'
 
 class Header extends Component {
@@ -113,7 +114,9 @@ class Header extends Component {
             />
           </div>
           {
-            username ? <a className="active user" style={{ marginLeft: 'auto' }}>{username}</a> :
+            username ? <a className="active user" style={{ marginLeft: 'auto' }}>
+                <Avator name={username} />
+              </a> :
               <Link prefetch href='/login'>
                 <a className="active" style={{ marginLeft: 'auto' }}>登录</a>
               </Link>
@@ -184,6 +187,13 @@ class Header extends Component {
             display: none;
           }
 
+          .user {
+            margin-left: auto; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
           .user:hover ~ .dropdown-menu,
           .dropdown-menu:hover {
             display: block; 
@@ -218,6 +228,6 @@ export default compose(
         userId: get(data, 'me.id')
       }
     },
-    skip: !process.browser
+    ssr: false
   })
 )(Header)

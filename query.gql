@@ -174,3 +174,10 @@ query ME {
     name
   } 
 }
+
+query TAGS {
+  tags {
+    id   
+    name
+  }  
+}
