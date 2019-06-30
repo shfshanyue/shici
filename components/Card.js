@@ -1,12 +1,13 @@
 import React from 'react'
 import Skeleton from './Skeleton'
 
-export default ({ children, loading }) => (
-  <div className={`card ${loading ? 'loading' : ''}`}>
-    <Skeleton active loading={loading}>
-      { children }
-    </Skeleton>
-    <style jsx>{`
+function Card ({ children, loading }) {
+  return (
+    <div className={`card ${loading ? 'loading' : ''}`}>
+      <Skeleton active loading={loading}>
+        {children}
+      </Skeleton>
+      <style jsx>{`
       .card {
         padding: 20px; 
         background-color: #fff;
@@ -26,5 +27,9 @@ export default ({ children, loading }) => (
         opacity: 0.7;
       }
     `}</style>
-  </div>
-)
+    </div>
+  )
+}
+
+
+export default Card

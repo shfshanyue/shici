@@ -1,6 +1,6 @@
-const Tag = ({ checked, onChange, children }) => {
+function Tag ({ checked, onChange, children, style }) {
   return (
-    <div className={`tag ${checked ? 'active' : ''}`} onClick={onChange}>
+    <div className={`tag ${checked ? 'active' : ''}`} onClick={onChange} style={style}>
       <style jsx>{`
         .tag {
           display: inline-block; 
@@ -11,7 +11,7 @@ const Tag = ({ checked, onChange, children }) => {
           cursor: pointer;
           font-size: .9em;
 
-          animation: 1s ease show;
+          animation: .3s ease show;
         }
 
         .tag:hover {

@@ -7,6 +7,8 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
+import Tags from '../../components/Tags'
+
 import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
 import { POEM, POEM_USER_STAR } from '../../query.gql'

@@ -11,6 +11,7 @@ import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Poem from '../../components/Poem'
 import Tag from '../../components/Tag'
+import Tags from '../../components/Tags'
 
 import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query.gql'
 
@@ -116,6 +117,7 @@ class Poems extends Component {
           <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
         </div>
         <aside className="side">
+          <Tags />
           <QR />
         </aside>
       </div>
