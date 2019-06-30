@@ -10,6 +10,8 @@ const Tag = ({ checked, onChange, children }) => {
           color: #f60c;
           cursor: pointer;
           font-size: .9em;
+
+          animation: 1s ease show;
         }
 
         .tag:hover {
@@ -19,6 +21,15 @@ const Tag = ({ checked, onChange, children }) => {
         .tag.active {
           background-color: #f60;
           color: #fff;
+        }
+
+        @keyframes show {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
         }
       `}</style>
       { children } 

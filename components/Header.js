@@ -88,7 +88,7 @@ class Header extends Component {
   }
 
   render () {
-    const { router: { query, asPath }, username, userId } = this.props
+    const { router: { query, asPath }, username, userId, loading } = this.props
   
     return (
       <header>
@@ -114,7 +114,7 @@ class Header extends Component {
             />
           </div>
           {
-            username ? <a className="active user" style={{ marginLeft: 'auto' }}>
+            loading ? null : username ? <a className="active user">
                 <Avator name={username} />
               </a> :
               <Link prefetch href='/login'>
@@ -225,9 +225,12 @@ export default compose(
     props ({ data }) {
       return {
         username: get(data, 'me.name'),
-        userId: get(data, 'me.id')
+        userId: get(data, 'me.id'),
+        loading: data.loading
       }
     },
-    ssr: false
+    options: {
+      ssr: false
+    }
   })
 )(Header)

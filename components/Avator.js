@@ -14,7 +14,18 @@ function Avator ({ name }) {
           border-radius: 50%;
           color: #fff;
           font-size: 22px;
+
+          animation: .3s ease show;
         } 
+
+        @keyframes show {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
       `}</style>       
     </div>
   )
