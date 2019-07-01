@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'next/router'
 
 import { get } from '../../lib/utils'
 
@@ -9,6 +7,7 @@ import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
+import Tags from '../../components/Tags'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
@@ -79,6 +78,7 @@ class Phrases extends Component {
           <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.phrasesCount} onChange={this.handleChange} pageSize={20} />
         </div>
         <aside className="side">
+          <Tags />
           <QR />
         </aside>
       </div>

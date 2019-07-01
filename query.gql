@@ -179,5 +179,6 @@ query TAGS {
   tags {
     id   
     name
+    kind
   }  
 }

@@ -6,7 +6,7 @@ import { TAGS } from '../query.gql'
 import Tag from './Tag'
 import Card from './Card'
 
-function Tags ({ tags }) {
+function Tags ({ tags = [] }) {
   return <Card title="标签">{
     tags.slice(0, 50).map((tag) => (
       <Tag style={{ marginBottom: '10px' }}>

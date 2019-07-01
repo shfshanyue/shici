@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
-import { withRouter } from 'next/router'
 
-import { Link, Router } from '../../routes'
+import { Router } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -11,6 +10,7 @@ import Card from '../../components/Card'
 import SearchBar from '../../components/SearchBar'
 import Pagination from '../../components/Pagination'
 import Author from '../../components/Author'
+import Tags from '../../components/Tags'
 
 const AUTHORS = gql`
   query AUTHORS ($page: Int, $q: String) {
@@ -84,6 +84,7 @@ class Authors extends Component {
           <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.authorsCount / 10} onChange={this.handleChange} />
         </div>
         <aside className="side">
+          <Tags />
           <QR />
         </aside>
       </div>

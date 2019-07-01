@@ -10,8 +10,6 @@ function Tag ({ checked, onChange, children, style }) {
           color: #f60c;
           cursor: pointer;
           font-size: .9em;
-
-          animation: .3s ease show;
         }
 
         .tag:hover {
