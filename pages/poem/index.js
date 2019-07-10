@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { get, map, omit, merge } from '../../lib/utils'
+import { get, map, omit, merge, flatten } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -53,37 +53,60 @@ class Poem extends Component {
             flex-shrink: 0;
             margin-left: 20px;
           }
-        `}</style>
-      <div className="container">
-        <div className="poem">
-          <Card loading={loading}>
-            <PoemComponent
-              poem={omit(poem, ['author', 'uuid'])}
-              highlightWords={this.props.phrase || map(poem.phrases, phrase => phrase.phrase)}
-            />
-          </Card>
-          { this.renderAnnotations() }
-          <Paragraph text={poem.translation} title="翻译" loading={loading} />
-          <Paragraph text={poem.intro} title="简介" loading={loading} />
-          <Paragraph text={poem.appreciation} title="赏析" loading={loading} />
-        </div>
-        <aside className="side">
-          <Card loading={loading}>
-            <Author author={poem.author} />
-          </Card>
-          {
-            get(poem, 'phrases', []).map(phrase =>
-              <Card key={phrase.id}>
-                <Link route="poem" params={{ uuid: poem.uuid, phrase: phrase.phrase }}>
-                  <a>{ phrase.phrase }</a>
-                </Link>
-              </Card>
-            )
+
+          .phrase {
+            padding: 10px 0;
+            display: block;
           }
-          <QR />
-        </aside>
-      </div>
-    </App>
+
+          .phrase:not(:last-child) {
+            border-bottom: 1px solid #eee;
+          }
+        `}</style>
+        <div className="container">
+          <div className="poem">
+            <Card loading={loading}>
+              <PoemComponent
+                poem={omit(poem, ['author', 'uuid'])}
+                highlightWords={this.props.phrase || map(poem.phrases, phrase => phrase.phrase)}
+              />
+            </Card>
+            {this.renderAnnotations()}
+            <Paragraph text={poem.translation} title="翻译" loading={loading} />
+            <Paragraph text={poem.intro} title="简介" loading={loading} />
+            <Paragraph text={poem.appreciation} title="赏析" loading={loading} />
+            {
+              flatten(map(poem.tags, tag => tag.poems)).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+                <Card loading={loading} key={poem.id} title={i ? '' : '更多相关诗词推荐'}>
+                  <PoemComponent poem={poem} />
+                </Card>
+              )
+            }
+          </div>
+          <aside className="side">
+            <Card loading={loading}>
+              <Author author={poem.author} />
+            </Card>
+            <Card title="名句" loading={loading}>
+              {
+                get(poem, 'phrases', []).map(phrase =>
+                  <Link route="poem" params={{ uuid: poem.uuid, phrase: phrase.phrase }} key={phrase.id}>
+                    <a className="phrase">{phrase.phrase}</a>
+                  </Link>
+                )
+              }
+            </Card>
+            {
+              get(poem, 'author.poems', []).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+                <Card loading={loading} key={poem.id} title={i ? '' : '更多作者诗词推荐'}>
+                  <PoemComponent poem={poem} />
+                </Card>
+              )
+            }
+            <QR />
+          </aside>
+        </div>
+      </App>
     )
   }
 }

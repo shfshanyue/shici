@@ -67,6 +67,18 @@ query POEM ($uuid: ID!) {
     tags {
       id
       name
+      poems (pageSize: 6) {
+        id
+        uuid
+        title
+        paragraphs
+        author {
+          id
+          dynasty
+          uuid
+          name
+        }
+      }
     }
     author {
       id
@@ -76,6 +88,12 @@ query POEM ($uuid: ID!) {
       birthYear
       deathYear
       intro
+      poems {
+        id
+        uuid
+        title
+        paragraphs
+      }
     }
   }
 }
