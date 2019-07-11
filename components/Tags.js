@@ -2,7 +2,7 @@ import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import { Link } from '../routes'
 import { TAGS } from '../query.gql'
-import { groupBy } from '../lib/utils'
+import { groupBy, get } from '../lib/utils'
 
 import Tag from './Tag'
 import Card from './Card'
@@ -41,7 +41,7 @@ export default compose(
   graphql(TAGS, {
     props ({ data }) {
       return {
-        tags: data.tags.filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)),
+        tags: get(data, 'tags', []).filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)),
         loading: data.loading
       }
     }
