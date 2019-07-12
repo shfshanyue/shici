@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+    "stat": "ANALYZE=1 next build"
   },
   "dependencies": {
     "@types/next": "^8.0.5",
