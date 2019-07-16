@@ -1,4 +1,19 @@
+stages:
+  - audit
+  - deploy
+
+audit:
+  stage: audit
+  only:
+    - master
+  image: node:10-alpine
+  script:
+    - npm audit
+  tags:
+    - docker
+
 deploy:
+  stage: deploy
   only:
     - master
   script:
