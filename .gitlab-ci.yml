@@ -1,14 +1,28 @@
 stages:
-  - audit
+  - pre
   - deploy
 
 audit:
-  stage: audit
-  only:
-    - master
+  stage: pre
   image: node:10-alpine
+  only:
+    refs:
+      - /^feature\/.*$/
+      - /^hotfix\/.*$/
   script:
     - npm audit
+  tags:
+    - docker
+
+outdated:
+  stage: pre
+  image: node:10-alpine
+  only:
+    refs:
+      - /^feature\/.*$/
+      - /^hotfix\/.*$/
+  script:
+    - npm run ncu
   tags:
     - docker
 

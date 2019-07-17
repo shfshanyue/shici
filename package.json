@@ -4,30 +4,34 @@
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
+    "ncu": "ncu",
     "start": "NODE_ENV=production node server.js",
     "stat": "ANALYZE=1 next build"
   },
   "dependencies": {
-    "@types/next": "^8.0.5",
+    "@types/next": "^8.0.6",
     "@zeit/next-less": "^1.0.1",
-    "apollo-boost": "^0.3.1",
-    "babel-plugin-import": "^1.11.0",
-    "dayjs": "^1.8.14",
-    "graphql": "^14.0.2",
+    "apollo-boost": "^0.4.3",
+    "babel-plugin-import": "^1.12.0",
+    "dayjs": "^1.8.15",
+    "graphql": "^14.4.2",
     "isomorphic-unfetch": "^3.0.0",
     "less": "^3.9.0",
-    "less-loader": "^4.1.0",
+    "less-loader": "^5.0.0",
     "lru-cache": "^5.1.1",
-    "next": "^7.0.2",
+    "next": "^9.0.2",
     "next-routes": "^1.4.2",
-    "prop-types": "^15.6.2",
-    "react": "^16.6.0",
-    "react-apollo": "^2.1.11",
-    "react-dom": "^16.6.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-apollo": "^2.5.8",
+    "react-dom": "^16.8.6",
     "sw-precache-webpack-plugin": "^0.11.5",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-bundle-size-analyzer": "^3.0.0"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "npm-check-updates": "^3.1.20"
+  }
 }
