@@ -1,3 +1,4 @@
+import React from 'react'
 import { graphql, compose } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
@@ -10,7 +11,16 @@ import { STAR_POEM, RECITE_POEM } from '../query.gql'
 import dayjs from 'dayjs'
 dayjs.extend(relativeTime)
 
-function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem, recitePoem, time }) {
+function Poem ({
+  poem = {},
+  highlightWords = [],
+  active = true,
+  onMore,
+  starPoem,
+  recitePoem,
+  time,
+  title="h2"
+}) {
   const handleStar = (poemId, star) => {
     starPoem({
       variables: {
@@ -65,9 +75,9 @@ function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem
       }
     `}</style>
     <div className="poem">
-      <h2>
-        {
-          poem.uuid ?
+      {
+        React.createElement(title, {
+          children: poem.uuid ?
             <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
               <a>
                 { 
@@ -75,8 +85,8 @@ function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem
                 }
               </a>
             </Link> : highlight(poem.title, highlightWords)
-        }
-      </h2>
+        }) 
+      }
       {
         author && <div className="author">
           <Link route="author" params={{ uuid: get(poem, 'author.uuid') }}>

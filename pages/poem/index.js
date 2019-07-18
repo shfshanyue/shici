@@ -67,6 +67,7 @@ class Poem extends Component {
           <div className="poem">
             <Card loading={loading}>
               <PoemComponent
+                title="h1"
                 poem={omit(poem, ['author', 'uuid'])}
                 highlightWords={this.props.phrase || map(poem.phrases, phrase => phrase.phrase)}
               />
