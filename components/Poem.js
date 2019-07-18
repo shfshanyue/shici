@@ -1,5 +1,4 @@
 import { graphql, compose } from 'react-apollo'
-import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
@@ -8,6 +7,7 @@ import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 import { STAR_POEM, RECITE_POEM } from '../query.gql'
 
+import dayjs from 'dayjs'
 dayjs.extend(relativeTime)
 
 function Poem ({ poem = {}, highlightWords = [], active = true, onMore, starPoem, recitePoem, time }) {

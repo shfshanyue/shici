@@ -74,7 +74,7 @@ class Poem extends Component {
             {this.renderAnnotations()}
             <Paragraph text={poem.translation} title="翻译" loading={loading} />
             <Paragraph text={poem.intro} title="简介" loading={loading} />
-            <Paragraph text={poem.appreciation} title="赏析" loading={loading} />
+            <Paragraph text={poem.appreciation} title="赏析" loading={loading} highlight />
             {
               flatten(map(poem.tags, tag => tag.poems)).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '更多相关诗词推荐'}>

@@ -25,6 +25,7 @@
     "react": "^16.8.6",
     "react-apollo": "^2.5.8",
     "react-dom": "^16.8.6",
+    "react-highlight-words": "^0.16.0",
     "sw-precache-webpack-plugin": "^0.11.5",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-bundle-size-analyzer": "^3.0.0"
