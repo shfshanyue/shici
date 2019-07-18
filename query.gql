@@ -96,6 +96,12 @@ query POEM ($uuid: ID!) {
       }
     }
   }
+  poems {
+    id   
+    uuid
+    title
+    paragraphs
+  }
 }
 
 mutation REGISTER (

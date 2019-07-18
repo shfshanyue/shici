@@ -10,7 +10,7 @@ import Author from '../../components/Author'
 
 import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
-import { POEM, POEM_USER_STAR } from '../../query.gql'
+import { POEM, POEM_USER_STAR, POEMS } from '../../query.gql'
 
 class Poem extends Component {
   static async getInitialProps({ query }) {
@@ -36,7 +36,7 @@ class Poem extends Component {
   }
 
   render () {
-    const { poem, loading } = this.props
+    const { poem, loading, poems } = this.props
     return (
       <App title={`${poem.title || ''}_诗词`} description={poem.paragraphs && poem.paragraphs.join('')}>
         <style jsx>{`
@@ -79,6 +79,13 @@ class Poem extends Component {
             {
               flatten(map(poem.tags, tag => tag.poems)).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '更多相关诗词推荐'}>
+                  <PoemComponent poem={poem} />
+                </Card>
+              )
+            }
+            {
+              !get(poem, 'tags.length') && poems.filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+                <Card loading={loading} key={poem.id} title={i ? '' : '更多诗词推荐'}>
                   <PoemComponent poem={poem} />
                 </Card>
               )
@@ -135,8 +142,9 @@ export default compose(
       const lastPoem = get(ownProps, 'data.poem', {})
       return {
         poem: merge(lastPoem, data.poem),
+        poems: get(data, 'poems', []),
         loading: data.loading
       } 
     }
-  })
+  }),
 )(Poem)
