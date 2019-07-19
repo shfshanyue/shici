@@ -17,7 +17,7 @@ const Paragraph = ({ title, text, loading, highlight }) => loading || text ? (
             <Highlighter
               highlightClassName="highlight"
               highlightTag="span"
-              searchWords={[/「.+?」/]}
+              searchWords={[/「.+?」/, /“.+?”/]}
               textToHighlight={t}
             /> : t
         }

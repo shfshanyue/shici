@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { graphql, compose } from 'react-apollo'
-import { get, map, omit, merge, flatten } from '../../lib/utils'
+import { get, map, omit, merge, flatten, uniq } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -37,6 +37,8 @@ class Poem extends Component {
 
   render () {
     const { poem, loading, poems } = this.props
+    const poemId = poem.id
+
     return (
       <App title={`${poem.title || ''}_诗词`} description={poem.paragraphs && poem.paragraphs.join('')}>
         <style jsx>{`
@@ -74,17 +76,17 @@ class Poem extends Component {
             </Card>
             {this.renderAnnotations()}
             <Paragraph text={poem.translation} title="翻译" loading={loading} />
-            <Paragraph text={poem.intro} title="简介" loading={loading} />
+            <Paragraph text={poem.intro} title="简介" loading={loading} highlight />
             <Paragraph text={poem.appreciation} title="赏析" loading={loading} highlight />
             {
-              flatten(map(poem.tags, tag => tag.poems)).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+              uniq(flatten(map(poem.tags, tag => tag.poems)), 'id').filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '更多相关诗词推荐'}>
                   <PoemComponent poem={poem} />
                 </Card>
               )
             }
             {
-              !get(poem, 'tags.length') && poems.filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+              !get(poem, 'tags.length') && poems.filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '更多诗词推荐'}>
                   <PoemComponent poem={poem} />
                 </Card>
