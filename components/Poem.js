@@ -56,10 +56,11 @@ function Poem ({
         cursor: pointer; 
       }
       .footer {
-        color: #aaa;
         display: flex; 
         align-items: center;
         flex-wrap: wrap;
+        color: #aaa;
+        min-height: 28px;
       }
       .tag-item {
         cursor: pointer; 
