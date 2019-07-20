@@ -69,6 +69,8 @@ $ npm run stat
 + [x] 自写组件替代 `antd`，减小打包体积
 + [x] robots/sitemap
 + [x] 点击喜欢与会背时的 `Optimistic UI`
++ [ ] 添加经史子集
++ [ ] 在诗词的赏析中为其所引用到的古籍添加链接
 + [ ] typescript 支持
 + [ ] eslint 支持
 + [ ] Sentry 支持

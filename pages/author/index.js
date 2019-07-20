@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { get } from '../../lib/utils'
 
-import { Router, Link } from '../../routes'
+import { Router } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -13,7 +13,7 @@ import Pagination from '../../components/Pagination'
 import AuthorComponent from '../../components/Author'
 
 const AUTHOR = gql`
-  query AUTHOR ($uuid: ID!, $page: Int) {
+  query AUTHOR ($uuid: ID!) {
     author (uuid: $uuid) {
       id
       uuid
@@ -22,7 +22,14 @@ const AUTHOR = gql`
       birthYear
       deathYear
       dynasty
-      baikeUrl
+    }
+  }
+`
+
+const AUTHOR_POEMS = gql`
+  query AUTHOR_POEMS ($uuid: ID!, $page: Int) {
+    author (uuid: $uuid) {
+      id
       poems (page: $page) {
         id 
         uuid
@@ -32,6 +39,8 @@ const AUTHOR = gql`
           id
           name
         }
+        userIsRecite
+        userIsStar
         paragraphs
       }
       poemsCount
@@ -57,8 +66,7 @@ class Author extends Component {
   }
 
   render () {
-    const { author, loading } = this.props
-    const poems = get(author, 'poems', [1, 2, 3, 4, 5].map(x => ({ id: x })))
+    const { author, loading, poems, poemsCount, poemsLoading } = this.props
     return (
       <App title={`${get(author, 'name', '')}_作者`} description={author.intro}>
         <style jsx>{`
@@ -79,16 +87,16 @@ class Author extends Component {
       <div className="container">
         <div className="author">
           <Card loading={loading}>
-            <AuthorComponent author={author} />
+            <AuthorComponent author={author} title="h1" />
           </Card>
           {
             poems.map(poem => (
-              <Card key={poem.id} loading={loading}>
+              <Card key={poem.id} loading={poemsLoading}>
                 <Poem poem={poem} />
               </Card>
             ))
           }
-        <Pagination current={Number(this.props.page)} total={get(this.props, 'author.poemsCount', 20)} onChange={this.handleChange} />
+        <Pagination current={Number(this.props.page)} total={poemsCount} onChange={this.handleChange} />
         </div>
         <aside className="side">
           <QR />
@@ -115,5 +123,24 @@ export default compose(
         loading: data.loading
       } 
     }
-  })
+  }),
+  graphql(AUTHOR_POEMS, {
+    props ({ data }) {
+      const poems = get(data, 'author.poems', [{ id: 1 }, { id: 2 }])
+      return {
+        poems,
+        poemsCount: get(data, 'author.poemsCount') || 10,
+        poemsLoading: data.loading
+      }
+    },
+    options ({ uuid, page }) {
+      return {
+        variables: {
+          uuid,
+          page
+        },
+        ssr: false
+      } 
+    }
+  }),
 )(Author)

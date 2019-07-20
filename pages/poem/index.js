@@ -107,7 +107,7 @@ class Poem extends Component {
               }
             </Card>
             {
-              get(poem, 'author.poems', []).filter(poem => poem.paragraphs.join('').length < 100).map((poem, i) =>
+              get(poem, 'author.poems', []).filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '更多作者诗词推荐'}>
                   <PoemComponent poem={poem} />
                 </Card>
