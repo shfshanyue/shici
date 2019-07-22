@@ -88,13 +88,17 @@ $ npm run stat
 ### ~350KB: 初始大小
 ### 191.64KB/242.74KB
 
+去除 `lodash` 与 `antd` 依赖，使打包体积大幅减小。这一步其实在半年前就已经做了，紧接着随后又写了很多页面与组件，所以在去除两者依赖后，真实的打包体积比现在还有缩减。
+
 + [Server Stat](https://shici.xiange.tech/2019-07-22-25305f34/server.html)
 + [Client Stat](https://shici.xiange.tech/2019-07-22-25305f34/client.html)
-+ 分析: 去除 `lodash` 与 `antd` 依赖，使打包体积大幅减小。这一步其实在半年前就已经做了，紧接着随后又写了很多页面与组件，所以在去除两者依赖后，真实的打包体积比现在还有缩减。
 
-### 176.52KB/245.02KB
+### 176.51KB/245.02KB
 
-+ 分析: 集中 `gql` 管理
+集中 `gql` 管理后，在浏览器模式下可以把所有的 `query` 都是用 `loader` 打到 `common.js` 中，而这些零散的 `query` 在以前被按需加载时重复打包多次。
+
++ [Server Stat](https://shici.xiange.tech/2019-07-22-99d0dd58/server.html)
++ [Client Stat](https://shici.xiange.tech/2019-07-22-99d0dd58/client.html)
 
 ## 相关思考与文章
 
