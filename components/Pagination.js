@@ -7,7 +7,7 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
 
   if (pageCount === 1) return null
 
-  if (current < 4) {
+  if (current <= 3 || pageCount <= 5) {
     start = 1
   } else if (current > pageCount - 3) {
     start = pageCount - 4
