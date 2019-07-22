@@ -81,6 +81,21 @@ $ npm run stat
 + [ ] 当出现 404 页面时，返回真正的 404 状态码，优化 SEO
 + [ ] 状态优化: 在我的喜欢列表页面取消喜欢时，切回标签页不需要重新发送请求便能展示最新数据 (`List Optimistic UI`)
 
+## 打包体积优化记录
+
+今天(2019/07/22)觉得很有必要把优化打包体积的过程给记录一下，至于以前的优化记录，如 `antd` 与 `lodash` 依赖的移除，就不大详细记录了。
+
+### ~350KB: 初始大小
+### 191.64KB/242.74KB
+
++ [Server Stat](https://shici.xiange.tech/2019-07-22-25305f34/server.html)
++ [Client Stat](https://shici.xiange.tech/2019-07-22-25305f34/client.html)
++ 分析: 去除 `lodash` 与 `antd` 依赖，使打包体积大幅减小。这一步其实在半年前就已经做了，紧接着随后又写了很多页面与组件，所以在去除两者依赖后，真实的打包体积比现在还有缩减。
+
+### 176.52KB/245.02KB
+
++ 分析: 集中 `gql` 管理
+
 ## 相关思考与文章
 
 + [关于诗词的 GraphQL API](https://shanyue.tech/post/shici-api/)

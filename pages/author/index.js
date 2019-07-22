@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import { get } from '../../lib/utils'
 
@@ -12,41 +11,7 @@ import Poem from '../../components/Poem'
 import Pagination from '../../components/Pagination'
 import AuthorComponent from '../../components/Author'
 
-const AUTHOR = gql`
-  query AUTHOR ($uuid: ID!) {
-    author (uuid: $uuid) {
-      id
-      uuid
-      name
-      intro
-      birthYear
-      deathYear
-      dynasty
-    }
-  }
-`
-
-const AUTHOR_POEMS = gql`
-  query AUTHOR_POEMS ($uuid: ID!, $page: Int) {
-    author (uuid: $uuid) {
-      id
-      poems (page: $page) {
-        id 
-        uuid
-        title
-        kind
-        tags {
-          id
-          name
-        }
-        userIsRecite
-        userIsStar
-        paragraphs
-      }
-      poemsCount
-    }
-  }
-`
+import { AUTHOR, AUTHOR_POEMS } from '../../query.gql'
 
 class Author extends Component {
   static async getInitialProps({ query }) {

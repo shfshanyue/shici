@@ -206,3 +206,48 @@ query TAGS {
     kind
   }  
 }
+
+query AUTHORS ($page: Int, $q: String) {
+  authors (page: $page, q: $q) {
+    id
+    uuid
+    name
+    intro
+    dynasty
+    birthYear
+    deathYear
+  }
+  authorsCount (q: $q)
+}
+
+query AUTHOR ($uuid: ID!) {
+  author (uuid: $uuid) {
+    id
+    uuid
+    name
+    intro
+    birthYear
+    deathYear
+    dynasty
+  }
+}
+
+query AUTHOR_POEMS ($uuid: ID!, $page: Int) {
+  author (uuid: $uuid) {
+    id
+    poems (page: $page) {
+      id 
+      uuid
+      title
+      kind
+      tags {
+        id
+        name
+      }
+      userIsRecite
+      userIsStar
+      paragraphs
+    }
+    poemsCount
+  }
+}
