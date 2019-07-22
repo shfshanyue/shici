@@ -6,7 +6,7 @@
     "build": "next build",
     "ncu": "ncu",
     "start": "NODE_ENV=production node server.js",
-    "stat": "ANALYZE=1 next build"
+    "stat": "COMMIT=$(git rev-parse --verify HEAD  | cut -c 1-8) ANALYZE=1 next build"
   },
   "dependencies": {
     "@types/next": "^8.0.6",
@@ -27,8 +27,7 @@
     "react-dom": "^16.8.6",
     "react-highlight-words": "^0.16.0",
     "sw-precache-webpack-plugin": "^0.11.5",
-    "webpack-bundle-analyzer": "^3.3.2",
-    "webpack-bundle-size-analyzer": "^3.0.0"
+    "webpack-bundle-analyzer": "^3.3.2"
   },
   "author": "",
   "license": "ISC",
