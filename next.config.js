@@ -36,7 +36,7 @@ module.exports = withLess({
     if (process.env.ANALYZE) {
       config.plugins.push(new BundleAnalyzerPlugin({
         analyzerMode: 'static',
-        reportFilename: path.resolve(__dirname, `${new Date().toJSON().substr(0, 10)}-${process.env.COMMIT}`, isServer ? 'server.html' : 'client.html')
+        reportFilename: path.resolve(__dirname, `static/${new Date().toJSON().substr(0, 10)}-${process.env.COMMIT}`, isServer ? 'server.html' : 'client.html')
       }))
     }
 

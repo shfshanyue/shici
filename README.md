@@ -85,20 +85,30 @@ $ npm run stat
 
 今天(2019/07/22)觉得很有必要把优化打包体积的过程给记录一下，至于以前的优化记录，如 `antd` 与 `lodash` 依赖的移除，就不大详细记录了。
 
-### ~350KB: 初始大小
-### 191.64KB/242.74KB
+记录时使用 `webpack-bundle-analyzer` 这个包分析打包体积，并且把每次的报告页面放在 `/static` 下，报告的命名为 `${date}-${commit}`。
+
+大致记录每次打包后服务端和客户端 `js` 总体积，以及首屏各项参数以及各种关键事件 (关键事件与机器，网络等也有很大相关性，仅做参考)。
+
+### 00: ~350KB
+
+刚开始写了两个页面，并且加上 `lodash` 和 `antd` 后的初始大小
+
+### 01: 191.64KB/242.74KB
 
 去除 `lodash` 与 `antd` 依赖，使打包体积大幅减小。这一步其实在半年前就已经做了，紧接着随后又写了很多页面与组件，所以在去除两者依赖后，真实的打包体积比现在还有缩减。
 
-+ [Server Stat](https://shici.xiange.tech/2019-07-22-25305f34/server.html)
-+ [Client Stat](https://shici.xiange.tech/2019-07-22-25305f34/client.html)
++ [Server Stat](https://shici.xiange.tech/static/2019-07-22-25305f34/server.html)
++ [Client Stat](https://shici.xiange.tech/static/2019-07-22-25305f34/client.html)
 
-### 176.51KB/245.02KB
+### 02: 176.51KB/245.02KB
 
 集中 `gql` 管理后，在浏览器模式下可以把所有的 `query` 都是用 `loader` 打到 `common.js` 中，而这些零散的 `query` 在以前被按需加载时重复打包多次。
 
-+ [Server Stat](https://shici.xiange.tech/2019-07-22-99d0dd58/server.html)
-+ [Client Stat](https://shici.xiange.tech/2019-07-22-99d0dd58/client.html)
++ [commit](https://github.com/shfshanyue/shici/commit/99d0dd58eac0f5af7271626c82d3815bb7af943a)
++ [Server Stat](https://shici.xiange.tech/static/2019-07-22-99d0dd58/server.html)
++ [Client Stat](https://shici.xiange.tech/static/2019-07-22-99d0dd58/client.html)
++ NetWwork statusBar: 18 requests | 223 KB transferred | 715 KB resources | Finish: 734 ms
++ Event: DCL 156.6 ms | FP 183.1 ms | FCP 183.1 ms | FMP 183.1 ms | Load 691.7 ms
 
 ## 相关思考与文章
 
