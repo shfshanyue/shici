@@ -29,6 +29,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "npm-check-updates": "^3.1.20"
+    "npm-check-updates": "^3.1.20",
+    "typescript": "^3.5.3"
   }
 }
