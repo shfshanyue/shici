@@ -104,10 +104,27 @@ $ npm run stat
 
 集中 `gql` 管理后，在浏览器模式下可以把所有的 `query` 都是用 `loader` 打到 `common.js` 中，而这些零散的 `query` 在以前被按需加载时重复打包多次。
 
-+ [commit](https://github.com/shfshanyue/shici/commit/99d0dd58eac0f5af7271626c82d3815bb7af943a)
++ [commit 01-02 diff](https://github.com/shfshanyue/shici/commit/99d0dd58eac0f5af7271626c82d3815bb7af943a)
 + [Server Stat](https://shici.xiange.tech/static/2019-07-22-99d0dd58/server.html)
 + [Client Stat](https://shici.xiange.tech/static/2019-07-22-99d0dd58/client.html)
 + NetWwork statusBar: 18 requests | 223 KB transferred | 715 KB resources | Finish: 734 ms
++ Event: DCL 156.6 ms | FP 183.1 ms | FCP 183.1 ms | FMP 183.1 ms | Load 691.7 ms
+
+### 03: 176.51KB/245.02KB
+
+与 02 数据大致一致，但是与 04 只差了一个 commit，但打包体积变化巨大。为了聚焦问题，所以记了下来。
+
++ [Server Stat - 245.02KB](https://shici.xiange.tech/static/2019-07-31-5be6889/server.html)
++ [Client Stat - 176.51KB](https://shici.xiange.tech/static/2019-07-31-5be6889/client.html)
+
+### 04: 176.52KB/193.25KB
+
+当去除了 `less` 后，发现服务端的包体积竟然下降了 50+ KB，在分析图中发现原因在多个页面少打了 `next` 包进去。至于为什么会减少这么多体积，以后再做分析，先把 Stat 图记录下来
+
++ [commit 03-04 diff](https://github.com/shfshanyue/shici/commit/e94a1a5327623ed296dfe388eb6de6de829f084c)
++ [Server Stat - 193.25KB](https://shici.xiange.tech/static/2019-07-31-e94a1a5/server.html)
++ [Client Stat - 176.52KB](https://shici.xiange.tech/static/2019-07-31-e94a1a5/client.html)
++ NetWwork statusBar: 18 requests | 223 KB transferred | 716 KB resources | Finish: 734 ms
 + Event: DCL 156.6 ms | FP 183.1 ms | FCP 183.1 ms | FMP 183.1 ms | Load 691.7 ms
 
 ## 相关思考与文章
