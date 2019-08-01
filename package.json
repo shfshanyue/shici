@@ -6,7 +6,8 @@
     "build": "next build",
     "ncu": "ncu",
     "start": "NODE_ENV=production node server.js",
-    "stat": "COMMIT=$(git rev-parse --short HEAD) ANALYZE=1 next build"
+    "stat": "COMMIT=$(git rev-parse --short HEAD) ANALYZE=1 next build",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@types/next": "^8.0.6",
@@ -29,7 +30,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.4.0",
     "npm-check-updates": "^3.1.20",
-    "typescript": "^3.5.3"
+    "typescript": "^3.5.3",
+    "@graphql-codegen/typescript": "1.4.0",
+    "@graphql-codegen/typescript-operations": "1.4.0",
+    "@graphql-codegen/typescript-react-apollo": "1.4.0"
   }
 }
