@@ -2,7 +2,7 @@
   "name": "poem",
   "version": "1.0.0",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "nodemon server.js",
     "build": "next build",
     "ncu": "ncu",
     "start": "NODE_ENV=production node server.js",
@@ -31,10 +31,11 @@
   "license": "ISC",
   "devDependencies": {
     "@graphql-codegen/cli": "^1.4.0",
-    "npm-check-updates": "^3.1.20",
-    "typescript": "^3.5.3",
     "@graphql-codegen/typescript": "1.4.0",
     "@graphql-codegen/typescript-operations": "1.4.0",
-    "@graphql-codegen/typescript-react-apollo": "1.4.0"
+    "@graphql-codegen/typescript-react-apollo": "1.4.0",
+    "nodemon": "^1.19.1",
+    "npm-check-updates": "^3.1.20",
+    "typescript": "^3.5.3"
   }
 }

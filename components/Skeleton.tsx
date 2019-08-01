@@ -1,4 +1,10 @@
-const Skeleton = ({ loading, children, line = 4 }) => {
+interface Props {
+  children: React.ReactElement;
+  loading?: boolean;
+  line?: number;
+}
+
+function Skeleton ({ loading, children, line = 4 }: Props) {
   return loading ? (
     <div>
       <style jsx>{`
