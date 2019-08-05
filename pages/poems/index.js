@@ -13,7 +13,7 @@ import Poem from '../../components/Poem'
 import Tag from '../../components/Tag'
 import Tags from '../../components/Tags'
 
-import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query.gql'
+import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query/index.gql'
 
 class Poems extends Component {
   static async getInitialProps({ query }) {

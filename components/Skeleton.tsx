@@ -1,5 +1,7 @@
+import React from 'react'
+
 interface Props {
-  children: React.ReactElement;
+  children?: any;
   loading?: boolean;
   line?: number;
 }

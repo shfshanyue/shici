@@ -11,7 +11,7 @@ import Pagination from '../../components/Pagination'
 import Author from '../../components/Author'
 import Tags from '../../components/Tags'
 
-import { AUTHORS } from '../../query.gql'
+import { AUTHORS } from '../../query/index.gql'
 
 class Authors extends Component {
   static async getInitialProps({ query }) {

@@ -2,7 +2,7 @@ import React from 'react'
 import Skeleton from './Skeleton'
 
 interface Props {
-  children: React.ReactElement;
+  children: any;
   loading?: boolean;
   title?: string;
 }
@@ -18,7 +18,7 @@ function Card ({ children, loading, title }: Props) {
       }
       <div className={`card ${loading ? 'loading' : ''}`}>
         <Skeleton loading={loading}>
-          {children}
+          { children }
         </Skeleton>
       </div>
       <style jsx>{`

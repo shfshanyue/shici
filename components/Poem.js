@@ -6,7 +6,7 @@ import 'dayjs/locale/zh-cn'
 import { Link, Router } from '../routes'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
-import { STAR_POEM, RECITE_POEM } from '../query.gql'
+import { STAR_POEM, RECITE_POEM } from '../query/index.gql'
 
 import dayjs from 'dayjs'
 dayjs.extend(relativeTime)

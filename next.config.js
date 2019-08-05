@@ -30,7 +30,7 @@ module.exports = {
     }
 
     config.module.rules.push({
-      test: /\.(graphql|gql)$/,
+      test: /\.gql$/,
       exclude: /node_modules/,
       use: {
         loader: 'graphql-tag/loader'

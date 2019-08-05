@@ -11,7 +11,7 @@ import Tags from '../../components/Tags'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
-import { PHRASES } from '../../query.gql'
+import { PHRASES } from '../../query/index.gql'
 
 class Phrases extends Component {
   static async getInitialProps({ query }) {

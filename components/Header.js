@@ -6,7 +6,7 @@ import { Router, Link } from '../routes'
 
 import Search from './Search'
 import Avator from './Avator'
-import { ME } from '../query.gql'
+import { ME } from '../query/index.gql'
 
 class Header extends Component {
   constructor (props) {

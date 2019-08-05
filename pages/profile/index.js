@@ -9,7 +9,7 @@ import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
 
-import { STAR_POEMS, RECITE_POEMS } from '../../query.gql'
+import { STAR_POEMS, RECITE_POEMS } from '../../query/index.gql'
 
 class Profile extends Component {
   static async getInitialProps({ query }) {

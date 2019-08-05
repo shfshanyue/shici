@@ -34,6 +34,7 @@
     "@graphql-codegen/typescript": "1.4.0",
     "@graphql-codegen/typescript-operations": "1.4.0",
     "@graphql-codegen/typescript-react-apollo": "1.4.0",
+    "babel-plugin-import-graphql": "^2.7.0",
     "nodemon": "^1.19.1",
     "npm-check-updates": "^3.1.20",
     "typescript": "^3.5.3"
