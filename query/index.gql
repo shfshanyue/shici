@@ -72,6 +72,12 @@ query POEM ($uuid: ID!) {
         uuid
         title
         paragraphs
+        userIsRecite
+        userIsStar
+        tags {
+          id
+          name
+        }
         author {
           id
           dynasty
