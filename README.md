@@ -1,14 +1,64 @@
 # 诗词弦歌
 
-出于个人兴趣做的一个网站作为自己技术上的试验田，相配套的后端自己也抽了出来做了脚手架 [apollo-server-starter](https://github.com/shfshanyue/apollo-server-starter)
+出于个人兴趣做的一个网站作为自己技术上的试验田
 
-![诗词弦歌](https://shici.xiange.tech/static/screen.png)
++ [shfshanyue/apollo-server-starter](https://github.com/shfshanyue/apollo-server-starter): 相配套的后端所抽离出来了脚手架 
++ [shfshanyue/shici-server](https://github.com/shfshanyue/shici-server): 相配套的后端，即将使用我新做的[脚手架](https://github.com/shfshanyue/apollo-server-starter)重写
+
+<p align="center">
+  <a href="https://shici.xiange.tech">
+    <img src="https://shici.xiange.tech/static/screen.png" width="600" alt="诗词" /><br>
+    <sup>https://shici.xiange.tech</sup>
+  </a>
+</p>
+<p align="center">
+  <a href="https://graphql.xiange.tech/playground">
+    <img src="https://shici.xiange.tech/static/playground.png" width="600" alt="诗词" /><br>
+    <sup>https://graphql.xiange.tech</sup>
+  </a>
+</p>
+
+> 考虑使用 Prerender 的方式重写项目
 
 ## 技术栈
 
++ [typescript](https://github.com/microsoft/TypeScript)，[graphql-code-generator](https://github.com/dotansimha/graphql-code-generator) -- 强类型语言以及类型自动生成
 + [react](https://github.com/facebook/react), [next.js](https://github.com/zeit/next.js), [next-routes](https://github.com/fridays/next-routes) -- 服务端渲染
-+ [GrapqhQL](https://github.com/koajs/koa), [apollo-client](https://github.com/apollographql/apollo-client) -- API && store
++ [graphql](https://github.com/graphql/graphql-js), [apollo-client](https://github.com/apollographql/apollo-client), `localstorage` -- API && store
 + `docker`, `docker-compose`, `traefik`, `gitlab-ci` -- 部署
+
+## 相关问题与思考
+
++ CI 与前端质量保障
++ 当使用 graphql 时，前后端的协作与交流
++ 服务器渲染与 prerender 之优劣
++ 关于服务器渲染的实践及若干考虑
++ 如何对一个进程进行内存以及CPU的监控
++ [关于统计诗词字云的解决方案](https://shanyue.tech/post/poem-char-frequent-stat)
++ [关于 async/await 的两个 OOM 的问题](https://shanyue.tech/post/async-oom)
++ dataloader 源码解析
++ graphql.js 源码解析
++ 浅谈 graphql 中 server/http/client 中的缓存策略
++ [graphql-tag 的使用以及源码解析](https://shanyue.tech/code/graphql-tag/)
++ [graphql 服务端开发指南](https://shanyue.tech/post/graphql-guide/)
++ 使用 lru-cache 来避免 graphql 中的缓存崩溃问题
++ 日志，filebeat 与 elk
++ 关于日志的收集以及优化
++ [使用 requestId 标记全链路日志](https://shanyue.tech/post/requestId-and-tracing)
++ [node 中异常收集与监控](https://shanyue.tech/post/server-structed-error)
++ [graphql 中 apollo-server 对 cache 的处理](https://shanyue.tech/record/2019.html#_2019-07-31)
++ [使用 graphql 的 schema 自动生成 typescript 的type](https://shanyue.tech/record/2019.html#_2019-08-01)
++ [关于诗词的 GraphQL API](https://shanyue.tech/post/shici-api/)
++ [在 pg 中重设用户表的 ID](https://shanyue.tech/post/refactor-id-in-pg)
++ [如何实现类似 lodash 的 get 与 merge 函数](https://shanyue.tech/post/lodash-get-and-merge/)
++ [使用 jwt 实践邮件验证与登录](https://shanyue.tech/post/jwt-and-verifyCode)
++ [jwt 指南](https://shanyue.tech/post/JWT-Guide)
++ [使用十行 React 代码实现一个关键字高亮组件](https://shanyue.tech/post/highlight-in-react)
++ [使用 enum 代替 constant number](https://shanyue.tech/post/constant-db-to-client/)
++ [使用纯 CSS 实现仿 Material Design 的 input 过渡效果](https://shanyue.tech/post/login-input-style/)
++ [使用 docker 高效部署前端](https://shanyue.tech/post/deploy-frontend-with-docker)
++ [traefik 入手以及简单配置](https://shanyue.tech/post/traefik-start)
++ [当我有一台服务器时，我做了什么](https://shanyue.tech/post/server-todo/)
 
 ## 目录结构
 
@@ -69,9 +119,9 @@ $ npm run stat
 + [x] 自写组件替代 `antd`，减小打包体积
 + [x] robots/sitemap
 + [x] 点击喜欢与会背时的 `Optimistic UI`
++ [x] typescript 支持
 + [ ] 添加经史子集
 + [ ] 在诗词的赏析中为其所引用到的古籍添加链接
-+ [ ] typescript 支持
 + [ ] eslint 支持
 + [ ] Sentry 支持
 + [ ] 图片优化
@@ -126,14 +176,6 @@ $ npm run stat
 + [Client Stat - 176.52KB](https://shici.xiange.tech/static/2019-07-31-e94a1a5/client.html)
 + NetWwork statusBar: 18 requests | 223 KB transferred | 716 KB resources | Finish: 734 ms
 + Event: DCL 156.6 ms | FP 183.1 ms | FCP 183.1 ms | FMP 183.1 ms | Load 691.7 ms
-
-## 相关思考与文章
-
-+ [关于诗词的 GraphQL API](https://shanyue.tech/post/shici-api/)
-+ [如何实现类似 lodash 的 get 与 merge 函数](https://shanyue.tech/post/lodash-get-and-merge/)
-+ [使用 enum 代替 constant number](https://shanyue.tech/post/constant-db-to-client/)
-+ [使用纯 CSS 实现仿 Material Design 的 input 过渡效果](https://shanyue.tech/post/login-input-style/)
-+ [当我有一台服务器时，我做了什么](https://shanyue.tech/post/server-todo/)
 
 ## 捐献
 

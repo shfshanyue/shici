@@ -62,17 +62,17 @@ class Header extends Component {
           }
         `}</style>
         <div className="item">
-          <Link prefetch route="poems">
+          <Link route="poems">
             <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
           </Link>
         </div>
         <div className="item">
-          <Link prefetch route="authors">
+          <Link route="authors">
             <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
           </Link>
         </div>
         <div className="item">
-          <Link prefetch route="phrases">
+          <Link route="phrases">
             <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
           </Link>
         </div>
@@ -96,13 +96,13 @@ class Header extends Component {
           <Link href="/">
             <span className="title">诗词弦歌</span>
           </Link>
-          <Link prefetch route="poems">
+          <Link route="poems">
             <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
           </Link>
-          <Link prefetch route="authors">
+          <Link route="authors">
             <a className={startsWith(asPath, '/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>
           </Link>
-          <Link prefetch route="phrases">
+          <Link route="phrases">
             <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
           </Link>
           <div className="search-box">
@@ -117,7 +117,7 @@ class Header extends Component {
             loading ? null : username ? <a className="active user">
                 <Avator name={username} />
               </a> :
-              <Link prefetch href='/login'>
+              <Link href='/login'>
                 <a className="active" style={{ marginLeft: 'auto' }}>登录</a>
               </Link>
           }

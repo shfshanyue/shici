@@ -79,7 +79,7 @@ function Poem ({
       {
         React.createElement(title, {
           children: poem.uuid ?
-            <Link route="poem" params={{ uuid: poem.uuid }} prefetch>
+            <Link route="poem" params={{ uuid: poem.uuid }}>
               <a>
                 { 
                   highlight(poem.title, highlightWords)
