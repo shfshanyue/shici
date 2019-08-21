@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
-import { get } from '../../lib/utils'
+import { get, compose } from '../../lib/utils'
 
 import { Link, Router } from '../../routes'
 

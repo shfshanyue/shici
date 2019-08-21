@@ -1,8 +1,8 @@
 import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { Link } from '../routes'
 import { TAGS } from '../query/index.gql'
-import { groupBy, get } from '../lib/utils'
+import { groupBy, get, compose } from '../lib/utils'
 
 import Tag from './Tag'
 import Card from './Card'

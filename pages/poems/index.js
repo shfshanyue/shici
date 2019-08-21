@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 
 import Pagination from '../../components/Pagination'
-import { get, merge } from '../../lib/utils'
+import { get, merge, compose } from '../../lib/utils'
 import { Router } from '../../routes'
 
 import App from '../../components/App'

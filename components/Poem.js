@@ -1,11 +1,11 @@
 import React from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
 import { Link, Router } from '../routes'
 import Tag from '../components/Tag'
-import { get, highlight, slice } from '../lib/utils'
+import { get, highlight, slice, compose } from '../lib/utils'
 import { STAR_POEM, RECITE_POEM } from '../query/index.gql'
 
 import dayjs from 'dayjs'

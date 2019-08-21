@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
+import { graphql } from 'react-apollo'
 import { withRouter } from 'next/router'
-import { startsWith, get } from '../lib/utils'
+import { startsWith, get, compose } from '../lib/utils'
 import { Router, Link } from '../routes'
 
 import Search from './Search'

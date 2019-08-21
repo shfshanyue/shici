@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { graphql, compose } from 'react-apollo'
-import { get, map, omit, merge, flatten, uniq } from '../../lib/utils'
+import { graphql } from 'react-apollo'
+import { get, map, omit, merge, flatten, uniq, compose } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
