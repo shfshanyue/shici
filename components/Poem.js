@@ -1,14 +1,15 @@
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { graphql, useMutation } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
 import { Link, Router } from '../routes'
 import Tag from '../components/Tag'
-import { get, highlight, slice, compose } from '../lib/utils'
+import { get, highlight, slice } from '../lib/utils'
 import { STAR_POEM, RECITE_POEM } from '../query/index.gql'
 
 import dayjs from 'dayjs'
+
 dayjs.extend(relativeTime)
 
 function Poem ({
@@ -16,11 +17,39 @@ function Poem ({
   highlightWords = [],
   active = true,
   onMore,
-  starPoem,
-  recitePoem,
   time,
   title="h2"
 }) {
+  const [starPoem] = useMutation(STAR_POEM, {
+    options: {
+      optimisticResponse ({ poemId, star }) {
+        return {
+          __typename: 'Mutation',
+          starPoem: {
+            id: poemId,
+            userIsStar: star,
+            __typename: 'Poem'
+          }
+        }
+      }
+    } 
+  })
+
+  const [recitePoem] = useMutation(RECITE_POEM, {
+    options: {
+      optimisticResponse ({ poemId, recite }) {
+        return {
+          __typename: 'Mutation',
+          starPoem: {
+            id: poemId,
+            userIsRecite: star,
+            __typename: 'Poem'
+          }
+        }
+      }
+    } 
+  })
+
   const handleStar = (poemId, star) => {
     starPoem({
       variables: {
@@ -145,35 +174,4 @@ function Poem ({
   </div>
 }
  
-export default compose(
-  graphql(STAR_POEM, {
-    name: 'starPoem',
-    options: {
-      optimisticResponse ({ poemId, star }) {
-        return {
-          __typename: 'Mutation',
-          starPoem: {
-            id: poemId,
-            userIsStar: star,
-            __typename: 'Poem'
-          }
-        }
-      }
-    } 
-  }),
-  graphql(RECITE_POEM, {
-    name: 'recitePoem',
-    options: {
-      optimisticResponse ({ poemId, recite }) {
-        return {
-          __typename: 'Mutation',
-          recitePoem: {
-            id: poemId,
-            userIsRecite: recite,
-            __typename: 'Poem'
-          }
-        }
-      }
-    } 
-  })
-)(Poem)
+export default Poem
