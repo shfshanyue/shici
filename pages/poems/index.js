@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
+import React, { useState } from 'react'
+import { useQuery } from 'react-apollo'
 
 import Pagination from '../../components/Pagination'
-import { get, merge, compose } from '../../lib/utils'
+import { get, merge } from '../../lib/utils'
 import { Router } from '../../routes'
 
 import App from '../../components/App'
@@ -13,61 +13,41 @@ import Poem from '../../components/Poem'
 import Tag from '../../components/Tag'
 import Tags from '../../components/Tags'
 
-import { POEMS, POEMS_USER_STAR, RECITE_POEM, STAR_POEM } from '../../query/index.gql'
+import { POEMS, POEMS_USER_STAR } from '../../query/index.gql'
 
-class Poems extends Component {
-  static async getInitialProps({ query }) {
-    return {
-      page: 1,
-      ...query
-    }
-  }
+function Poems ({
+  q,
+  tagId,
+  tagName,
+  page,
+}) {
+  const [activeIds, setActiveIds] = useState({})
+  const { data: starData } = useQuery(POEMS_USER_STAR, {
+    variables: { page, q, tagId },
+    skip: !process.browser
+  })
+  const { loading, data } = useQuery(POEMS, {
+    variables: { page, q, tagId }
+  })
 
-  constructor (props) {
-    super(props) 
-    this.state = {
-      // 代表展开的诗词
-      activeIds: {
-      
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
-  }
+  const lastPoems = get(starData, 'poems', [])
+  const currentPoems = get(data, 'poems', [1, 2, 3, 4, 5].map(id => ({ id })))
 
-  handleChange (page) {
+  const poems = merge(lastPoems, currentPoems)
+  const poemsCount = data.poemsCount || 10
+        
+  function handleChange (page) {
     Router.pushRoute('poems', {
       page,
-      q: this.props.q,
-      tagId: this.props.tagId,
-      tagName: this.props.tagName
+      q,
+      tagId,
+      tagName
     })
   }
 
-  handleStar (poemId, star) {
-    this.props.starPoem({
-      variables: {
-        poemId,
-        star
-      } 
-    }) 
-  }
-
-  handleRecite (poemId, recite) {
-    this.props.recitePoem({
-      variables: {
-        poemId,
-        recite
-      } 
-    }) 
-  }
-
-  render () {
-    const { poems, loading, q, tagId, tagName } = this.props
-    const { activeIds } = this.state
-
-    return (
-      <App title="首页" description="诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美">
-        <style jsx>{`
+  return (
+    <App title="首页" description="诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美">
+      <style jsx>{`
           .container {
             display: flex;
           }
@@ -91,9 +71,9 @@ class Poems extends Component {
           <SearchBar q={q} />
           {
             tagId &&
-              <Card>
-                <Tag>{ tagName }</Tag>
-              </Card>
+            <Card>
+              <Tag>{tagName}</Tag>
+            </Card>
           }
           {
             poems.map(poem => (
@@ -103,18 +83,16 @@ class Poems extends Component {
                   active={Boolean(activeIds[poem.id])}
                   highlightWords={[q]}
                   onMore={() => {
-                    this.setState({
-                      activeIds: {
-                        ...activeIds,
-                        [poem.id]: 1
-                      }
+                    setActiveIds({
+                      ...activeIds,
+                      [poem.id]: 1
                     })
                   }}
                 />
               </Card>
             ))
           }
-          <Pagination showQuickJumper current={Number(this.props.page)} total={this.props.poemsCount} onChange={this.handleChange} />
+          <Pagination showQuickJumper current={Number(page)} total={poemsCount} onChange={handleChange} />
         </div>
         <aside className="side">
           <Tags />
@@ -122,71 +100,14 @@ class Poems extends Component {
         </aside>
       </div>
     </App>
-    )  
+  )  
+}
+
+Poems.getInitialProps = ({ query }) => {
+  return {
+    page: 1,
+    ...query
   }
 }
 
-export default compose(
-  graphql(STAR_POEM, {
-    name: 'starPoem',
-    options: {
-      optimisticResponse ({ poemId, star }) {
-        return {
-          __typename: 'Mutation',
-          starPoem: {
-            id: poemId,
-            userIsStar: star,
-            __typename: 'Poem'
-          }
-        }
-      }
-    } 
-  }),
-  graphql(RECITE_POEM, {
-    name: 'recitePoem',
-    options: {
-      optimisticResponse ({ poemId, recite }) {
-        return {
-          __typename: 'Mutation',
-          recitePoem: {
-            id: poemId,
-            userIsRecite: recite,
-            __typename: 'Poem'
-          }
-        }
-      }
-    } 
-  }),
-  graphql(POEMS_USER_STAR, {
-    options ({ page, q, tagId }) {
-      return {
-        variables: {
-          page,
-          q,
-          tagId
-        } 
-      } 
-    },
-    skip: !process.browser
-  }),
-  graphql(POEMS, {
-    props ({ data, ownProps }) {
-      const lastPoems = get(ownProps, 'data.poems', [])
-      const poems = get(data, 'poems', [1, 2, 3, 4, 5].map(id => ({ id })))
-      return {
-        poems: merge(lastPoems, poems),
-        poemsCount: data.poemsCount || 10,
-        loading: data.loading
-      }
-    },
-    options ({ page, q, tagId }) {
-      return {
-        variables: {
-          page,
-          q,
-          tagId
-        } 
-      } 
-    }
-  }),
-)(Poems)
+export default Poems

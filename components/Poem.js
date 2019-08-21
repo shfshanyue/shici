@@ -42,7 +42,7 @@ function Poem ({
           __typename: 'Mutation',
           starPoem: {
             id: poemId,
-            userIsRecite: star,
+            userIsRecite: recite,
             __typename: 'Poem'
           }
         }
