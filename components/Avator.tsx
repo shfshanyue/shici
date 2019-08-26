@@ -1,4 +1,8 @@
-function Avator ({ name }) {
+interface Props {
+  name: string;
+}
+
+function Avator ({ name }: Props) {
   return (
     <div className="avator">
       { name[0] }

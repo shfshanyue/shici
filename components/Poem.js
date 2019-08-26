@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql, useMutation } from 'react-apollo'
+import { useMutation } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
@@ -143,20 +143,14 @@ function Poem ({
       </div>
     </div>
     <div className="footer">
-      {
-        poem.userIsStar !== undefined &&
-          <Tag
-            onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)}
-            checked={poem.userIsStar}
-          >喜欢</Tag>
-      }
-      {
-        poem.userIsRecite !== undefined &&
-          <Tag
-            onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)}
-            checked={poem.userIsRecite}
-          >会背</Tag>
-      }
+      <Tag
+        onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)}
+        checked={poem.userIsStar}
+      >喜欢</Tag>
+      <Tag
+        onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)}
+        checked={poem.userIsRecite}
+      >会背</Tag>
       {
         get(poem, 'tags', []).map(tag => 
           <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>

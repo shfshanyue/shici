@@ -1,39 +1,39 @@
-import React, { Component } from 'react'
-import { graphql } from 'react-apollo'
-import { withRouter } from 'next/router'
-import { startsWith, get, compose } from '../lib/utils'
-import { Router, Link } from '../routes'
+import React, { useState } from 'react'
+import { useQuery } from 'react-apollo'
+import { useRouter } from 'next/router'
+import { startsWith, get } from '../lib/utils'
+import * as routes from '../routes'
 
 import Search from './Search'
 import Avator from './Avator'
-import { ME } from '../query/index.gql'
+import * as query from '../query/index.gql'
+import { MeQuery } from '../query'
 
-class Header extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      toggle: false 
-    }
-    this.handleSearch = this.handleSearch.bind(this)
-    this.handleTouchStart = this.handleTouchStart.bind(this)
+const { Router, Link } = routes
+const { ME } = query
+
+function Header () {
+  const [toggle, setToggle] = useState(false)
+  // TODO
+  const { query, asPath } = useRouter() || {
+    query: {},
+    asPath: ''
   }
+  const { data, loading } = useQuery<MeQuery>(ME, {
+    ssr: false
+  })
+  const userId = get(data, 'me.id')
+  const username = get(data, 'me.name')
 
-  handleSearch (value) {
+  function handleSearch (value: string) {
     Router.pushRoute('poems', {
       q: value 
     })
   }
 
-  handleTouchStart () {
-    this.setState({
-      toggle: !this.state.toggle 
-    })
-  }
-
-  renderMobile () {
-    const { router: { query, asPath } } = this.props
+  function renderMobile () {
     return (
-      <div className={`container mobile-container ${this.state.toggle ? 'active' : ''}`}>
+      <div className={`container mobile-container ${toggle ? 'active' : ''}`}>
         <style jsx>{`
           .item {
             height: 53px; 
@@ -80,21 +80,19 @@ class Header extends Component {
           <Search
             defaultValue={query.q}
             placeholder={query.q || '将进酒'}
-            onSearch={this.handleSearch}
+            onSearch={handleSearch}
           />
         </div>
       </div>
     )
   }
 
-  render () {
-    const { router: { query, asPath }, username, userId, loading } = this.props
-  
+  function render () {
     return (
       <header>
         <div className="container">
           <Link href="/">
-            <span className="title">诗词弦歌</span>
+            <a className="title">诗词弦歌</a>
           </Link>
           <Link route="poems">
             <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
@@ -109,7 +107,7 @@ class Header extends Component {
             <Search
               defaultValue={query.q}
               placeholder={query.q || '将进酒'}
-              onSearch={this.handleSearch}
+              onSearch={handleSearch}
               style={{ marginLeft: 20 }}
             />
           </div>
@@ -121,7 +119,7 @@ class Header extends Component {
                 <a className="active" style={{ marginLeft: 'auto' }}>登录</a>
               </Link>
           }
-          <div className="button more" onTouchStart={this.handleTouchStart} >
+          <div className="button more" onTouchStart={() => setToggle(!toggle)} >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#888" d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
           </div>
           <div className="dropdown-menu">
@@ -131,7 +129,7 @@ class Header extends Component {
             <a className="dropdown-item" href="" onClick={() => localStorage.token = ""}>注销</a>
           </div>
         </div>
-        { this.renderMobile() }
+        { renderMobile() }
         <style jsx>{`
           header {
             margin-bottom: 20px;
@@ -171,6 +169,7 @@ class Header extends Component {
             font-size: 25px; 
             color: #f60;
             cursor: pointer;
+            margin-left: 0;
           }
 
           a {
@@ -216,21 +215,9 @@ class Header extends Component {
         `}</style>
       </header>
     )
+
   }
+  return render()
 }
 
-export default compose(
-  withRouter,
-  graphql(ME, {
-    props ({ data }) {
-      return {
-        username: get(data, 'me.name'),
-        userId: get(data, 'me.id'),
-        loading: data.loading
-      }
-    },
-    options: {
-      ssr: false
-    }
-  })
-)(Header)
+export default Header

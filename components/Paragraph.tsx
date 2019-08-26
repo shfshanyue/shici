@@ -25,7 +25,7 @@ function Paragraph ({ title, text, loading, highlight }: Props ) {
               <Highlighter
                 highlightClassName="highlight"
                 highlightTag="span"
-                searchWords={[/「.+?」/, /“.+?”/, /《.+?》/]}
+                searchWords={[/「.+?」/, /“.+?”/, /《.+?》/] as any as string[]}
                 textToHighlight={t}
               /> : t
           }
