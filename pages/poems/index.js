@@ -34,7 +34,7 @@ function Poems ({
   const currentPoems = get(data, 'poems', [1, 2, 3, 4, 5].map(id => ({ id })))
 
   const poems = merge(lastPoems, currentPoems)
-  const poemsCount = data.poemsCount || 10
+  const poemsCount = get(data, 'poemsCount', 10)
         
   function handleChange (page) {
     Router.pushRoute('poems', {
