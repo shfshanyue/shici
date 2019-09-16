@@ -1,9 +1,11 @@
+import { useMemo } from 'react'
+
 interface Props {
   name: string;
 }
 
 function Avator ({ name }: Props) {
-  return (
+  return useMemo(() => (
     <div className="avator">
       { name[0] }
       <style jsx>{`
@@ -32,7 +34,7 @@ function Avator ({ name }: Props) {
         }
       `}</style>       
     </div>
-  )
+  ), [name])
 }
 
 export default Avator

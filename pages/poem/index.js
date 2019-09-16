@@ -10,7 +10,7 @@ import Author from '../../components/Author'
 
 import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
-import { POEM, POEM_USER_STAR, POEMS } from '../../query/index.gql'
+import { POEM, POEM_USER_STAR } from '../../query/index.gql'
 
 class Poem extends Component {
   static async getInitialProps({ query }) {
@@ -127,7 +127,7 @@ export default compose(
       return {
         variables: {
           uuid
-        } 
+        }
       } 
     },
     skip: !process.browser
