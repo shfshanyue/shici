@@ -12,7 +12,7 @@ import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
 import { POEM, POEM_USER_STAR } from '../../query/index.gql'
 
-function Poem ({ uuid, phrase }) {
+function Poem ({ uuid, phraseId }) {
 
   const { data: authData = {} } = useQuery(POEM_USER_STAR, {
     // not work
@@ -23,13 +23,16 @@ function Poem ({ uuid, phrase }) {
 
   const { data = {}, loading } = useQuery(POEM, {
     variables: {
-      poemUuid: uuid
+      poemUuid: uuid,
+      phraseId
     }
   })
 
   const poem = { ...data.poem, ...authData.poem }
   const poems = get(poem, 'poems', [])
   const poemId = poem.id
+
+  const phrase = get(data, 'phrase.text', '')
 
   const renderAnnotations = () => {
     const { annotations = [] } = poem
@@ -50,7 +53,7 @@ function Poem ({ uuid, phrase }) {
   }
 
   return (
-    <App title={`${poem.title || ''}_诗词`} description={poem.paragraphs && poem.paragraphs.join('')}>
+    <App title={`${phraseId ? phrase + '_名句' : get(poem, 'title', '') + '_诗词'}`} description={poem.paragraphs && poem.paragraphs.join('')}>
       <style jsx>{`
           .container {
             display: flex;
@@ -74,14 +77,27 @@ function Poem ({ uuid, phrase }) {
           .phrase:not(:last-child) {
             border-bottom: 1px solid #eee;
           }
+
+          .phrase-h1 {
+            margin: 0;
+            border-left: 8px solid #f609;
+            padding-left: 10px;
+            background-color: #f601;
+            color: #666;
+          }
         `}</style>
       <div className="container">
         <div className="poem">
+          {
+            phraseId && <Card loading={loading}>
+              <h1 className="phrase-h1">{phrase.slice(0, -1)}</h1>
+            </Card>
+          }
           <Card loading={loading}>
             <PoemComponent
-              title="h1"
-              poem={omit(poem, ['author', 'uuid'])}
-              highlightWords={phrase || map(poem.phrases, phrase => phrase.phrase)}
+              title={phraseId ? 'h2' : 'h1'}
+              poem={omit(poem, ['author', phraseId ? '' : 'uuid'])}
+              highlightWords={phraseId ? phrase : map(poem.phrases, phrase => phrase.phrase)}
             />
           </Card>
           {renderAnnotations()}
@@ -110,7 +126,7 @@ function Poem ({ uuid, phrase }) {
           <Card title="名句" loading={loading}>
             {
               get(poem, 'phrases', []).map(phrase =>
-                <Link route="poem" params={{ uuid: poem.uuid, phrase: phrase.text }} key={phrase.id}>
+                <Link route="phrase" params={{ uuid: poem.uuid, phraseId: phrase.id }} key={phrase.id}>
                   <a className="phrase">{phrase.text}</a>
                 </Link>
               )
