@@ -58,9 +58,9 @@ class Phrases extends Component {
             phrases.map(phrase => (
               <Card loading={loading} key={phrase.id || phrase}>
                 <div className="phrase">
-                  <Link route="poem" params={{ uuid: get(phrase, 'poem.uuid'), phrase: phrase.phrase }}>
+                  <Link route="poem" params={{ uuid: get(phrase, 'poem.uuid'), phrase: phrase.text }}>
                     <a>
-                      { phrase.phrase }
+                      { phrase.text }
                     </a>
                   </Link>
                   <div style={{ marginTop: '10px' }}>

@@ -49,8 +49,12 @@ mutation STAR_POEM($poemId: ID!, $star: Boolean) {
   }
 }
 
-query POEM ($uuid: ID!) {
-  poem (uuid: $uuid) {
+query POEM ($poemUuid: ID!, $phraseId: ID) {
+  phrase (id: $phraseId) {
+    id
+    text
+  }
+  poem (uuid: $poemUuid) {
     id
     uuid
     title
@@ -62,7 +66,7 @@ query POEM ($uuid: ID!) {
     annotations
     phrases {
       id 
-      phrase
+      text
     }
     tags {
       id
@@ -99,6 +103,8 @@ query POEM ($uuid: ID!) {
         uuid
         title
         paragraphs
+        userIsRecite
+        userIsStar
       }
     }
   }
@@ -133,7 +139,7 @@ mutation SEND_VERIFY_CODE ($email: String!) {
 query PHRASES ($page: Int, $pageSize: Int) {
   phrases (page: $page, pageSize: $pageSize) {
     id
-    phrase
+    text
     authorName
     poem {
       uuid
