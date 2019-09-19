@@ -11,7 +11,7 @@ export default ({ author = {}, title = 'h2' }) => (
     {
       React.createElement(title, {
         children: title === 'h1' ? author.name : (
-          <Link route="author" params={{ uuid: author.uuid }}>
+          <Link route="author" params={{ id: author.id }}>
             <a>
               { author.name }
             </a>

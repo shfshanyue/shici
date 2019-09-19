@@ -12,18 +12,18 @@ import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
 import { POEM, POEM_USER_STAR } from '../../query/index.gql'
 
-function Poem ({ uuid, phraseId }) {
+function Poem ({ id, phraseId }) {
 
   const { data: authData = {} } = useQuery(POEM_USER_STAR, {
     // not work
     // 有可能与 POEM 这个 query 有关
     ssr: false,
-    variables: { uuid }
+    variables: { id }
   })
 
   const { data = {}, loading } = useQuery(POEM, {
     variables: {
-      poemUuid: uuid,
+      poemId: id,
       phraseId
     }
   })
@@ -96,7 +96,7 @@ function Poem ({ uuid, phraseId }) {
           <Card loading={loading}>
             <PoemComponent
               title={phraseId ? 'h2' : 'h1'}
-              poem={omit(poem, ['author', phraseId ? '' : 'uuid'])}
+              poem={omit(poem, ['author', phraseId ? '' : 'id'])}
               highlightWords={phraseId ? phrase : map(poem.phrases, phrase => phrase.phrase)}
             />
           </Card>
@@ -126,7 +126,7 @@ function Poem ({ uuid, phraseId }) {
           <Card title="名句" loading={loading}>
             {
               get(poem, 'phrases', []).map(phrase =>
-                <Link route="phrase" params={{ uuid: poem.uuid, phraseId: phrase.id }} key={phrase.id}>
+                <Link route="phrase" params={{ id: poem.id, phraseId: phrase.id }} key={phrase.id}>
                   <a className="phrase">{phrase.text}</a>
                 </Link>
               )

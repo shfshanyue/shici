@@ -1,7 +1,6 @@
 query POEMS ($page: Int, $q: String, $tagId: ID) {
   poems (page: $page, q: $q, tagId: $tagId) {
     id
-    uuid
     title
     paragraphs
     kind
@@ -11,7 +10,6 @@ query POEMS ($page: Int, $q: String, $tagId: ID) {
     }
     author {
       id
-      uuid
       name
       dynasty
     }
@@ -27,8 +25,8 @@ query POEMS_USER_STAR ($page: Int, $q: String, $tagId: ID) {
   }
 }
 
-query POEM_USER_STAR ($uuid: ID!) {
-  poem (uuid: $uuid) {
+query POEM_USER_STAR ($id: ID!) {
+  poem (id: $id) {
     id
     userIsStar
     userIsRecite
@@ -49,14 +47,13 @@ mutation STAR_POEM($poemId: ID!, $star: Boolean) {
   }
 }
 
-query POEM ($poemUuid: ID!, $phraseId: ID) {
+query POEM ($poemId: ID!, $phraseId: ID) {
   phrase (id: $phraseId) {
     id
     text
   }
-  poem (uuid: $poemUuid) {
+  poem (id: $poemId) {
     id
-    uuid
     title
     intro
     paragraphs
@@ -73,7 +70,6 @@ query POEM ($poemUuid: ID!, $phraseId: ID) {
       name
       poems (pageSize: 6) {
         id
-        uuid
         title
         paragraphs
         userIsRecite
@@ -85,14 +81,12 @@ query POEM ($poemUuid: ID!, $phraseId: ID) {
         author {
           id
           dynasty
-          uuid
           name
         }
       }
     }
     author {
       id
-      uuid
       name
       dynasty
       birthYear
@@ -100,7 +94,6 @@ query POEM ($poemUuid: ID!, $phraseId: ID) {
       intro
       poems {
         id
-        uuid
         title
         paragraphs
         userIsRecite
@@ -110,7 +103,6 @@ query POEM ($poemUuid: ID!, $phraseId: ID) {
   }
   poems {
     id   
-    uuid
     title
     paragraphs
   }
@@ -142,10 +134,9 @@ query PHRASES ($page: Int, $pageSize: Int) {
     text
     authorName
     poem {
-      uuid
+      id
       title
       author {
-        uuid
         name
         dynasty
       }
@@ -161,7 +152,6 @@ query STAR_POEMS ($userId: ID!) {
     starPoemsWithDate {
       poem {
         id
-        uuid
         title
         kind
         paragraphs
@@ -169,7 +159,6 @@ query STAR_POEMS ($userId: ID!) {
         userIsStar
         author {
           id
-          uuid
           name
           dynasty
         }
@@ -186,7 +175,6 @@ query RECITE_POEMS ($userId: ID!) {
     recitePoemsWithDate {
       poem {
         id
-        uuid
         title
         kind
         paragraphs
@@ -194,7 +182,6 @@ query RECITE_POEMS ($userId: ID!) {
         userIsStar
         author {
           id
-          uuid
           name
           dynasty
         }
@@ -222,7 +209,6 @@ query TAGS {
 query AUTHORS ($page: Int, $q: String) {
   authors (page: $page, q: $q) {
     id
-    uuid
     name
     intro
     dynasty
@@ -232,10 +218,9 @@ query AUTHORS ($page: Int, $q: String) {
   authorsCount (q: $q)
 }
 
-query AUTHOR ($uuid: ID!) {
-  author (uuid: $uuid) {
+query AUTHOR ($id: ID!) {
+  author (id: $id) {
     id
-    uuid
     name
     intro
     birthYear
@@ -244,12 +229,11 @@ query AUTHOR ($uuid: ID!) {
   }
 }
 
-query AUTHOR_POEMS ($uuid: ID!, $page: Int) {
-  author (uuid: $uuid) {
+query AUTHOR_POEMS ($id: ID!, $page: Int) {
+  author (id: $id) {
     id
     poems (page: $page) {
       id 
-      uuid
       title
       kind
       tags {

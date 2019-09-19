@@ -48,24 +48,24 @@ function Poems ({
   return (
     <App title="首页" description="诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美">
       <style jsx>{`
-          .container {
-            display: flex;
-          }
+        .container {
+          display: flex;
+        }
 
-          .poems {
-            flex-grow: 1; 
-          }
+        .poems {
+          flex-grow: 1;
+        }
 
-          .side {
-            flex-basis: 300px;
-            flex-shrink: 0;
-            margin-left: 20px;
-          }
+        .side {
+          flex-basis: 300px;
+          flex-shrink: 0;
+          margin-left: 20px;
+        }
 
-          .highlight {
-            color: #f60; 
-          }
-        `}</style>
+        .highlight {
+          color: #f60; 
+        }
+      `}</style>
       <div className="container">
         <div className="poems">
           <SearchBar q={q} />

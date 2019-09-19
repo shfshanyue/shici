@@ -27,7 +27,7 @@ class Author extends Component {
   }
 
   handleChange (page) {
-    Router.pushRoute(`/authors/${this.props.uuid}?page=${page}`)
+    Router.pushRoute(`/authors/${this.props.id}?page=${page}`)
   }
 
   render () {
@@ -74,10 +74,10 @@ class Author extends Component {
 
 export default compose(
   graphql(AUTHOR, {
-    options ({ uuid, page }) {
+    options ({ id, page }) {
       return {
         variables: {
-          uuid,
+          id,
           page
         }
       }
@@ -98,10 +98,10 @@ export default compose(
         poemsLoading: data.loading
       }
     },
-    options ({ uuid, page }) {
+    options ({ id, page }) {
       return {
         variables: {
-          uuid,
+          id,
           page
         },
         ssr: false

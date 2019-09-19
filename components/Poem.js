@@ -72,7 +72,7 @@ function Poem ({
     Router.pushRoute('/login')
   }
 
-  const author = get(poem, 'author.uuid')
+  const author = get(poem, 'author.id')
 
   return <div>
     <style jsx>{`
@@ -107,10 +107,10 @@ function Poem ({
     <div className="poem">
       {
         React.createElement(title, {
-          children: poem.uuid ?
-            <Link route="poem" params={{ uuid: poem.uuid }}>
+          children: poem.id ?
+            <Link route="poem" params={{ id: poem.id }}>
               <a>
-                { 
+                {
                   highlight(poem.title, highlightWords)
                 }
               </a>
@@ -119,7 +119,7 @@ function Poem ({
       }
       {
         author && <div className="author">
-          <Link route="author" params={{ uuid: get(poem, 'author.uuid') }}>
+          <Link route="author" params={{ id: get(poem, 'author.id') }}>
             <a>
               { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
             </a>
@@ -131,7 +131,7 @@ function Poem ({
           // 当折叠时，只显示四段
           slice(poem.paragraphs, 0, active ? undefined : 4).map((p, index) => (
             <p key={index}>
-              { highlight(p, highlightWords) } 
+              { highlight(p, highlightWords) }
             </p>
           )) 
         } 
@@ -152,17 +152,17 @@ function Poem ({
         checked={poem.userIsRecite}
       >会背</Tag>
       {
+        time && <time>{
+          dayjs(new Date()).diff(time, 'day') > 60 ?
+            dayjs(time).format('YYYY-MM-DD HH:mm') : dayjs(time).locale('zh-cn').fromNow()
+        }</time>
+      }
+      {
         get(poem, 'tags', []).map(tag => 
           <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>
             <div className="tag-item">{tag.name}</div>
           </Link>
         )
-      }
-      {
-        time && <time>{
-          dayjs(new Date()).diff(time, 'day') > 60 ?
-            dayjs(time).format('YYYY-MM-DD HH:mm') : dayjs(time).locale('zh-cn').fromNow()
-        }</time>
       }
     </div>
   </div>

@@ -1,5 +1,3 @@
-import { withRouter } from 'next/router'
-
 const Footer = () => (
   <footer>
     <div className="container">
@@ -27,4 +25,4 @@ const Footer = () => (
   </footer>
 )
 
-export default withRouter(Footer)
+export default Footer
