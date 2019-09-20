@@ -1,4 +1,3 @@
-import React from 'react'
 import { graphql } from 'react-apollo'
 import { Link } from '../routes'
 import { TAGS } from '../query/index.gql'

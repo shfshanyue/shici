@@ -1,7 +1,8 @@
+import { useMemo } from 'react'
 import Card from './Card'
 
 function QR () {
-  return (
+  return useMemo(() => (
     <Card>
       <style jsx>{`
       .cunyin {
@@ -21,7 +22,7 @@ function QR () {
         <span>每天一首古诗词</span>
       </div>
     </Card>
-  )
+  ), [])
 }
 
 export default QR

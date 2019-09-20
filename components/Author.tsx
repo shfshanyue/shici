@@ -1,7 +1,15 @@
-import React from 'react'
-import { Link, Router } from '../routes'
+import { createElement, FC } from 'react'
+import { Author as AuthorType } from '../query'
+import routes from '../routes'
 
-export default ({ author = {}, title = 'h2' }) => (
+const { Link } = routes
+
+interface Props {
+  author: AuthorType;
+  title: string;
+}
+
+const Author: FC<Props> = ({ author = {}, title = 'h2' }) => (
   <div>
     <style>{`
       .author {
@@ -9,7 +17,7 @@ export default ({ author = {}, title = 'h2' }) => (
       } 
     `}</style>
     {
-      React.createElement(title, {
+      createElement(title, {
         children: title === 'h1' ? author.name : (
           <Link route="author" params={{ id: author.id }}>
             <a>
@@ -26,3 +34,5 @@ export default ({ author = {}, title = 'h2' }) => (
     <p>{ author.intro }</p>
   </div>
 )
+
+export default Author

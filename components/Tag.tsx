@@ -1,4 +1,13 @@
-function Tag ({ checked, onChange, children, style }) {
+import { CSSProperties, MouseEventHandler } from 'react'
+
+interface Props {
+  children: React.ReactChildren;
+  checked?: boolean;
+  onChange?: MouseEventHandler;
+  style?: CSSProperties;
+}
+
+function Tag ({ checked, onChange, children, style }: Props) {
   return (
     <div className={`tag ${checked ? 'active' : ''}`} onClick={onChange} style={style}>
       <style jsx>{`

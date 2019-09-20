@@ -21,7 +21,7 @@ function Avator ({ name }: Props) {
           color: #fff;
           font-size: 22px;
 
-          animation: .3s ease show;
+          // animation: .3s ease show;
         } 
 
         @keyframes show {

@@ -7,7 +7,7 @@ Router.events.on('routeChangeComplete', url => {
   _hmt && _hmt.push(['_trackPageview', url])
 })
 
-const App = ({ children, title='', description, router }) => {
+const App = ({ children, title='', description='', router }) => {
   const desc = description ? description.slice(0, 100) : '诗词学习网致力于古诗文的整理，为每一个人传递中国诗词之美'
   return (
     <div>

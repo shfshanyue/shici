@@ -137,6 +137,7 @@ query PHRASES ($page: Int, $pageSize: Int) {
       id
       title
       author {
+        id
         name
         dynasty
       }

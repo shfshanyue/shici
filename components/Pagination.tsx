@@ -1,9 +1,16 @@
 import Icon from './Icon'
 
-function Pagination({ current, total, pageSize = 10, onChange }) {
+interface Props {
+  current: number;
+  total: number;
+  pageSize: number;
+  onChange: (to: number) => void;
+}
+
+function Pagination({ current, total, pageSize = 10, onChange }: Props) {
   const pageCount = Math.ceil(total / pageSize)
   const showPageCount = Math.min(pageCount, 5)
-  let start
+  let start: number
 
   if (pageCount === 1) return null
 
@@ -15,7 +22,7 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
     start = current - 2
   }
 
-  function handleChange(to) {
+  function handleChange(to: number) {
     if (to >= 1 && to <= pageCount && to !== current) {
       window && window.scrollTo(0, 0)
       onChange(to);
@@ -103,7 +110,7 @@ function Pagination({ current, total, pageSize = 10, onChange }) {
         <Icon type="right" />
       </div>
     </div>
-  );
+  )
 }
 
 export default Pagination
