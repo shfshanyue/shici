@@ -7,13 +7,13 @@
 
 <p align="center">
   <a href="https://shici.xiange.tech">
-    <img src="https://shici.xiange.tech/static/screen.png" width="600" alt="诗词" /><br>
+    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/screen.jpg" width="600" alt="诗词" /><br>
     <sup>https://shici.xiange.tech</sup>
   </a>
 </p>
 <p align="center">
   <a href="https://graphql.xiange.tech/playground">
-    <img src="https://shici.xiange.tech/static/playground.png" width="600" alt="诗词" /><br>
+    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/playground.png" width="600" alt="诗词" /><br>
     <sup>https://graphql.xiange.tech</sup>
   </a>
 </p>
