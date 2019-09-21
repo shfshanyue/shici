@@ -1,6 +1,8 @@
 {
-  "name": "poem",
+  "name": "shici",
   "version": "1.0.0",
+  "author": "shfshanyue",
+  "license": "ISC",
   "scripts": {
     "dev": "nodemon server.js",
     "build": "next build",
@@ -14,21 +16,19 @@
     "apollo-boost": "^0.4.4",
     "babel-plugin-import": "^1.12.1",
     "dayjs": "^1.8.16",
-    "graphql": "^14.5.5",
+    "graphql": "^14.5.7",
     "isomorphic-unfetch": "^3.0.0",
     "lru-cache": "^5.1.1",
-    "next": "^9.0.5",
+    "next": "^9.0.6",
     "next-routes": "^1.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
-    "react-apollo": "^3.1.0",
+    "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-highlight-words": "^0.16.0",
     "sw-precache-webpack-plugin": "^0.11.5",
-    "webpack-bundle-analyzer": "^3.5.0"
+    "webpack-bundle-analyzer": "^3.5.1"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@graphql-codegen/cli": "^1.7.0",
     "@graphql-codegen/typescript": "1.7.0",
@@ -37,6 +37,7 @@
     "babel-plugin-import-graphql": "^2.7.0",
     "nodemon": "^1.19.2",
     "npm-check-updates": "^3.1.23",
-    "typescript": "^3.6.3"
+    "typescript": "^3.6.3",
+    "lodash.template": ">=4.5.0"
   }
 }
