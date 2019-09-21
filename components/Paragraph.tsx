@@ -15,8 +15,8 @@ function Paragraph ({ title, text, loading, highlight }: Props ) {
       <style jsx>{`
       p {
         text-indent: 2em; 
-      } 
-    `}</style>
+      }
+      `}</style>
       <h3>{title}</h3>
       {
         map(text, (t, index) => <p key={index}>
