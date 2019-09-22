@@ -7,6 +7,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
+import Nav from '../../components/Nav'
 
 import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'

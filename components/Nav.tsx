@@ -1,4 +1,21 @@
-const Nav = ({ children }) => {
+import { FC, ReactChildren, ReactElement, cloneElement } from 'react'
+import classNames from 'classnames'
+
+interface NavItemProps {
+  children: ReactChildren;
+  active: boolean;
+  id: string;
+  onChange: (key: string) => void;
+}
+
+interface NavProps {
+  // FIX
+  children: ReactElement<NavItemProps, FC<NavItemProps>>[];
+  value: string;
+  onChange: (key: string) => void;
+}
+
+const Nav = ({ children, value, onChange }: NavProps) => {
   return (
     <div className="nav">
       <style jsx>{`
@@ -12,14 +29,20 @@ const Nav = ({ children }) => {
           background-color: #fff;
         }
       `}</style>
-      { children }
+      {
+        children.map(item => cloneElement(item, {
+          active: value === item.key,
+          id: item.key as string,
+          onChange: onChange
+        }))
+      }
     </div>
   )
 }
 
-Nav.Item = ({ children }) => {
+Nav.Item = function NavItem ({ children, active, onChange, id }) {
   return (
-    <div className="nav-item">
+    <div className={classNames('nav-item', { active })} onClick={() => onChange(id)}>
       <style jsx>{`
         .nav-item {
           display: flex;
