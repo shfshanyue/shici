@@ -1,7 +1,7 @@
-import { CSSProperties, MouseEventHandler } from 'react'
+import { CSSProperties, MouseEventHandler, ReactNode } from 'react'
 
 interface Props {
-  children: string;
+  children: ReactNode;
   checked?: boolean;
   onChange?: MouseEventHandler;
   style?: CSSProperties;

@@ -1,6 +1,6 @@
 import { withRouter } from 'next/router'
 import Card from './Card'
-import { Router, Link } from '../routes'
+import { Link } from '../routes'
 
 const SearchBar = ({ q, router: { pathname }}) => q ? (
   <Card>
