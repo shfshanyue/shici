@@ -1,7 +1,7 @@
 import { CSSProperties, MouseEventHandler } from 'react'
 
 interface Props {
-  children: React.ReactChildren;
+  children: string;
   checked?: boolean;
   onChange?: MouseEventHandler;
   style?: CSSProperties;

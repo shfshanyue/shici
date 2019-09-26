@@ -3,48 +3,56 @@ import { useMutation } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
-import { Link, Router } from '../routes'
+import * as routes from '../routes'
+import * as query from '../query/index.gql'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
-import { STAR_POEM, RECITE_POEM } from '../query/index.gql'
 
 import dayjs from 'dayjs'
-
+import { Poem as PoemType } from '../query'
 dayjs.extend(relativeTime)
 
+const { Link, Router } = routes
+const { STAR_POEM, RECITE_POEM } = query
+
+interface Props {
+  poem: PoemType;
+  active?: boolean;
+  onMore?: () => void;
+  time?: Date;
+  title?: string;
+  highlightWords: any[];
+}
+
 function Poem ({
-  poem = {},
+  poem,
   highlightWords = [],
   active = true,
   onMore,
   time,
-  title="h2"
-}) {
+  title = 'h2'
+}: Props) {
   const [starPoem] = useMutation(STAR_POEM, {
-    options: {
-      optimisticResponse ({ poemId, star }) {
-        return {
-          __typename: 'Mutation',
-          starPoem: {
-            id: poemId,
-            userIsStar: star,
-            __typename: 'Poem'
-          }
+    optimisticResponse({ poemId, star }) {
+      return {
+        __typename: 'Mutation',
+        starPoem: {
+          id: poemId,
+          userIsStar: star,
+          __typename: 'Poem'
         }
       }
-    } 
+    }
   })
 
   const [recitePoem] = useMutation(RECITE_POEM, {
-    options: {
-      optimisticResponse ({ poemId, recite }) {
-        return {
-          __typename: 'Mutation',
-          starPoem: {
-            id: poemId,
-            userIsRecite: recite,
-            __typename: 'Poem'
-          }
+    optimisticResponse({ poemId, recite }) {
+      return {
+        __typename: 'Mutation',
+        recitePoem: {
+          id: poemId,
+          userIsRecite: recite,
+          __typename: 'Poem'
         }
       }
     } 
@@ -158,7 +166,7 @@ function Poem ({
         }</time>
       }
       {
-        get(poem, 'tags', []).map(tag => 
+        poem.tags && poem.tags.map(tag => 
           <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>
             <div className="tag-item">{tag.name}</div>
           </Link>
