@@ -177,6 +177,12 @@ $ npm run stat
 + NetWwork statusBar: 18 requests | 223 KB transferred | 716 KB resources | Finish: 734 ms
 + Event: DCL 156.6 ms | FP 183.1 ms | FCP 183.1 ms | FMP 183.1 ms | Load 691.7 ms
 
-## 捐献
+## 关注我
 
-<img src="https://shanyue.tech/pay.jpg" width="250" height="250">
+我一个关于前后端以及运维分享的公众号：记录我的学习与成长
+
+<img src="https://shanyue.tech/qrcode.jpg" width="250" height="250">
+
+我一个关于诗词分享的公众号：每天分享一篇古诗文
+
+<img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/wechat.jpg" width="250" height="250">
