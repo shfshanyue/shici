@@ -1,3 +1,3 @@
 export default {
-  url: 'https://shici.xiange.tech/graphql'
+  url: 'https://shici.shanyue.tech/graphql'
 }
