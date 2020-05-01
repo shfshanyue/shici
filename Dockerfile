@@ -1,11 +1,12 @@
-FROM node:alpine
+FROM node:10-alpine
 
-ADD package.json package-lock.json /code/
+ADD package.json yarn.lock /code/
 WORKDIR /code
 
-RUN npm install
+RUN yarn
 
 ADD . /code
 
+ENV NODE_ENV=production
 RUN npm run build
-CMD npm start
+CMD node server.js

@@ -6,6 +6,11 @@ services:
       - 3000
     restart: always
     labels:
-      - "traefik.frontend.rule=Host:shici.xiange.tech"
-    volumes:
-      - /etc/resolv.conf:/etc/resolv.conf
+      - traefik.http.routers.shici-app.rule=Host(`shici.xiange.tech`)
+      - traefik.http.routers.shici-app.tls=true
+      - traefik.http.routers.shici-app.tls.certresolver=le
+
+networks:
+  default:
+    external:
+      name: traefik_default
