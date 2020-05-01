@@ -14,6 +14,7 @@ import Tag from '../../components/Tag'
 import Tags from '../../components/Tags'
 
 import { POEMS, POEMS_USER_STAR } from '../../query/index.gql'
+import withApollo from '../../lib/with-apollo'
 
 function Poems ({
   q,
@@ -110,4 +111,4 @@ Poems.getInitialProps = ({ query }) => {
   }
 }
 
-export default Poems
+export default withApollo(Poems)

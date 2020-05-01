@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 import { get, compose } from '../../lib/utils'
+import withApollo from '../../lib/with-apollo'
 
 import { Router } from '../../routes'
 
@@ -73,6 +74,7 @@ class Author extends Component {
 }
 
 export default compose(
+  withApollo,
   graphql(AUTHOR, {
     options ({ id, page }) {
       return {

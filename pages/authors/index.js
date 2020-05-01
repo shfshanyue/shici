@@ -13,6 +13,7 @@ import Author from '../../components/Author'
 import Tags from '../../components/Tags'
 
 import { AUTHORS } from '../../query/index.gql'
+import withApollo from '../../lib/with-apollo'
 
 class Authors extends Component {
   static async getInitialProps({ query }) {
@@ -81,6 +82,7 @@ class Authors extends Component {
 }
 
 export default compose(
+  withApollo,
   graphql(AUTHORS, {
     props ({ data, ...rest }) {
       return {

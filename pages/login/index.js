@@ -3,13 +3,14 @@ import { graphql, withApollo } from 'react-apollo'
 import { withRouter } from 'next/router'
 
 import { get, compose } from '../../lib/utils'
+import withApolloClient from '../../lib/with-apollo'
 
 import { Link, Router } from '../../routes'
 
 import App from '../../components/App'
 import Card from '../../components/Card'
 
-import { REGISTER, LOGIN, SEND_VERIFY_CODE, ME } from '../../query/index.gql'
+import { REGISTER, LOGIN, SEND_VERIFY_CODE } from '../../query/index.gql'
 
 class Login extends Component {
   constructor (props) {
@@ -237,6 +238,7 @@ class Login extends Component {
 }
 
 export default compose(
+  withApolloClient,
   withRouter,
   withApollo,
   graphql(LOGIN, {

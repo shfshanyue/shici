@@ -12,6 +12,7 @@ import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 
 import { PHRASES } from '../../query/index.gql'
+import withApollo from '../../lib/with-apollo'
 
 class Phrases extends Component {
   static async getInitialProps({ query }) {
@@ -88,6 +89,7 @@ class Phrases extends Component {
 }
 
 export default compose(
+  withApollo,
   graphql(PHRASES, {
     props ({ data, ...rest }) {
       return {

@@ -7,11 +7,11 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
-import Nav from '../../components/Nav'
 
 import PoemComponent from '../../components/Poem'
 import { Link } from '../../routes'
 import { POEM, POEM_USER_STAR } from '../../query/index.gql'
+import withApollo from '../../lib/with-apollo'
 
 function Poem ({ id, phraseId }) {
 
@@ -149,4 +149,4 @@ function Poem ({ id, phraseId }) {
 
 Poem.getInitialProps = ({ query }) => query
 
-export default Poem
+export default withApollo(Poem)

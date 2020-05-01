@@ -1,5 +1,6 @@
 import App from '../components/App'
 import Card from '../components/Card'
+import withApollo from '../lib/with-apollo'
 
 function Error () {
   return (
@@ -34,4 +35,4 @@ function Error () {
   )
 }
 
-export default Error
+export default withApollo(Error)

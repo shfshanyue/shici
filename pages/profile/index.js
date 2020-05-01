@@ -8,6 +8,7 @@ import Poem from '../../components/Poem'
 import App from '../../components/App'
 import QR from '../../components/QR'
 import Card from '../../components/Card'
+import withApollo from '../../lib/with-apollo'
 
 import { STAR_POEMS, RECITE_POEMS } from '../../query/index.gql'
 
@@ -116,6 +117,7 @@ class Profile extends Component {
 }
 
 export default compose(
+  withApollo,
   graphql(STAR_POEMS, {
     props ({ data }) {
       return {

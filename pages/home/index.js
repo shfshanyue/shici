@@ -1,8 +1,10 @@
 import App from '../../components/App'
-import Header from '../../components/Header'
+import withApollo from '../../lib/with-apollo'
 
-export default () => (
+const Home = () => (
   <App>
     Hello, APP
   </App>
 )
+
+export default withApollo(Home)
