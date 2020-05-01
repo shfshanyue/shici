@@ -19,7 +19,6 @@
     "dayjs": "^1.8.26",
     "graphql": "^15.0.0",
     "isomorphic-unfetch": "^3.0.0",
-    "lru-cache": "^5.1.1",
     "next": "^9.3.6",
     "next-routes": "^1.4.2",
     "prop-types": "^15.7.2",
