@@ -4,10 +4,11 @@
   "author": "shfshanyue",
   "license": "ISC",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "next dev",
+    "debug": "NODE_OPTIONS='--inspect' next",
     "build": "next build",
     "ncu": "ncu",
-    "start": "NODE_ENV=production node server.js",
+    "start": "next",
     "stat": "COMMIT=$(git rev-parse --short HEAD) ANALYZE=1 next build",
     "codegen": "graphql-codegen --config codegen.yml"
   },

@@ -4,7 +4,7 @@ import withApollo from '../lib/with-apollo'
 
 function Error () {
   return (
-    <App title="未找到">
+    <App title="众里寻他千百度">
       <style jsx>{`
       .card {
         width: 600px; 

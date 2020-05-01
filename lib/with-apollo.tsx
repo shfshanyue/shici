@@ -21,6 +21,8 @@ type WithApolloPageContext = {
 
 let globalApolloClient: TApolloClient
 
+const isBrowser = typeof window !== 'undefined'
+
 /**
  * Creates and provides the apolloContext
  * to a next.js PageTree. Use it by wrapping
@@ -153,22 +155,15 @@ function createApolloClient(initialState = {}) {
 }
 
 function createIsomorphLink() {
-  return ApolloLink.from([
-    new ApolloLink((operation, forward) => {
-      operation.setContext({
-        headers: {
-          Authorization: process.browser && localStorage.token
-        }
-      });
-      return forward(operation)
-    }),
-    new HttpLink({
-      uri: config.url,
-      credentials: 'same-origin',
-      fetch(uri, options) {
-        const { operationName } = JSON.parse(options.body as any)
-        return fetch(`${uri}?query=${operationName}`, options)
-      }
-    })
-  ])
+  return new HttpLink({
+    uri: config.url,
+    credentials: 'same-origin',
+    headers: {
+      Authorization: isBrowser ? localStorage.token : ''
+    },
+    fetch(uri, options) {
+      const { operationName } = JSON.parse(options.body as any)
+      return fetch(`${uri}?query=${operationName}`, options)
+    }
+  })
 }

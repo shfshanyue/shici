@@ -23,6 +23,7 @@ function Poem ({ id, phraseId }) {
   })
 
   const { data = {}, loading } = useQuery(POEM, {
+    ssr: true,
     variables: {
       poemId: id,
       phraseId
