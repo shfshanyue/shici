@@ -3,7 +3,7 @@ import Icon from './Icon'
 interface Props {
   current: number;
   total: number;
-  pageSize: number;
+  pageSize?: number;
   onChange: (to: number) => void;
 }
 

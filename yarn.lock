@@ -1113,7 +1113,7 @@
     "@graphql-toolkit/schema-merging" "~0.10.4"
     tslib "~1.11.1"
 
-"@graphql-codegen/plugin-helpers@1.13.4":
+"@graphql-codegen/plugin-helpers@1.13.4", "@graphql-codegen/plugin-helpers@1.13.5":
   version "1.13.4"
   resolved "https://registry.npm.taobao.org/@graphql-codegen/plugin-helpers/download/@graphql-codegen/plugin-helpers-1.13.4.tgz#bb750f22d723403c76e079ce58fe1f9345ae9ef4"
   integrity sha1-u3UPItcjQDx24HnOWP4fk0WunvQ=
@@ -1140,13 +1140,13 @@
     auto-bind "~4.0.0"
     tslib "~1.11.1"
 
-"@graphql-codegen/typescript-react-apollo@1.13.4":
-  version "1.13.4"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-react-apollo/download/@graphql-codegen/typescript-react-apollo-1.13.4.tgz#a1e6461a4c184ff2ef0ea498dc70a0d2099035cf"
-  integrity sha1-oeZGGkwYT/LvDqSY3HCg0gmQNc8=
+"@graphql-codegen/typescript-react-apollo@^1.13.5":
+  version "1.13.5"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-react-apollo/download/@graphql-codegen/typescript-react-apollo-1.13.5.tgz#04ac91510e9681530388dd5697d4e8f127324ca4"
+  integrity sha1-BKyRUQ6WgVMDiN1Wl9To8ScyTKQ=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.13.4"
-    "@graphql-codegen/visitor-plugin-common" "1.13.4"
+    "@graphql-codegen/plugin-helpers" "1.13.5"
+    "@graphql-codegen/visitor-plugin-common" "1.13.5"
     auto-bind "~4.0.0"
     camel-case "4.1.1"
     pascal-case "3.1.1"
@@ -1162,7 +1162,7 @@
     auto-bind "~4.0.0"
     tslib "~1.11.1"
 
-"@graphql-codegen/visitor-plugin-common@1.13.4":
+"@graphql-codegen/visitor-plugin-common@1.13.4", "@graphql-codegen/visitor-plugin-common@1.13.5":
   version "1.13.4"
   resolved "https://registry.npm.taobao.org/@graphql-codegen/visitor-plugin-common/download/@graphql-codegen/visitor-plugin-common-1.13.4.tgz#0ef46278617fae3e420369327808ee7f5440a111"
   integrity sha1-DvRieGF/rj5CA2kyeAjuf1RAoRE=

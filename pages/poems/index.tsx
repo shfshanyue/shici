@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-apollo'
 
 import Pagination from '../../components/Pagination'
 import { get, merge } from '../../lib/utils'
-import { Router } from '../../routes'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -13,22 +11,22 @@ import Poem from '../../components/Poem'
 import Tag from '../../components/Tag'
 import Tags from '../../components/Tags'
 
-import { POEMS, POEMS_USER_STAR } from '../../query/index.gql'
+import { usePoemsQuery, usePoemsUserStarQuery } from '../../query'
 import withApollo from '../../lib/with-apollo'
+import { useRouter } from 'next/router'
 
-function Poems ({
-  q,
-  tagId,
-  tagName,
-  page,
-}) {
+const Poems: React.FC = () => {
   const [activeIds, setActiveIds] = useState({})
-  const { data: starData } = useQuery(POEMS_USER_STAR, {
-    variables: { page, q, tagId },
+  const router = useRouter()
+  const { query, pathname } = router
+  const { page = 1, tagId, tagName, q } = query as any
+
+  const { data: starData } = usePoemsUserStarQuery({
+    variables: { page: page as number, q, tagId },
     skip: !process.browser
   })
-  const { loading, data } = useQuery(POEMS, {
-    variables: { page, q, tagId }
+  const { loading, data } = usePoemsQuery({
+    variables: { page: page as number, q, tagId }
   })
 
   const lastPoems = get(starData, 'poems', [])
@@ -38,11 +36,14 @@ function Poems ({
   const poemsCount = get(data, 'poemsCount', 10)
         
   function handleChange (page) {
-    Router.pushRoute('poems', {
-      page,
-      q,
-      tagId,
-      tagName
+    router.push({
+      pathname,
+      query: {
+        page,
+        q,
+        tagId,
+        tagName
+      }
     })
   }
 
@@ -93,7 +94,7 @@ function Poems ({
               </Card>
             ))
           }
-          <Pagination showQuickJumper current={Number(page)} total={poemsCount} onChange={handleChange} />
+          <Pagination current={Number(page)} total={poemsCount} onChange={handleChange} />
         </div>
         <aside className="side">
           <Tags />
@@ -102,13 +103,6 @@ function Poems ({
       </div>
     </App>
   )  
-}
-
-Poems.getInitialProps = ({ query }) => {
-  return {
-    page: 1,
-    ...query
-  }
 }
 
 export default withApollo(Poems)
