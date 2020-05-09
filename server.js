@@ -1,13 +1,11 @@
 const { createServer } = require('http')
 const next = require('next')
 const { parse } = require('url')
-const { join } = require('path')
 
 const routes = require('./routes')
 const LRUCache = require('lru-cache')
 
 const ssrCache = new LRUCache({
-  max: 100,
   maxAge: 1000 * 60 * 60 * 24 * 365
 })
 
@@ -22,7 +20,7 @@ const handler = routes.getRequestHandler(app)
 app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true)
-    const { pathname, query } = parsedUrl
+    const { pathname } = parsedUrl
 
     if (pathname === '/robots.txt') {
       res.writeHead(200, { 'Content-Type': 'text/plain' })

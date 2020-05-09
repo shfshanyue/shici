@@ -1,25 +1,19 @@
 import React, { useState } from 'react'
-import { useQuery } from 'react-apollo'
 import { useRouter } from 'next/router'
 import { startsWith, get } from '../lib/utils'
 import * as routes from '../routes'
 
 import Search from './Search'
 import Avator from './Avator'
-import * as query from '../query/index.gql'
-import { MeQuery } from '../query'
+import { useMeQuery } from '../query'
 
 const { Router, Link } = routes
-const { ME } = query
 
 function Header () {
   const [toggle, setToggle] = useState(false)
   // TODO
-  const { query, asPath } = useRouter() || {
-    query: {},
-    asPath: ''
-  }
-  const { data, loading } = useQuery<MeQuery>(ME, {
+  const { query, asPath } = useRouter()
+  const { data, loading } = useMeQuery({
     ssr: false
   })
   const userId = get(data, 'me.id')
@@ -94,14 +88,14 @@ function Header () {
           <Link href="/">
             <a className="title">诗词弦歌</a>
           </Link>
+          <Link route="phrases">
+            <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
+          </Link>
           <Link route="poems">
             <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
           </Link>
           <Link route="authors">
             <a className={startsWith(asPath, '/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>
-          </Link>
-          <Link route="phrases">
-            <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
           </Link>
           <div className="search-box">
             <Search
