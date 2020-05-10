@@ -4,9 +4,9 @@ import Card from './Card'
 
 interface Props {
   title: string;
-  text: string;
+  text: string[];
   loading: boolean;
-  highlight: boolean;
+  highlight?: boolean;
 };
 
 function Paragraph ({ title, text, loading, highlight }: Props ) {

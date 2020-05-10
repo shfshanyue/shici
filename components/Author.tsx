@@ -5,8 +5,8 @@ import routes from '../routes'
 const { Link } = routes
 
 interface Props {
-  author: AuthorType;
-  title: string;
+  author: Partial<AuthorType>;
+  title?: string;
 }
 
 const Author: FC<Props> = ({ author = {}, title = 'h2' }) => (

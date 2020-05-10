@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { startsWith, get } from '../lib/utils'
+import classNames from 'classnames'
+
+import { get } from '../lib/utils'
 import * as routes from '../routes'
+import { useMeQuery } from '../query'
 
 import Search from './Search'
 import Avator from './Avator'
-import { useMeQuery } from '../query'
 
 const { Router, Link } = routes
 
@@ -16,6 +18,7 @@ function Header () {
   const { data, loading } = useMeQuery({
     ssr: false
   })
+
   const userId = get(data, 'me.id')
   const username = get(data, 'me.name')
 
@@ -57,17 +60,17 @@ function Header () {
         `}</style>
         <div className="item">
           <Link route="poems">
-            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
+            <a className={(asPath.startsWith('/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active' : ''}>诗词</a>
           </Link>
         </div>
         <div className="item">
           <Link route="authors">
-            <a className={startsWith(asPath, '/authors') ? 'active' : ''}>作者</a>
+            <a className={classNames({ active: asPath.startsWith('/authors') })}>作者</a>
           </Link>
         </div>
         <div className="item">
           <Link route="phrases">
-            <a className={asPath.indexOf('phrase') !== -1 ? 'active' : ''}>名句</a>
+            <a className={classNames({ active: asPath.includes('phrase') })}>名句</a>
           </Link>
         </div>
         <div className="item">
@@ -92,10 +95,10 @@ function Header () {
             <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
           </Link>
           <Link route="poems">
-            <a className={(startsWith(asPath, '/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
+            <a className={(asPath.startsWith('/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
           </Link>
           <Link route="authors">
-            <a className={startsWith(asPath, '/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>
+            <a className={asPath.startsWith('/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>
           </Link>
           <div className="search-box">
             <Search

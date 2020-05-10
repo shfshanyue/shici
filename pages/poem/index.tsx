@@ -1,5 +1,7 @@
 import React from 'react'
-import { useQuery } from 'react-apollo'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+
 import { get, map, omit, flatten, uniq } from '../../lib/utils'
 
 import App from '../../components/App'
@@ -7,22 +9,23 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import Paragraph from '../../components/Paragraph'
 import Author from '../../components/Author'
-
 import PoemComponent from '../../components/Poem'
-import { Link } from '../../routes'
-import { POEM, POEM_USER_STAR } from '../../query/index.gql'
+
+import { usePoemQuery, usePoemUserStarQuery } from '../../query'
 import withApollo from '../../lib/with-apollo'
 
-function Poem ({ id, phraseId }) {
+function Poem () {
 
-  const { data: authData = {} } = useQuery(POEM_USER_STAR, {
+  const { query: { id, phraseId } } = useRouter() as any
+
+  const { data: authData = {} } = usePoemUserStarQuery({
     // not work
     // 有可能与 POEM 这个 query 有关
     ssr: false,
     variables: { id }
   })
 
-  const { data = {}, loading } = useQuery(POEM, {
+  const { data = {} as any, loading } = usePoemQuery({
     ssr: true,
     variables: {
       poemId: id,
@@ -30,7 +33,8 @@ function Poem ({ id, phraseId }) {
     }
   })
 
-  const poem = { ...data.poem, ...authData.poem }
+
+  const poem: any = { ...data.poem, ...authData.poem }
   const poems = get(poem, 'poems', [])
   const poemId = poem.id
 
@@ -42,8 +46,8 @@ function Poem ({ id, phraseId }) {
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
-          {map(annotations, (a, index) => (
-            <li key={index} key={index}>
+          {map(annotations, (a) => (
+            <li key={a.key}>
               <p>
                 <i>{a.key}:</i> {a.value}
               </p>
@@ -98,7 +102,7 @@ function Poem ({ id, phraseId }) {
           <Card loading={loading}>
             <PoemComponent
               title={phraseId ? 'h2' : 'h1'}
-              poem={omit(poem, ['author', phraseId ? '' : 'id'])}
+              poem={omit(poem, ['author', phraseId ? '' : 'id']) as any}
               highlightWords={phraseId ? phrase : map(poem.phrases, phrase => phrase.phrase)}
             />
           </Card>
@@ -128,7 +132,7 @@ function Poem ({ id, phraseId }) {
           <Card title="名句" loading={loading}>
             {
               get(poem, 'phrases', []).map(phrase =>
-                <Link route="phrase" params={{ id: poem.id, phraseId: phrase.id }} key={phrase.id}>
+                <Link href="/poems/[id]/phrase/[phraseId]" as={`/poems/${id}/phrase/${phrase.id}`} key={phrase.id}>
                   <a className="phrase">{phrase.text}</a>
                 </Link>
               )
@@ -147,7 +151,5 @@ function Poem ({ id, phraseId }) {
     </App>
   )
 }
-
-Poem.getInitialProps = ({ query }) => query
 
 export default withApollo(Poem)

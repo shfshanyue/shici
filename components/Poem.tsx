@@ -21,7 +21,7 @@ interface Props {
   onMore?: () => void;
   time?: Date;
   title?: string;
-  highlightWords: any[];
+  highlightWords?: any[];
 }
 
 function Poem ({
