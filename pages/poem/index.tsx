@@ -88,16 +88,18 @@ function Poem () {
             margin: 0;
             border-left: 8px solid #f609;
             padding-left: 10px;
-            background-color: #f601;
+            background-color: #fff;
             color: #666;
+
+            padding: 20px; 
+            margin-bottom: 15px;
           }
         `}</style>
       <div className="container">
         <div className="poem">
           {
-            phraseId && <Card loading={loading}>
+            phraseId &&
               <h1 className="phrase-h1">{phrase.slice(0, -1)}</h1>
-            </Card>
           }
           <Card loading={loading}>
             <PoemComponent
