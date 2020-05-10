@@ -26,14 +26,13 @@ app.prepare().then(() => {
       res.writeHead(200, { 'Content-Type': 'text/plain' })
       res.write('User-agent: *\nSitemap: https://shici.xiange.tech/sitemap/site.xml')
       res.end()
-    } else if (pathname === '/') {
-      renderAndCache(req, res, '/poems', {})
     } else {
       handler(req, res)
     }
   }).listen(3000)
 })
 
+// TODO: enhance cache
 async function renderAndCache (req, res, pagePath, queryParams) {
   const key = req.url
 

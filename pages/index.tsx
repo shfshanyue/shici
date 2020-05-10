@@ -1,3 +1,3 @@
-import Home from './poems'
+import Phrases from './phrases'
 
-export default Home
+export default Phrases

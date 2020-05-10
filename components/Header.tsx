@@ -92,10 +92,10 @@ function Header () {
             <a className="title">诗词弦歌</a>
           </Link>
           <Link route="phrases">
-            <a className={asPath.indexOf('phrase') !== -1 ? 'active hidden-xs' : 'hidden-xs'}>名句</a>
+            <a className={classNames('hidden-xs', { active: asPath.includes('phrase') || asPath === '/' })}>名句</a>
           </Link>
           <Link route="poems">
-            <a className={(asPath.startsWith('/poems') && asPath.indexOf('phrase') === -1) || asPath === '/' ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
+            <a className={(asPath.startsWith('/poems') && asPath.indexOf('phrase') === -1) ? 'active hidden-xs' : 'hidden-xs'}>诗词</a>
           </Link>
           <Link route="authors">
             <a className={asPath.startsWith('/authors') ? 'active hidden-xs' : 'hidden-xs'}>作者</a>

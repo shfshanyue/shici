@@ -1,10 +1,10 @@
 const routes = require('next-routes')
 
-module.exports = routes()                           
+module.exports = routes()
+  .add('phrases', '/phrases')
   .add('poems', '/poems')
   .add('poem', '/poems/:id')
   .add('phrase', '/poems/:id/phrase/:phraseId', 'poem')
-  .add('phrases', '/phrases')
   .add('authors', '/authors')
   .add('author', '/authors/:id')
   .add('register', '/register', 'login')
