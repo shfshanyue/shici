@@ -1,11 +1,7 @@
 import gql from 'graphql-tag';
-import * as React from 'react';
 import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactComponents from '@apollo/react-components';
-import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -627,25 +623,6 @@ export const PoemsDocument = gql`
   poemsCount(q: $q, tagId: $tagId)
 }
     `;
-export type PoemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<PoemsQuery, PoemsQueryVariables>, 'query'>;
-
-    export const PoemsComponent = (props: PoemsComponentProps) => (
-      <ApolloReactComponents.Query<PoemsQuery, PoemsQueryVariables> query={PoemsDocument} {...props} />
-    );
-    
-export type PoemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<PoemsQuery, PoemsQueryVariables>
-    } & TChildProps;
-export function withPoems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PoemsQuery,
-  PoemsQueryVariables,
-  PoemsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, PoemsQuery, PoemsQueryVariables, PoemsProps<TChildProps, TDataName>>(PoemsDocument, {
-      alias: 'poems',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePoemsQuery__
@@ -683,25 +660,6 @@ export const PoemsUserStarDocument = gql`
   }
 }
     `;
-export type PoemsUserStarComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<PoemsUserStarQuery, PoemsUserStarQueryVariables>, 'query'>;
-
-    export const PoemsUserStarComponent = (props: PoemsUserStarComponentProps) => (
-      <ApolloReactComponents.Query<PoemsUserStarQuery, PoemsUserStarQueryVariables> query={PoemsUserStarDocument} {...props} />
-    );
-    
-export type PoemsUserStarProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<PoemsUserStarQuery, PoemsUserStarQueryVariables>
-    } & TChildProps;
-export function withPoemsUserStar<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PoemsUserStarQuery,
-  PoemsUserStarQueryVariables,
-  PoemsUserStarProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, PoemsUserStarQuery, PoemsUserStarQueryVariables, PoemsUserStarProps<TChildProps, TDataName>>(PoemsUserStarDocument, {
-      alias: 'poemsUserStar',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePoemsUserStarQuery__
@@ -739,25 +697,6 @@ export const PoemUserStarDocument = gql`
   }
 }
     `;
-export type PoemUserStarComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<PoemUserStarQuery, PoemUserStarQueryVariables>, 'query'> & ({ variables: PoemUserStarQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const PoemUserStarComponent = (props: PoemUserStarComponentProps) => (
-      <ApolloReactComponents.Query<PoemUserStarQuery, PoemUserStarQueryVariables> query={PoemUserStarDocument} {...props} />
-    );
-    
-export type PoemUserStarProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<PoemUserStarQuery, PoemUserStarQueryVariables>
-    } & TChildProps;
-export function withPoemUserStar<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PoemUserStarQuery,
-  PoemUserStarQueryVariables,
-  PoemUserStarProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, PoemUserStarQuery, PoemUserStarQueryVariables, PoemUserStarProps<TChildProps, TDataName>>(PoemUserStarDocument, {
-      alias: 'poemUserStar',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePoemUserStarQuery__
@@ -793,25 +732,6 @@ export const RecitePoemDocument = gql`
 }
     `;
 export type RecitePoemMutationFn = ApolloReactCommon.MutationFunction<RecitePoemMutation, RecitePoemMutationVariables>;
-export type RecitePoemComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<RecitePoemMutation, RecitePoemMutationVariables>, 'mutation'>;
-
-    export const RecitePoemComponent = (props: RecitePoemComponentProps) => (
-      <ApolloReactComponents.Mutation<RecitePoemMutation, RecitePoemMutationVariables> mutation={RecitePoemDocument} {...props} />
-    );
-    
-export type RecitePoemProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: ApolloReactCommon.MutationFunction<RecitePoemMutation, RecitePoemMutationVariables>
-    } & TChildProps;
-export function withRecitePoem<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  RecitePoemMutation,
-  RecitePoemMutationVariables,
-  RecitePoemProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, RecitePoemMutation, RecitePoemMutationVariables, RecitePoemProps<TChildProps, TDataName>>(RecitePoemDocument, {
-      alias: 'recitePoem',
-      ...operationOptions
-    });
-};
 
 /**
  * __useRecitePoemMutation__
@@ -846,25 +766,6 @@ export const StarPoemDocument = gql`
 }
     `;
 export type StarPoemMutationFn = ApolloReactCommon.MutationFunction<StarPoemMutation, StarPoemMutationVariables>;
-export type StarPoemComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<StarPoemMutation, StarPoemMutationVariables>, 'mutation'>;
-
-    export const StarPoemComponent = (props: StarPoemComponentProps) => (
-      <ApolloReactComponents.Mutation<StarPoemMutation, StarPoemMutationVariables> mutation={StarPoemDocument} {...props} />
-    );
-    
-export type StarPoemProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: ApolloReactCommon.MutationFunction<StarPoemMutation, StarPoemMutationVariables>
-    } & TChildProps;
-export function withStarPoem<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StarPoemMutation,
-  StarPoemMutationVariables,
-  StarPoemProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, StarPoemMutation, StarPoemMutationVariables, StarPoemProps<TChildProps, TDataName>>(StarPoemDocument, {
-      alias: 'starPoem',
-      ...operationOptions
-    });
-};
 
 /**
  * __useStarPoemMutation__
@@ -952,25 +853,6 @@ export const PoemDocument = gql`
   }
 }
     `;
-export type PoemComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<PoemQuery, PoemQueryVariables>, 'query'> & ({ variables: PoemQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const PoemComponent = (props: PoemComponentProps) => (
-      <ApolloReactComponents.Query<PoemQuery, PoemQueryVariables> query={PoemDocument} {...props} />
-    );
-    
-export type PoemProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<PoemQuery, PoemQueryVariables>
-    } & TChildProps;
-export function withPoem<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PoemQuery,
-  PoemQueryVariables,
-  PoemProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, PoemQuery, PoemQueryVariables, PoemProps<TChildProps, TDataName>>(PoemDocument, {
-      alias: 'poem',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePoemQuery__
@@ -1006,25 +888,6 @@ export const RegisterDocument = gql`
 }
     `;
 export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
-export type RegisterComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<RegisterMutation, RegisterMutationVariables>, 'mutation'>;
-
-    export const RegisterComponent = (props: RegisterComponentProps) => (
-      <ApolloReactComponents.Mutation<RegisterMutation, RegisterMutationVariables> mutation={RegisterDocument} {...props} />
-    );
-    
-export type RegisterProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>
-    } & TChildProps;
-export function withRegister<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  RegisterMutation,
-  RegisterMutationVariables,
-  RegisterProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps, TDataName>>(RegisterDocument, {
-      alias: 'register',
-      ...operationOptions
-    });
-};
 
 /**
  * __useRegisterMutation__
@@ -1059,25 +922,6 @@ export const LoginDocument = gql`
 }
     `;
 export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
-export type LoginComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<LoginMutation, LoginMutationVariables>, 'mutation'>;
-
-    export const LoginComponent = (props: LoginComponentProps) => (
-      <ApolloReactComponents.Mutation<LoginMutation, LoginMutationVariables> mutation={LoginDocument} {...props} />
-    );
-    
-export type LoginProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>
-    } & TChildProps;
-export function withLogin<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  LoginMutation,
-  LoginMutationVariables,
-  LoginProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps, TDataName>>(LoginDocument, {
-      alias: 'login',
-      ...operationOptions
-    });
-};
 
 /**
  * __useLoginMutation__
@@ -1109,25 +953,6 @@ export const SendVerifyCodeDocument = gql`
 }
     `;
 export type SendVerifyCodeMutationFn = ApolloReactCommon.MutationFunction<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
-export type SendVerifyCodeComponentProps = Omit<ApolloReactComponents.MutationComponentOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>, 'mutation'>;
-
-    export const SendVerifyCodeComponent = (props: SendVerifyCodeComponentProps) => (
-      <ApolloReactComponents.Mutation<SendVerifyCodeMutation, SendVerifyCodeMutationVariables> mutation={SendVerifyCodeDocument} {...props} />
-    );
-    
-export type SendVerifyCodeProps<TChildProps = {}, TDataName extends string = 'mutate'> = {
-      [key in TDataName]: ApolloReactCommon.MutationFunction<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>
-    } & TChildProps;
-export function withSendVerifyCode<TProps, TChildProps = {}, TDataName extends string = 'mutate'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  SendVerifyCodeMutation,
-  SendVerifyCodeMutationVariables,
-  SendVerifyCodeProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withMutation<TProps, SendVerifyCodeMutation, SendVerifyCodeMutationVariables, SendVerifyCodeProps<TChildProps, TDataName>>(SendVerifyCodeDocument, {
-      alias: 'sendVerifyCode',
-      ...operationOptions
-    });
-};
 
 /**
  * __useSendVerifyCodeMutation__
@@ -1171,25 +996,6 @@ export const PhrasesDocument = gql`
   phrasesCount
 }
     `;
-export type PhrasesComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<PhrasesQuery, PhrasesQueryVariables>, 'query'>;
-
-    export const PhrasesComponent = (props: PhrasesComponentProps) => (
-      <ApolloReactComponents.Query<PhrasesQuery, PhrasesQueryVariables> query={PhrasesDocument} {...props} />
-    );
-    
-export type PhrasesProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<PhrasesQuery, PhrasesQueryVariables>
-    } & TChildProps;
-export function withPhrases<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  PhrasesQuery,
-  PhrasesQueryVariables,
-  PhrasesProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, PhrasesQuery, PhrasesQueryVariables, PhrasesProps<TChildProps, TDataName>>(PhrasesDocument, {
-      alias: 'phrases',
-      ...operationOptions
-    });
-};
 
 /**
  * __usePhrasesQuery__
@@ -1241,25 +1047,6 @@ export const StarPoemsDocument = gql`
   }
 }
     `;
-export type StarPoemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<StarPoemsQuery, StarPoemsQueryVariables>, 'query'> & ({ variables: StarPoemsQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const StarPoemsComponent = (props: StarPoemsComponentProps) => (
-      <ApolloReactComponents.Query<StarPoemsQuery, StarPoemsQueryVariables> query={StarPoemsDocument} {...props} />
-    );
-    
-export type StarPoemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<StarPoemsQuery, StarPoemsQueryVariables>
-    } & TChildProps;
-export function withStarPoems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StarPoemsQuery,
-  StarPoemsQueryVariables,
-  StarPoemsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, StarPoemsQuery, StarPoemsQueryVariables, StarPoemsProps<TChildProps, TDataName>>(StarPoemsDocument, {
-      alias: 'starPoems',
-      ...operationOptions
-    });
-};
 
 /**
  * __useStarPoemsQuery__
@@ -1310,25 +1097,6 @@ export const RecitePoemsDocument = gql`
   }
 }
     `;
-export type RecitePoemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<RecitePoemsQuery, RecitePoemsQueryVariables>, 'query'> & ({ variables: RecitePoemsQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const RecitePoemsComponent = (props: RecitePoemsComponentProps) => (
-      <ApolloReactComponents.Query<RecitePoemsQuery, RecitePoemsQueryVariables> query={RecitePoemsDocument} {...props} />
-    );
-    
-export type RecitePoemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<RecitePoemsQuery, RecitePoemsQueryVariables>
-    } & TChildProps;
-export function withRecitePoems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  RecitePoemsQuery,
-  RecitePoemsQueryVariables,
-  RecitePoemsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, RecitePoemsQuery, RecitePoemsQueryVariables, RecitePoemsProps<TChildProps, TDataName>>(RecitePoemsDocument, {
-      alias: 'recitePoems',
-      ...operationOptions
-    });
-};
 
 /**
  * __useRecitePoemsQuery__
@@ -1363,25 +1131,6 @@ export const MeDocument = gql`
   }
 }
     `;
-export type MeComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<MeQuery, MeQueryVariables>, 'query'>;
-
-    export const MeComponent = (props: MeComponentProps) => (
-      <ApolloReactComponents.Query<MeQuery, MeQueryVariables> query={MeDocument} {...props} />
-    );
-    
-export type MeProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<MeQuery, MeQueryVariables>
-    } & TChildProps;
-export function withMe<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  MeQuery,
-  MeQueryVariables,
-  MeProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, MeQuery, MeQueryVariables, MeProps<TChildProps, TDataName>>(MeDocument, {
-      alias: 'me',
-      ...operationOptions
-    });
-};
 
 /**
  * __useMeQuery__
@@ -1416,25 +1165,6 @@ export const TagsDocument = gql`
   }
 }
     `;
-export type TagsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<TagsQuery, TagsQueryVariables>, 'query'>;
-
-    export const TagsComponent = (props: TagsComponentProps) => (
-      <ApolloReactComponents.Query<TagsQuery, TagsQueryVariables> query={TagsDocument} {...props} />
-    );
-    
-export type TagsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<TagsQuery, TagsQueryVariables>
-    } & TChildProps;
-export function withTags<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  TagsQuery,
-  TagsQueryVariables,
-  TagsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, TagsQuery, TagsQueryVariables, TagsProps<TChildProps, TDataName>>(TagsDocument, {
-      alias: 'tags',
-      ...operationOptions
-    });
-};
 
 /**
  * __useTagsQuery__
@@ -1473,25 +1203,6 @@ export const AuthorsDocument = gql`
   authorsCount(q: $q)
 }
     `;
-export type AuthorsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AuthorsQuery, AuthorsQueryVariables>, 'query'>;
-
-    export const AuthorsComponent = (props: AuthorsComponentProps) => (
-      <ApolloReactComponents.Query<AuthorsQuery, AuthorsQueryVariables> query={AuthorsDocument} {...props} />
-    );
-    
-export type AuthorsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<AuthorsQuery, AuthorsQueryVariables>
-    } & TChildProps;
-export function withAuthors<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  AuthorsQuery,
-  AuthorsQueryVariables,
-  AuthorsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, AuthorsQuery, AuthorsQueryVariables, AuthorsProps<TChildProps, TDataName>>(AuthorsDocument, {
-      alias: 'authors',
-      ...operationOptions
-    });
-};
 
 /**
  * __useAuthorsQuery__
@@ -1531,25 +1242,6 @@ export const AuthorDocument = gql`
   }
 }
     `;
-export type AuthorComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AuthorQuery, AuthorQueryVariables>, 'query'> & ({ variables: AuthorQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const AuthorComponent = (props: AuthorComponentProps) => (
-      <ApolloReactComponents.Query<AuthorQuery, AuthorQueryVariables> query={AuthorDocument} {...props} />
-    );
-    
-export type AuthorProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<AuthorQuery, AuthorQueryVariables>
-    } & TChildProps;
-export function withAuthor<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  AuthorQuery,
-  AuthorQueryVariables,
-  AuthorProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, AuthorQuery, AuthorQueryVariables, AuthorProps<TChildProps, TDataName>>(AuthorDocument, {
-      alias: 'author',
-      ...operationOptions
-    });
-};
 
 /**
  * __useAuthorQuery__
@@ -1596,25 +1288,6 @@ export const AuthorPoemsDocument = gql`
   }
 }
     `;
-export type AuthorPoemsComponentProps = Omit<ApolloReactComponents.QueryComponentOptions<AuthorPoemsQuery, AuthorPoemsQueryVariables>, 'query'> & ({ variables: AuthorPoemsQueryVariables; skip?: boolean; } | { skip: boolean; });
-
-    export const AuthorPoemsComponent = (props: AuthorPoemsComponentProps) => (
-      <ApolloReactComponents.Query<AuthorPoemsQuery, AuthorPoemsQueryVariables> query={AuthorPoemsDocument} {...props} />
-    );
-    
-export type AuthorPoemsProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<AuthorPoemsQuery, AuthorPoemsQueryVariables>
-    } & TChildProps;
-export function withAuthorPoems<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  AuthorPoemsQuery,
-  AuthorPoemsQueryVariables,
-  AuthorPoemsProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, AuthorPoemsQuery, AuthorPoemsQueryVariables, AuthorPoemsProps<TChildProps, TDataName>>(AuthorPoemsDocument, {
-      alias: 'authorPoems',
-      ...operationOptions
-    });
-};
 
 /**
  * __useAuthorPoemsQuery__
