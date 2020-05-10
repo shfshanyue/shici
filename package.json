@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.10",
-    "apollo-boost": "^0.4.7",
+    "apollo-boost": "^0.4.8",
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.26",
@@ -29,15 +29,15 @@
     "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.13.4",
-    "@graphql-codegen/typescript": "1.13.4",
-    "@graphql-codegen/typescript-operations": "1.13.4",
+    "@graphql-codegen/cli": "^1.13.5",
+    "@graphql-codegen/typescript": "1.13.5",
+    "@graphql-codegen/typescript-operations": "1.13.5",
     "@graphql-codegen/typescript-react-apollo": "^1.13.5",
     "@types/react": "^16.9.34",
     "babel-plugin-import-graphql": "^2.7.0",
     "lodash.template": ">=4.5.0",
     "nodemon": "^2.0.3",
-    "npm-check-updates": "^4.1.2",
+    "npm-check-updates": "^5.0.0",
     "typescript": "^3.8.3",
     "webpack-bundle-analyzer": "^3.7.0"
   }
