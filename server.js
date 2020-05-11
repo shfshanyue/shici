@@ -1,12 +1,12 @@
 const { createServer } = require('http')
 const next = require('next')
-const { parse } = require('url')
 
 const routes = require('./routes')
 const LRUCache = require('lru-cache')
 
 const ssrCache = new LRUCache({
-  maxAge: 1000 * 60 * 60 * 24 * 365
+  max: 2000, 
+  maxAge: 1000 * 60 * 60 * 24 * 7
 })
 
 const isDev = process.env.NODE_ENV !== 'production'
@@ -15,21 +15,12 @@ const app = next({
   dev: isDev
 })
 
-const handler = routes.getRequestHandler(app)
+const handler = routes.getRequestHandler(app, ({req, res, route, query}) => {
+  renderAndCache(req, res, route.page, query)
+})
 
 app.prepare().then(() => {
-  createServer((req, res) => {
-    const parsedUrl = parse(req.url, true)
-    const { pathname } = parsedUrl
-
-    if (pathname === '/robots.txt') {
-      res.writeHead(200, { 'Content-Type': 'text/plain' })
-      res.write('User-agent: *\nSitemap: https://shici.xiange.tech/sitemap/site.xml')
-      res.end()
-    } else {
-      handler(req, res)
-    }
-  }).listen(3000)
+  createServer(handler).listen(3000)
 })
 
 // TODO: enhance cache

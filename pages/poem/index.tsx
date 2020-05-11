@@ -90,6 +90,7 @@ function Poem () {
             padding-left: 10px;
             background-color: #fff;
             color: #666;
+            min-height: 85px;
 
             padding: 20px; 
             margin-bottom: 15px;

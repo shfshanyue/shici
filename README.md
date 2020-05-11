@@ -7,13 +7,13 @@
 
 <p align="center">
   <a href="https://shici.xiange.tech">
-    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/screen.jpg" width="600" alt="诗词" /><br>
+    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/public/static/screen.jpg" width="600" alt="诗词" /><br>
     <sup>https://shici.xiange.tech</sup>
   </a>
 </p>
 <p align="center">
   <a href="https://graphql.xiange.tech/playground">
-    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/playground.png" width="600" alt="诗词" /><br>
+    <img src="https://raw.githubusercontent.com/shfshanyue/shici/master/public/static/playground.png" width="600" alt="诗词" /><br>
     <sup>https://graphql.xiange.tech</sup>
   </a>
 </p>
@@ -26,39 +26,6 @@
 + [react](https://github.com/facebook/react), [next.js](https://github.com/zeit/next.js), [next-routes](https://github.com/fridays/next-routes) -- 服务端渲染
 + [graphql](https://github.com/graphql/graphql-js), [apollo-client](https://github.com/apollographql/apollo-client), `localstorage` -- API && store
 + `docker`, `docker-compose`, `traefik`, `gitlab-ci` -- 部署
-
-## 相关问题与思考
-
-+ CI 与前端质量保障
-+ 当使用 graphql 时，前后端的协作与交流
-+ 服务器渲染与 prerender 之优劣
-+ 关于服务器渲染的实践及若干考虑
-+ 如何对一个进程进行内存以及CPU的监控
-+ [关于统计诗词字云的解决方案](https://shanyue.tech/post/poem-char-frequent-stat)
-+ [关于 async/await 的两个 OOM 的问题](https://shanyue.tech/post/async-oom)
-+ dataloader 源码解析
-+ graphql.js 源码解析
-+ 浅谈 graphql 中 server/http/client 中的缓存策略
-+ [graphql-tag 的使用以及源码解析](https://shanyue.tech/code/graphql-tag/)
-+ [graphql 服务端开发指南](https://shanyue.tech/post/graphql-guide/)
-+ 使用 lru-cache 来避免 graphql 中的缓存崩溃问题
-+ 日志，filebeat 与 elk
-+ 关于日志的收集以及优化
-+ [使用 requestId 标记全链路日志](https://shanyue.tech/post/requestId-and-tracing)
-+ [node 中异常收集与监控](https://shanyue.tech/post/server-structed-error)
-+ [graphql 中 apollo-server 对 cache 的处理](https://shanyue.tech/record/2019.html#_2019-07-31)
-+ [使用 graphql 的 schema 自动生成 typescript 的type](https://shanyue.tech/record/2019.html#_2019-08-01)
-+ [关于诗词的 GraphQL API](https://shanyue.tech/post/shici-api/)
-+ [在 pg 中重设用户表的 ID](https://shanyue.tech/post/refactor-id-in-pg)
-+ [如何实现类似 lodash 的 get 与 merge 函数](https://shanyue.tech/post/lodash-get-and-merge/)
-+ [使用 jwt 实践邮件验证与登录](https://shanyue.tech/post/jwt-and-verifyCode)
-+ [jwt 指南](https://shanyue.tech/post/JWT-Guide)
-+ [使用十行 React 代码实现一个关键字高亮组件](https://shanyue.tech/post/highlight-in-react)
-+ [使用 enum 代替 constant number](https://shanyue.tech/post/constant-db-to-client/)
-+ [使用纯 CSS 实现仿 Material Design 的 input 过渡效果](https://shanyue.tech/post/login-input-style/)
-+ [使用 docker 高效部署前端](https://shanyue.tech/post/deploy-frontend-with-docker)
-+ [traefik 入手以及简单配置](https://shanyue.tech/post/traefik-start)
-+ [当我有一台服务器时，我做了什么](https://shanyue.tech/post/server-todo/)
 
 ## 目录结构
 
@@ -185,4 +152,4 @@ $ npm run stat
 
 我一个关于诗词分享的公众号：每天分享一篇古诗文
 
-<img src="https://raw.githubusercontent.com/shfshanyue/shici/master/static/wechat.jpg" width="250" height="250">
+<img src="https://raw.githubusercontent.com/shfshanyue/shici/master/public/static/wechat.jpg" width="250" height="250">
