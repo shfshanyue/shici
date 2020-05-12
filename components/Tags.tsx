@@ -12,7 +12,7 @@ const { Link } = routes
 
 function Tags () {
   const { data, loading } = useQuery<TagsQuery>(TAGS)
-  const tags = data ? data.tags.filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)) : []
+  const tags = data?.tags?.filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)) || []
 
   return (
     <Card title="标签" loading={loading}>

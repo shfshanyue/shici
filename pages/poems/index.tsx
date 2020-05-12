@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
+import merge from 'lodash.merge'
 
 import Pagination from '../../components/Pagination'
-import { get, merge } from '../../lib/utils'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -16,7 +16,7 @@ import withApollo from '../../lib/with-apollo'
 import { useRouter } from 'next/router'
 
 const Poems: React.FC = () => {
-  const [activeIds, setActiveIds] = useState({})
+  const [activeIds, setActiveIds] = useState<Record<string, boolean>>({})
   const router = useRouter()
   const { query, pathname } = router
   const { page = 1, tagId, tagName, q } = query as any
@@ -29,11 +29,9 @@ const Poems: React.FC = () => {
     variables: { page: page as number, q, tagId }
   })
 
-  const lastPoems = get(starData, 'poems', [])
-  const currentPoems = get(data, 'poems', [1, 2, 3, 4, 5].map(id => ({ id })))
+  const poems = merge(data?.poems, starData?.poems)
 
-  const poems = merge(lastPoems, currentPoems)
-  const poemsCount = get(data, 'poemsCount', 10)
+  const poemsCount = data?.poemsCount || 10
         
   function handleChange (page: number) {
     router.push({
@@ -78,21 +76,27 @@ const Poems: React.FC = () => {
             </Card>
           }
           {
-            poems.map(poem => (
-              <Card loading={loading} key={poem.id}>
-                <Poem
-                  poem={poem}
-                  active={Boolean(activeIds[poem.id])}
-                  highlightWords={[q]}
-                  onMore={() => {
-                    setActiveIds({
-                      ...activeIds,
-                      [poem.id]: 1
-                    })
-                  }}
-                />
-              </Card>
-            ))
+            loading ?
+              <>
+                <Card loading={loading} />
+                <Card loading={loading} />
+                <Card loading={loading} />
+              </> :
+              poems?.map(poem => (
+                <Card key={poem.id}>
+                  <Poem
+                    poem={poem}
+                    active={Boolean(activeIds[poem.id])}
+                    highlightWords={[q]}
+                    onMore={() => {
+                      setActiveIds({
+                        ...activeIds,
+                        [poem.id]: true
+                      })
+                    }}
+                  />
+                </Card>
+              ))
           }
           <Pagination current={Number(page)} total={poemsCount} onChange={handleChange} />
         </div>

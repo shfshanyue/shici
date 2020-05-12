@@ -19,7 +19,7 @@ function Paragraph ({ title, text, loading, highlight }: Props ) {
       `}</style>
       <h3>{title}</h3>
       {
-        map(text, (t, index) => <p key={index}>
+        map(text, (t: any) => <p key={t}>
           {
             highlight ?
               <Highlighter

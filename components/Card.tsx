@@ -1,7 +1,7 @@
 import Skeleton from './Skeleton'
 
 interface Props {
-  children: any;
+  children?: any;
   loading?: boolean;
   title?: string;
 }

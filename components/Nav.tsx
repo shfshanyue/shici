@@ -1,5 +1,4 @@
 import { FC, ReactChildren, ReactElement, cloneElement } from 'react'
-import classNames from 'classnames'
 
 interface NavItemProps {
   children: ReactChildren;
@@ -40,29 +39,29 @@ const Nav = ({ children, value, onChange }: NavProps) => {
   )
 }
 
-Nav.Item = function NavItem ({ children, active, onChange, id }) {
-  return (
-    <div className={classNames('nav-item', { active })} onClick={() => onChange(id)}>
-      <style jsx>{`
-        .nav-item {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: relative;
-          padding: 0 20px;
-          cursor: pointer;
-          height: 100%;
-          color: #888;
-        }
+// Nav.Item = function NavItem ({ children, active, onChange, id }) {
+//   return (
+//     <div className={classNames('nav-item', { active })} onClick={() => onChange(id)}>
+//       <style jsx>{`
+//         .nav-item {
+//           display: flex;
+//           align-items: center;
+//           justify-content: center;
+//           position: relative;
+//           padding: 0 20px;
+//           cursor: pointer;
+//           height: 100%;
+//           color: #888;
+//         }
 
-        .nav-item.active {
-          color: #f60;
-          box-shadow: inset 0 -2px 0 #f60;
-        }
-      `}</style>
-      { children }
-    </div>
-  )   
-}
+//         .nav-item.active {
+//           color: #f60;
+//           box-shadow: inset 0 -2px 0 #f60;
+//         }
+//       `}</style>
+//       { children }
+//     </div>
+//   )   
+// }
 
 export default Nav

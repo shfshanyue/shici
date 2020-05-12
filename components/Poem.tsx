@@ -16,7 +16,7 @@ const { Link, Router } = routes
 const { STAR_POEM, RECITE_POEM } = query
 
 interface Props {
-  poem: PoemType;
+  poem: Partial<PoemType> & Pick<PoemType, 'id'>;
   active?: boolean;
   onMore?: () => void;
   time?: Date;
@@ -58,7 +58,7 @@ function Poem ({
     } 
   })
 
-  const handleStar = (poemId, star) => {
+  const handleStar = (poemId: string, star: boolean) => {
     starPoem({
       variables: {
         poemId,
@@ -67,7 +67,7 @@ function Poem ({
     }) 
   }
 
-  const handleRecite = (poemId, recite) => {
+  const handleRecite = (poemId: string, recite: boolean) => {
     recitePoem({
       variables: {
         poemId,
@@ -137,7 +137,7 @@ function Poem ({
       <div>
         {
           // 当折叠时，只显示四段
-          slice(poem.paragraphs, 0, active ? undefined : 4).map((p, index) => (
+          slice(poem.paragraphs, 0, active ? undefined : 4).map((p: any, index: any) => (
             <p key={index}>
               { highlight(p, highlightWords) }
             </p>
@@ -153,11 +153,11 @@ function Poem ({
     <div className="footer">
       <Tag
         onChange={() => poem.userIsStar === null ? goLogin() : handleStar(poem.id, !poem.userIsStar)}
-        checked={poem.userIsStar}
+        checked={Boolean(poem.userIsStar)}
       >喜欢</Tag>
       <Tag
         onChange={() => poem.userIsStar === null ? goLogin() : handleRecite(poem.id, !poem.userIsRecite)}
-        checked={poem.userIsRecite}
+        checked={Boolean(poem.userIsRecite)}
       >会背</Tag>
       {
         time && <time>{
