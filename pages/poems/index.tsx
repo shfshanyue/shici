@@ -35,7 +35,7 @@ const Poems: React.FC = () => {
   const poems = merge(lastPoems, currentPoems)
   const poemsCount = get(data, 'poemsCount', 10)
         
-  function handleChange (page) {
+  function handleChange (page: number) {
     router.push({
       pathname,
       query: {
