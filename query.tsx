@@ -36,7 +36,7 @@ export type Query = {
   poemsCount: Scalars['Int'];
   authorsCount: Scalars['Int'];
   poem?: Maybe<Poem>;
-  tags?: Maybe<Array<Tag>>;
+  tags: Array<Tag>;
   tag?: Maybe<Tag>;
 };
 
@@ -546,10 +546,10 @@ export type TagsQueryVariables = {};
 
 export type TagsQuery = (
   { __typename?: 'Query' }
-  & { tags?: Maybe<Array<(
+  & { tags: Array<(
     { __typename?: 'Tag' }
     & Pick<Tag, 'id' | 'name' | 'kind'>
-  )>> }
+  )> }
 );
 
 export type AuthorsQueryVariables = {

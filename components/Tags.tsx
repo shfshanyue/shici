@@ -1,18 +1,17 @@
-import { useQuery } from 'react-apollo'
+import groupBy from 'lodash.groupby'
+
 import * as routes from '../routes'
-import * as query from '../query/index.gql'
-import { groupBy } from '../lib/utils'
-import { TagsQuery, Tag as TagType } from '../query'
+import { useTagsQuery } from '../query'
 
 import Tag from './Tag'
 import Card from './Card'
 
-const { TAGS } = query
 const { Link } = routes
 
 function Tags () {
-  const { data, loading } = useQuery<TagsQuery>(TAGS)
-  const tags = data?.tags?.filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)) || []
+  const { data, loading } = useTagsQuery()
+  // 对应五个不想展示的 Tag
+  const tags = data?.tags.filter(tag => !new Set([1, 7, 8, 9, 10]).has(tag.kind)) || []
 
   return (
     <Card title="标签" loading={loading}>
@@ -28,7 +27,7 @@ function Tags () {
         Object.entries(groupBy(tags, 'kind')).map(([kind, tags]) =>
           <div key={kind} className="tags">
             {
-              (tags as TagType[]).map((tag) => (
+              tags.map((tag) => (
                 <Tag style={{ marginBottom: '10px' }} key={tag.id}>
                   <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }}>
                     <a>{ tag.name }</a>
