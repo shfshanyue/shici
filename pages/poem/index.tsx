@@ -2,7 +2,9 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { get, map, omit, flatten, uniq } from '../../lib/utils'
+import { map, omit, flatten, uniq } from '../../lib/utils'
+
+import get from 'lodash.get'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -15,28 +17,28 @@ import { usePoemQuery, usePoemUserStarQuery } from '../../query'
 import withApollo from '../../lib/with-apollo'
 
 function Poem () {
-
   const { query: { id, phraseId } } = useRouter() as any
 
-  const { data: authData = {} } = usePoemUserStarQuery({
+  const { data: authData } = usePoemUserStarQuery({
     // not work
     // 有可能与 POEM 这个 query 有关
     ssr: false,
     variables: { id }
   })
 
-  const { data = {} as any, loading } = usePoemQuery({
+  const { data, loading } = usePoemQuery({
     ssr: true,
     variables: {
-      poemId: id,
+      poemId: Number(id) ? id : null,
+      poemUUID: Number(id) ? null : id,
       phraseId
     }
   })
 
 
-  const poem: any = { ...data.poem, ...authData.poem }
-  const poems = get(poem, 'poems', [])
-  const poemId = poem.id
+  const poem: any = { ...data?.poem, ...authData?.poem }
+  const poems = data?.poems || []
+  const poemId = data?.poem?.id
 
   const phrase = get(data, 'phrase.text', '')
 
@@ -46,7 +48,7 @@ function Poem () {
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
-          {map(annotations, (a) => (
+          {map(annotations, (a: any) => (
             <li key={a.key}>
               <p>
                 <i>{a.key}:</i> {a.value}
@@ -106,7 +108,7 @@ function Poem () {
             <PoemComponent
               title={phraseId ? 'h2' : 'h1'}
               poem={omit(poem, ['author', phraseId ? '' : 'id']) as any}
-              highlightWords={phraseId ? phrase : map(poem.phrases, phrase => phrase.phrase)}
+              highlightWords={phraseId ? phrase : data?.poem?.phrases?.map(phrase => phrase.text)}
             />
           </Card>
           {renderAnnotations()}
@@ -115,13 +117,13 @@ function Poem () {
           <Paragraph text={poem.appreciation} title="赏析" loading={loading} highlight />
           {
             uniq(flatten(map(poem.tags, tag => tag.poems)), 'id').filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
-              <Card loading={loading} key={poem.id} title={i ? '' : '更多相关诗词推荐'}>
+              <Card loading={loading} key={poem.id} title={i ? '' : '相关诗词推荐'}>
                 <PoemComponent poem={poem} />
               </Card>
             )
           }
           {
-            !get(poem, 'tags.length') && poems.filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
+            poems.filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
               <Card loading={loading} key={poem.id} title={i ? '' : '更多诗词推荐'}>
                 <PoemComponent poem={poem} />
               </Card>

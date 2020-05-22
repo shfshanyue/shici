@@ -18,7 +18,7 @@ export type Scalars = {
 };
 
 export type Query = {
-   __typename?: 'Query';
+  __typename?: 'Query';
   ping: Scalars['String'];
   error: Scalars['Int'];
   reqError?: Maybe<Scalars['Int']>;
@@ -107,7 +107,7 @@ export type QueryTagArgs = {
 };
 
 export type User = {
-   __typename?: 'User';
+  __typename?: 'User';
   id: Scalars['ID'];
   name: Scalars['String'];
   email: Scalars['String'];
@@ -121,7 +121,7 @@ export type User = {
 
 
 export type Todo = {
-   __typename?: 'Todo';
+  __typename?: 'Todo';
   id: Scalars['ID'];
   name: Scalars['String'];
   createTime: Scalars['DateTime'];
@@ -135,7 +135,7 @@ export enum TodoStatus {
 }
 
 export type Poem = {
-   __typename?: 'Poem';
+  __typename?: 'Poem';
   id: Scalars['ID'];
   uuid: Scalars['ID'];
   title: Scalars['String'];
@@ -159,7 +159,7 @@ export type Poem = {
 
 
 export type Author = {
-   __typename?: 'Author';
+  __typename?: 'Author';
   id: Scalars['ID'];
   uuid: Scalars['ID'];
   name: Scalars['String'];
@@ -180,7 +180,7 @@ export type AuthorPoemsArgs = {
 };
 
 export type Phrase = {
-   __typename?: 'Phrase';
+  __typename?: 'Phrase';
   id: Scalars['ID'];
   phrase: Scalars['String'];
   text: Scalars['String'];
@@ -189,7 +189,7 @@ export type Phrase = {
 };
 
 export type Tag = {
-   __typename?: 'Tag';
+  __typename?: 'Tag';
   id: Scalars['ID'];
   name: Scalars['String'];
   kind: Scalars['Int'];
@@ -204,14 +204,14 @@ export type TagPoemsArgs = {
 
 /** 用户与诗词的喜欢与背诵数据 */
 export type UserPoem = {
-   __typename?: 'UserPoem';
+  __typename?: 'UserPoem';
   updateTime: Scalars['DateTime'];
   user: User;
   poem: Poem;
 };
 
 export type Mutation = {
-   __typename?: 'Mutation';
+  __typename?: 'Mutation';
   /** 登录，如果返回 null，则登录失败 */
   createUserToken?: Maybe<Scalars['String']>;
   /** 注册 */
@@ -375,7 +375,8 @@ export type StarPoemMutation = (
 );
 
 export type PoemQueryVariables = {
-  poemId: Scalars['ID'];
+  poemId?: Maybe<Scalars['ID']>;
+  poemUUID?: Maybe<Scalars['ID']>;
   phraseId?: Maybe<Scalars['ID']>;
 };
 
@@ -792,12 +793,12 @@ export type StarPoemMutationHookResult = ReturnType<typeof useStarPoemMutation>;
 export type StarPoemMutationResult = ApolloReactCommon.MutationResult<StarPoemMutation>;
 export type StarPoemMutationOptions = ApolloReactCommon.BaseMutationOptions<StarPoemMutation, StarPoemMutationVariables>;
 export const PoemDocument = gql`
-    query POEM($poemId: ID!, $phraseId: ID) {
+    query POEM($poemId: ID, $poemUUID: ID, $phraseId: ID) {
   phrase(id: $phraseId) {
     id
     text
   }
-  poem(id: $poemId) {
+  poem(id: $poemId, uuid: $poemUUID) {
     id
     title
     intro
@@ -813,7 +814,7 @@ export const PoemDocument = gql`
     tags {
       id
       name
-      poems(pageSize: 6) {
+      poems(pageSize: 3) {
         id
         title
         paragraphs
@@ -846,7 +847,7 @@ export const PoemDocument = gql`
       }
     }
   }
-  poems {
+  poems(pageSize: 5) {
     id
     title
     paragraphs
@@ -867,6 +868,7 @@ export const PoemDocument = gql`
  * const { data, loading, error } = usePoemQuery({
  *   variables: {
  *      poemId: // value for 'poemId'
+ *      poemUUID: // value for 'poemUUID'
  *      phraseId: // value for 'phraseId'
  *   },
  * });
