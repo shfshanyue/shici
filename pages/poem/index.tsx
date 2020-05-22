@@ -2,9 +2,10 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { map, omit, flatten, uniq } from '../../lib/utils'
+import { map, omit } from '../../lib/utils'
 
 import get from 'lodash.get'
+import uniqBy from 'lodash.uniqby'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -116,10 +117,12 @@ function Poem () {
           <Paragraph text={poem.intro} title="简介" loading={loading} highlight />
           <Paragraph text={poem.appreciation} title="赏析" loading={loading} highlight />
           {
-            uniq(flatten(map(poem.tags, tag => tag.poems)), 'id').filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId).map((poem, i) =>
-              <Card loading={loading} key={poem.id} title={i ? '' : '相关诗词推荐'}>
-                <PoemComponent poem={poem} />
-              </Card>
+            uniqBy(data?.poem?.tags?.flatMap(tag => tag.poems), 'id')
+              .filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId)
+              .map((poem, i) =>
+                <Card loading={loading} key={poem.id} title={i ? '' : '相关诗词推荐'}>
+                  <PoemComponent poem={poem} />
+                </Card>
             )
           }
           {
