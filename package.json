@@ -21,7 +21,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "lodash.groupby": "^4.6.0",
     "lodash.merge": "^4.6.2",
-    "next": "^9.4.0",
+    "next": "^9.4.2",
     "next-routes": "^1.4.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
@@ -30,10 +30,10 @@
     "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.13.5",
-    "@graphql-codegen/typescript": "1.13.5",
-    "@graphql-codegen/typescript-operations": "1.13.5",
-    "@graphql-codegen/typescript-react-apollo": "^1.13.5",
+    "@graphql-codegen/cli": "^1.14.0",
+    "@graphql-codegen/typescript": "1.14.0",
+    "@graphql-codegen/typescript-operations": "1.14.0",
+    "@graphql-codegen/typescript-react-apollo": "^1.14.0",
     "@types/classnames": "^2.2.10",
     "@types/lodash.merge": "^4.6.6",
     "@types/react-highlight-words": "^0.16.1",
@@ -43,7 +43,7 @@
     "lodash.template": ">=4.5.0",
     "nodemon": "^2.0.4",
     "npm-check-updates": "^6.0.1",
-    "typescript": "^3.9.2",
-    "webpack-bundle-analyzer": "^3.7.0"
+    "typescript": "^3.9.3",
+    "webpack-bundle-analyzer": "^3.8.0"
   }
 }
