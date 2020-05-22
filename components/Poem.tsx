@@ -1,22 +1,20 @@
 import React from 'react'
-import { useMutation } from 'react-apollo'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
 import * as routes from '../routes'
-import * as query from '../query/index.gql'
 import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 
 import dayjs from 'dayjs'
-import { Poem as PoemType } from '../query'
+import { Poem as PoemType, useStarPoemMutation, useRecitePoemMutation, Author } from '../query'
+
 dayjs.extend(relativeTime)
 
 const { Link, Router } = routes
-const { STAR_POEM, RECITE_POEM } = query
 
 interface Props {
-  poem: Partial<PoemType> & Pick<PoemType, 'id'>;
+  poem: Partial<PoemType> & { author?: Partial<Author> };
   active?: boolean;
   onMore?: () => void;
   time?: Date;
@@ -32,7 +30,7 @@ function Poem ({
   time,
   title = 'h2'
 }: Props) {
-  const [starPoem] = useMutation(STAR_POEM, {
+  const [starPoem] = useStarPoemMutation({
     optimisticResponse({ poemId, star }) {
       return {
         __typename: 'Mutation',
@@ -45,7 +43,7 @@ function Poem ({
     }
   })
 
-  const [recitePoem] = useMutation(RECITE_POEM, {
+  const [recitePoem] = useRecitePoemMutation({
     optimisticResponse({ poemId, recite }) {
       return {
         __typename: 'Mutation',
@@ -166,7 +164,7 @@ function Poem ({
         }</time>
       }
       {
-        poem.tags && poem.tags.map(tag => 
+        poem.tags?.map(tag => 
           <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>
             <div className="tag-item">{tag.name}</div>
           </Link>
