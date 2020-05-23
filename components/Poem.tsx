@@ -7,14 +7,15 @@ import Tag from '../components/Tag'
 import { get, highlight, slice } from '../lib/utils'
 
 import dayjs from 'dayjs'
-import { Poem as PoemType, useStarPoemMutation, useRecitePoemMutation, Author } from '../query'
+import { Poem as PoemType, useStarPoemMutation, useRecitePoemMutation, Author, Tag as TagType } from '../query'
 
 dayjs.extend(relativeTime)
 
 const { Link, Router } = routes
 
 interface Props {
-  poem: Partial<PoemType> & { author?: Partial<Author> };
+  poem: Partial<Omit<PoemType, 'author' | 'tags'>> &
+    { author?: Partial<Author>, tags?: Array<Partial<TagType>> } & Pick<PoemType, 'id'>;
   active?: boolean;
   onMore?: () => void;
   time?: Date;
@@ -78,7 +79,7 @@ function Poem ({
     Router.pushRoute('/login')
   }
 
-  const author = get(poem, 'author.id')
+  const author = poem.author
 
   return <div>
     <style jsx>{`
@@ -125,7 +126,7 @@ function Poem ({
       }
       {
         author && <div className="author">
-          <Link route="author" params={{ id: get(poem, 'author.id') }}>
+          <Link route="author" params={{ id: author.id }}>
             <a>
               { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
             </a>

@@ -121,7 +121,7 @@ function Poem () {
               .filter(poem => poem.paragraphs.join('').length < 100 && poem.id !== poemId)
               .map((poem, i) =>
                 <Card loading={loading} key={poem.id} title={i ? '' : '相关诗词推荐'}>
-                  <PoemComponent poem={poem} />
+                  <PoemComponent poem={poem as any} />
                 </Card>
             )
           }
