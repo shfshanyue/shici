@@ -1,4 +1,4 @@
-FROM node:10-alpine
+FROM node:12-alpine
 
 ADD package.json yarn.lock /code/
 WORKDIR /code
