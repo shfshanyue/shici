@@ -1,10 +1,9 @@
 import Highlighter from 'react-highlight-words'
-import { map } from '../lib/utils'
 import Card from './Card'
 
 interface Props {
   title: string;
-  text: string[];
+  text?: string[];
   loading: boolean;
   highlight?: boolean;
 };
@@ -19,7 +18,7 @@ function Paragraph ({ title, text, loading, highlight }: Props ) {
       `}</style>
       <h3>{title}</h3>
       {
-        map(text, (t: any) => <p key={t}>
+        text?.map((t: any) => <p key={t}>
           {
             highlight ?
               <Highlighter

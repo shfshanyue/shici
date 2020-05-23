@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-import { map, omit } from '../../lib/utils'
+import { omit } from '../../lib/utils'
 
 import get from 'lodash.get'
 import uniqBy from 'lodash.uniqby'
@@ -44,12 +44,12 @@ function Poem () {
   const phrase = get(data, 'phrase.text', '')
 
   const renderAnnotations = () => {
-    const { annotations = [] } = poem
-    return annotations.length ? (
+    const annotations = data?.poem.annotations
+    return annotations?.length ? (
       <Card loading={loading}>
         <h3>注释</h3>
         <ul>
-          {map(annotations, (a: any) => (
+          {annotations.map((a: any) => (
             <li key={a.key}>
               <p>
                 <i>{a.key}:</i> {a.value}

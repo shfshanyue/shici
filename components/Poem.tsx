@@ -4,7 +4,7 @@ import 'dayjs/locale/zh-cn'
 
 import * as routes from '../routes'
 import Tag from '../components/Tag'
-import { get, highlight, slice } from '../lib/utils'
+import { get, highlight } from '../lib/utils'
 
 import dayjs from 'dayjs'
 import { Poem as PoemType, useStarPoemMutation, useRecitePoemMutation, Author, Tag as TagType } from '../query'
@@ -136,14 +136,14 @@ function Poem ({
       <div>
         {
           // 当折叠时，只显示四段
-          slice(poem.paragraphs, 0, active ? undefined : 4).map((p: any, index: any) => (
+          poem.paragraphs.slice(0, active ? undefined : 4).map((p: any, index: any) => (
             <p key={index}>
               { highlight(p, highlightWords) }
             </p>
           )) 
         } 
         {
-          !active && poem.paragraphs && poem.paragraphs.length > 4 && <p className="more" onClick={onMore}>
+          !active && poem.paragraphs.length > 4 && <p className="more" onClick={onMore}>
           ...
           </p>
         }
