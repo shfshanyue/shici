@@ -24,7 +24,7 @@ function Phrases () {
     }
   })
   const phrases = data?.phrases
-  const phrasesCount = data?.phrasesCount || 30
+  const phrasesCount = data?.phrasesCount ?? 30
 
   function handleChange (page: number) {
     router.push({
@@ -55,25 +55,31 @@ function Phrases () {
       <div className="container">
         <div className="phrases">
           {
-            phrases?.map(phrase => (
-              <Card loading={loading} key={phrase.id}>
-                <div className="phrase">
-                  <Link route="phrase" params={{ id: phrase.poem.id, phraseId: phrase.id }}>
-                    <a>
-                      {phrase.text}
-                    </a>
-                  </Link>
-                  <div style={{ marginTop: '10px' }}>
-                    <span>
-                      {phrase.poem.author?.dynasty}·{phrase.poem.author?.name}
+            loading ?
+              <>
+                <Card loading={loading} />
+                <Card loading={loading} />
+                <Card loading={loading} />
+              </> :
+              phrases?.map(phrase => (
+                <Card key={phrase.id}>
+                  <div className="phrase">
+                    <Link route="phrase" params={{ id: phrase.poem.id, phraseId: phrase.id }}>
+                      <a>
+                        {phrase.text}
+                      </a>
+                    </Link>
+                    <div style={{ marginTop: '10px' }}>
+                      <span>
+                        {phrase.poem.author?.dynasty}·{phrase.poem.author?.name}
+                      </span>
+                      <span>
+                        《{phrase.poem.title}》
                     </span>
-                    <span>
-                      《{phrase.poem.title}》
-                    </span>
+                    </div>
                   </div>
-                </div>
-              </Card>
-            ))
+                </Card>
+              ))
           }
           <Pagination
             current={Number(page)}
