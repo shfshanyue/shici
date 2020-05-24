@@ -9,12 +9,141 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
+  /**
+   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+   * 8601 standard for representation of dates and times using the Gregorian calendar.
+   */
   DateTime: Date;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { [key: string]: any };
   ConstraintString: any;
   ConstraintNumber: any;
+};
+
+export type Author = {
+  __typename?: 'Author';
+  id: Scalars['ID'];
+  uuid: Scalars['ID'];
+  name: Scalars['String'];
+  dynasty?: Maybe<Scalars['String']>;
+  birthYear?: Maybe<Scalars['String']>;
+  deathYear?: Maybe<Scalars['String']>;
+  baikeUrl?: Maybe<Scalars['String']>;
+  star?: Maybe<Scalars['Int']>;
+  intro?: Maybe<Scalars['String']>;
+  poems: Array<Poem>;
+  poemsCount: Scalars['Int'];
+};
+
+
+export type AuthorPoemsArgs = {
+  page?: Maybe<Scalars['Int']>;
+  pageSize?: Maybe<Scalars['Int']>;
+};
+
+
+
+
+
+export type Like = {
+  like: Scalars['String'];
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** 登录，如果返回 null，则登录失败 */
+  createUserToken?: Maybe<Scalars['String']>;
+  /** 注册 */
+  createUser: User;
+  /**
+   * 发送邮件
+   * 返回一个 token，注册时需要携带 token，用以校验验证码
+   */
+  sendEmailVerifyCode: Scalars['String'];
+  starPoem: Poem;
+  recitePoem: Poem;
+  createTodo?: Maybe<Todo>;
+  updateTodo?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationCreateUserTokenArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationCreateUserArgs = {
+  name: Scalars['String'];
+  password: Scalars['String'];
+  email: Scalars['String'];
+  verifyCode: Scalars['String'];
+  token: Scalars['String'];
+};
+
+
+export type MutationSendEmailVerifyCodeArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationStarPoemArgs = {
+  id: Scalars['ID'];
+  star?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationRecitePoemArgs = {
+  id: Scalars['ID'];
+  recite?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationCreateTodoArgs = {
+  todo: TodoCreate;
+};
+
+
+export type MutationUpdateTodoArgs = {
+  todo: TodoUpdate;
+};
+
+export type Order = {
+  field: Scalars['String'];
+  asc?: Maybe<Scalars['Boolean']>;
+};
+
+export type Phrase = {
+  __typename?: 'Phrase';
+  id: Scalars['ID'];
+  phrase: Scalars['String'];
+  text: Scalars['String'];
+  authorName?: Maybe<Scalars['String']>;
+  poem: Poem;
+};
+
+export type Poem = {
+  __typename?: 'Poem';
+  id: Scalars['ID'];
+  uuid: Scalars['ID'];
+  title: Scalars['String'];
+  kind?: Maybe<Scalars['String']>;
+  baikeUrl?: Maybe<Scalars['String']>;
+  paragraphs: Array<Scalars['String']>;
+  starCount: Scalars['Int'];
+  appreciation?: Maybe<Array<Maybe<Scalars['String']>>>;
+  translation?: Maybe<Array<Maybe<Scalars['String']>>>;
+  intro?: Maybe<Array<Maybe<Scalars['String']>>>;
+  annotations?: Maybe<Scalars['JSON']>;
+  expertComments?: Maybe<Scalars['JSON']>;
+  author?: Maybe<Author>;
+  phrases?: Maybe<Array<Phrase>>;
+  tags?: Maybe<Array<Tag>>;
+  /** 用户是否喜欢该诗词，null 为未登录 */
+  userIsStar?: Maybe<Scalars['Boolean']>;
+  /** 用户是否会背该诗词，null 为未登录 */
+  userIsRecite?: Maybe<Scalars['Boolean']>;
 };
 
 export type Query = {
@@ -106,88 +235,6 @@ export type QueryTagArgs = {
   id: Scalars['ID'];
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createTime: Scalars['DateTime'];
-  todos?: Maybe<Array<Todo>>;
-  starPoems?: Maybe<Array<Poem>>;
-  starPoemsWithDate?: Maybe<Array<UserPoem>>;
-  recitePoems?: Maybe<Array<Poem>>;
-  recitePoemsWithDate?: Maybe<Array<UserPoem>>;
-};
-
-
-export type Todo = {
-  __typename?: 'Todo';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  createTime: Scalars['DateTime'];
-  user: User;
-  status: TodoStatus;
-};
-
-export enum TodoStatus {
-  DONE = 'DONE',
-  UNDO = 'UNDO'
-}
-
-export type Poem = {
-  __typename?: 'Poem';
-  id: Scalars['ID'];
-  uuid: Scalars['ID'];
-  title: Scalars['String'];
-  kind?: Maybe<Scalars['String']>;
-  baikeUrl?: Maybe<Scalars['String']>;
-  paragraphs: Array<Scalars['String']>;
-  starCount: Scalars['Int'];
-  appreciation?: Maybe<Array<Maybe<Scalars['String']>>>;
-  translation?: Maybe<Array<Maybe<Scalars['String']>>>;
-  intro?: Maybe<Array<Maybe<Scalars['String']>>>;
-  annotations?: Maybe<Scalars['JSON']>;
-  expertComments?: Maybe<Scalars['JSON']>;
-  author?: Maybe<Author>;
-  phrases?: Maybe<Array<Phrase>>;
-  tags?: Maybe<Array<Tag>>;
-  /** 用户是否喜欢该诗词，null 为未登录 */
-  userIsStar?: Maybe<Scalars['Boolean']>;
-  /** 用户是否会背该诗词，null 为未登录 */
-  userIsRecite?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type Author = {
-  __typename?: 'Author';
-  id: Scalars['ID'];
-  uuid: Scalars['ID'];
-  name: Scalars['String'];
-  dynasty?: Maybe<Scalars['String']>;
-  birthYear?: Maybe<Scalars['String']>;
-  deathYear?: Maybe<Scalars['String']>;
-  baikeUrl?: Maybe<Scalars['String']>;
-  star?: Maybe<Scalars['Int']>;
-  intro?: Maybe<Scalars['String']>;
-  poems: Array<Poem>;
-  poemsCount: Scalars['Int'];
-};
-
-
-export type AuthorPoemsArgs = {
-  page?: Maybe<Scalars['Int']>;
-  pageSize?: Maybe<Scalars['Int']>;
-};
-
-export type Phrase = {
-  __typename?: 'Phrase';
-  id: Scalars['ID'];
-  phrase: Scalars['String'];
-  text: Scalars['String'];
-  authorName?: Maybe<Scalars['String']>;
-  poem: Poem;
-};
-
 export type Tag = {
   __typename?: 'Tag';
   id: Scalars['ID'];
@@ -202,76 +249,28 @@ export type TagPoemsArgs = {
   pageSize?: Maybe<Scalars['Int']>;
 };
 
-/** 用户与诗词的喜欢与背诵数据 */
-export type UserPoem = {
-  __typename?: 'UserPoem';
-  updateTime: Scalars['DateTime'];
-  user: User;
-  poem: Poem;
+export type TimeBetween = {
+  /** [DateTime, DateTime] 表示起止时间 */
+  between: Array<Scalars['DateTime']>;
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  /** 登录，如果返回 null，则登录失败 */
-  createUserToken?: Maybe<Scalars['String']>;
-  /** 注册 */
-  createUser: User;
-  /**
-   * 发送邮件
-   * 返回一个 token，注册时需要携带 token，用以校验验证码
-   */
-  sendEmailVerifyCode: Scalars['String'];
-  starPoem: Poem;
-  recitePoem: Poem;
-  createTodo?: Maybe<Todo>;
-  updateTodo?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateUserTokenArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type MutationCreateUserArgs = {
+export type Todo = {
+  __typename?: 'Todo';
+  id: Scalars['ID'];
   name: Scalars['String'];
-  password: Scalars['String'];
-  email: Scalars['String'];
-  verifyCode: Scalars['String'];
-  token: Scalars['String'];
-};
-
-
-export type MutationSendEmailVerifyCodeArgs = {
-  email: Scalars['String'];
-};
-
-
-export type MutationStarPoemArgs = {
-  id: Scalars['ID'];
-  star?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationRecitePoemArgs = {
-  id: Scalars['ID'];
-  recite?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateTodoArgs = {
-  todo: TodoCreate;
-};
-
-
-export type MutationUpdateTodoArgs = {
-  todo: TodoUpdate;
+  createTime: Scalars['DateTime'];
+  user: User;
+  status: TodoStatus;
 };
 
 export type TodoCreate = {
   name: Scalars['ConstraintString'];
 };
+
+export enum TodoStatus {
+  DONE = 'DONE',
+  UNDO = 'UNDO'
+}
 
 export type TodoUpdate = {
   id: Scalars['ID'];
@@ -279,20 +278,25 @@ export type TodoUpdate = {
   status?: Maybe<TodoStatus>;
 };
 
-
-
-export type Like = {
-  like: Scalars['String'];
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  createTime: Scalars['DateTime'];
+  todos?: Maybe<Array<Todo>>;
+  starPoems?: Maybe<Array<Poem>>;
+  starPoemsWithDate?: Maybe<Array<UserPoem>>;
+  recitePoems?: Maybe<Array<Poem>>;
+  recitePoemsWithDate?: Maybe<Array<UserPoem>>;
 };
 
-export type Order = {
-  field: Scalars['String'];
-  asc?: Maybe<Scalars['Boolean']>;
-};
-
-export type TimeBetween = {
-  /** [DateTime, DateTime] 表示起止时间 */
-  between: Array<Scalars['DateTime']>;
+/** 用户与诗词的喜欢与背诵数据 */
+export type UserPoem = {
+  __typename?: 'UserPoem';
+  updateTime: Scalars['DateTime'];
+  user: User;
+  poem: Poem;
 };
 
 export type PoemsQueryVariables = {
@@ -651,7 +655,6 @@ export function usePoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOp
         }
 export type PoemsQueryHookResult = ReturnType<typeof usePoemsQuery>;
 export type PoemsLazyQueryHookResult = ReturnType<typeof usePoemsLazyQuery>;
-export type PoemsQueryResult = ApolloReactCommon.QueryResult<PoemsQuery, PoemsQueryVariables>;
 export const PoemsUserStarDocument = gql`
     query POEMS_USER_STAR($page: Int, $q: String, $tagId: ID) {
   poems(page: $page, q: $q, tagId: $tagId) {
@@ -688,7 +691,6 @@ export function usePoemsUserStarLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
         }
 export type PoemsUserStarQueryHookResult = ReturnType<typeof usePoemsUserStarQuery>;
 export type PoemsUserStarLazyQueryHookResult = ReturnType<typeof usePoemsUserStarLazyQuery>;
-export type PoemsUserStarQueryResult = ApolloReactCommon.QueryResult<PoemsUserStarQuery, PoemsUserStarQueryVariables>;
 export const PoemUserStarDocument = gql`
     query POEM_USER_STAR($id: ID!) {
   poem(id: $id) {
@@ -723,7 +725,6 @@ export function usePoemUserStarLazyQuery(baseOptions?: ApolloReactHooks.LazyQuer
         }
 export type PoemUserStarQueryHookResult = ReturnType<typeof usePoemUserStarQuery>;
 export type PoemUserStarLazyQueryHookResult = ReturnType<typeof usePoemUserStarLazyQuery>;
-export type PoemUserStarQueryResult = ApolloReactCommon.QueryResult<PoemUserStarQuery, PoemUserStarQueryVariables>;
 export const RecitePoemDocument = gql`
     mutation RECITE_POEM($poemId: ID!, $recite: Boolean) {
   recitePoem(id: $poemId, recite: $recite) {
@@ -756,7 +757,6 @@ export function useRecitePoemMutation(baseOptions?: ApolloReactHooks.MutationHoo
         return ApolloReactHooks.useMutation<RecitePoemMutation, RecitePoemMutationVariables>(RecitePoemDocument, baseOptions);
       }
 export type RecitePoemMutationHookResult = ReturnType<typeof useRecitePoemMutation>;
-export type RecitePoemMutationResult = ApolloReactCommon.MutationResult<RecitePoemMutation>;
 export type RecitePoemMutationOptions = ApolloReactCommon.BaseMutationOptions<RecitePoemMutation, RecitePoemMutationVariables>;
 export const StarPoemDocument = gql`
     mutation STAR_POEM($poemId: ID!, $star: Boolean) {
@@ -790,7 +790,6 @@ export function useStarPoemMutation(baseOptions?: ApolloReactHooks.MutationHookO
         return ApolloReactHooks.useMutation<StarPoemMutation, StarPoemMutationVariables>(StarPoemDocument, baseOptions);
       }
 export type StarPoemMutationHookResult = ReturnType<typeof useStarPoemMutation>;
-export type StarPoemMutationResult = ApolloReactCommon.MutationResult<StarPoemMutation>;
 export type StarPoemMutationOptions = ApolloReactCommon.BaseMutationOptions<StarPoemMutation, StarPoemMutationVariables>;
 export const PoemDocument = gql`
     query POEM($poemId: ID, $poemUUID: ID, $phraseId: ID) {
@@ -881,7 +880,6 @@ export function usePoemLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOpt
         }
 export type PoemQueryHookResult = ReturnType<typeof usePoemQuery>;
 export type PoemLazyQueryHookResult = ReturnType<typeof usePoemLazyQuery>;
-export type PoemQueryResult = ApolloReactCommon.QueryResult<PoemQuery, PoemQueryVariables>;
 export const RegisterDocument = gql`
     mutation REGISTER($email: String!, $name: String!, $password: String!, $token: String!, $verifyCode: String!) {
   createUser(email: $email, name: $name, password: $password, token: $token, verifyCode: $verifyCode) {
@@ -916,7 +914,6 @@ export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookO
         return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
-export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const LoginDocument = gql`
     mutation LOGIN($email: String!, $password: String!) {
@@ -947,7 +944,6 @@ export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOpti
         return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
 export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const SendVerifyCodeDocument = gql`
     mutation SEND_VERIFY_CODE($email: String!) {
@@ -977,7 +973,6 @@ export function useSendVerifyCodeMutation(baseOptions?: ApolloReactHooks.Mutatio
         return ApolloReactHooks.useMutation<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>(SendVerifyCodeDocument, baseOptions);
       }
 export type SendVerifyCodeMutationHookResult = ReturnType<typeof useSendVerifyCodeMutation>;
-export type SendVerifyCodeMutationResult = ApolloReactCommon.MutationResult<SendVerifyCodeMutation>;
 export type SendVerifyCodeMutationOptions = ApolloReactCommon.BaseMutationOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
 export const PhrasesDocument = gql`
     query PHRASES($page: Int, $pageSize: Int) {
@@ -1024,7 +1019,6 @@ export function usePhrasesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
         }
 export type PhrasesQueryHookResult = ReturnType<typeof usePhrasesQuery>;
 export type PhrasesLazyQueryHookResult = ReturnType<typeof usePhrasesLazyQuery>;
-export type PhrasesQueryResult = ApolloReactCommon.QueryResult<PhrasesQuery, PhrasesQueryVariables>;
 export const StarPoemsDocument = gql`
     query STAR_POEMS($userId: ID!) {
   user(id: $userId) {
@@ -1074,7 +1068,6 @@ export function useStarPoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHo
         }
 export type StarPoemsQueryHookResult = ReturnType<typeof useStarPoemsQuery>;
 export type StarPoemsLazyQueryHookResult = ReturnType<typeof useStarPoemsLazyQuery>;
-export type StarPoemsQueryResult = ApolloReactCommon.QueryResult<StarPoemsQuery, StarPoemsQueryVariables>;
 export const RecitePoemsDocument = gql`
     query RECITE_POEMS($userId: ID!) {
   user(id: $userId) {
@@ -1124,7 +1117,6 @@ export function useRecitePoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQuery
         }
 export type RecitePoemsQueryHookResult = ReturnType<typeof useRecitePoemsQuery>;
 export type RecitePoemsLazyQueryHookResult = ReturnType<typeof useRecitePoemsLazyQuery>;
-export type RecitePoemsQueryResult = ApolloReactCommon.QueryResult<RecitePoemsQuery, RecitePoemsQueryVariables>;
 export const MeDocument = gql`
     query ME {
   me {
@@ -1157,7 +1149,6 @@ export function useMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptio
         }
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
-export type MeQueryResult = ApolloReactCommon.QueryResult<MeQuery, MeQueryVariables>;
 export const TagsDocument = gql`
     query TAGS {
   tags {
@@ -1191,7 +1182,6 @@ export function useTagsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOpt
         }
 export type TagsQueryHookResult = ReturnType<typeof useTagsQuery>;
 export type TagsLazyQueryHookResult = ReturnType<typeof useTagsLazyQuery>;
-export type TagsQueryResult = ApolloReactCommon.QueryResult<TagsQuery, TagsQueryVariables>;
 export const AuthorsDocument = gql`
     query AUTHORS($page: Int, $q: String) {
   authors(page: $page, q: $q) {
@@ -1231,7 +1221,6 @@ export function useAuthorsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHook
         }
 export type AuthorsQueryHookResult = ReturnType<typeof useAuthorsQuery>;
 export type AuthorsLazyQueryHookResult = ReturnType<typeof useAuthorsLazyQuery>;
-export type AuthorsQueryResult = ApolloReactCommon.QueryResult<AuthorsQuery, AuthorsQueryVariables>;
 export const AuthorDocument = gql`
     query AUTHOR($id: ID!) {
   author(id: $id) {
@@ -1269,7 +1258,6 @@ export function useAuthorLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
         }
 export type AuthorQueryHookResult = ReturnType<typeof useAuthorQuery>;
 export type AuthorLazyQueryHookResult = ReturnType<typeof useAuthorLazyQuery>;
-export type AuthorQueryResult = ApolloReactCommon.QueryResult<AuthorQuery, AuthorQueryVariables>;
 export const AuthorPoemsDocument = gql`
     query AUTHOR_POEMS($id: ID!, $page: Int) {
   author(id: $id) {
@@ -1316,4 +1304,3 @@ export function useAuthorPoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQuery
         }
 export type AuthorPoemsQueryHookResult = ReturnType<typeof useAuthorPoemsQuery>;
 export type AuthorPoemsLazyQueryHookResult = ReturnType<typeof useAuthorPoemsLazyQuery>;
-export type AuthorPoemsQueryResult = ApolloReactCommon.QueryResult<AuthorPoemsQuery, AuthorPoemsQueryVariables>;
