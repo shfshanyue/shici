@@ -11,7 +11,7 @@ interface Props {
 
 const Author: FC<Props> = ({ author = {}, title = 'h2' }) => (
   <div>
-    <style>{`
+    <style jsx>{`
       .author {
         font-size: 1.1em; 
       } 
