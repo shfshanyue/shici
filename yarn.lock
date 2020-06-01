@@ -4471,7 +4471,7 @@ graphql-request@^1.5.0:
   dependencies:
     cross-fetch "2.2.2"
 
-graphql-tag@2.10.3, graphql-tag@^2.4.2, graphql-tag@^2.9.2:
+graphql-tag@2.10.3, graphql-tag@^2.10.3, graphql-tag@^2.4.2, graphql-tag@^2.9.2:
   version "2.10.3"
   resolved "https://registry.npm.taobao.org/graphql-tag/download/graphql-tag-2.10.3.tgz#ea1baba5eb8fc6339e4c4cf049dabe522b0edf03"
   integrity sha1-6hurpeuPxjOeTEzwSdq+UisO3wM=
@@ -6599,11 +6599,6 @@ object.values@^1.1.0:
     es-abstract "^1.17.0-next.1"
     function-bind "^1.1.1"
     has "^1.0.3"
-
-omit@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.npm.taobao.org/omit/download/omit-1.0.1.tgz#058a01b4b6db1287b36ecb58dfa8e18778958017"
-  integrity sha1-BYoBtLbbEoezbstY36jhh3iVgBc=
 
 on-finished@~2.3.0:
   version "2.3.0"
