@@ -10,7 +10,7 @@ import { Link, Router } from '../../routes'
 import App from '../../components/App'
 import Card from '../../components/Card'
 
-import { REGISTER, LOGIN, SEND_VERIFY_CODE } from '../../query/index.gql'
+import { RegisterDocument as REGISTER, LoginDocument as LOGIN, SendVerifyCodeDocument as SEND_VERIFY_CODE } from '../../query'
 
 class Login extends Component {
   constructor (props) {

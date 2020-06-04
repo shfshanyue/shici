@@ -24,7 +24,7 @@ function Phrases () {
     }
   })
   const phrases = data?.phrases
-  const phrasesCount = data?.phrasesCount ?? 30
+  const phrasesCount = data?.phrasesCount ?? 50
 
   function handleChange (page: number) {
     router.push({

@@ -10,7 +10,7 @@ import QR from '../../components/QR'
 import Card from '../../components/Card'
 import withApollo from '../../lib/with-apollo'
 
-import { STAR_POEMS, RECITE_POEMS } from '../../query/index.gql'
+import { StarPoemsDocument as STAR_POEMS, RecitePoemsDocument as RECITE_POEMS } from '../../query'
 
 class Profile extends Component {
   static async getInitialProps({ query }) {
