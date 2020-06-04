@@ -1,12 +1,12 @@
 overwrite: true
-schema: "https://shici.shanyue.tech/graphql"
-documents: "./query/index.gql"
+schema: https://shici.shanyue.tech/graphql
+documents: ./query.gql
 generates:
   query.tsx:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
     config:
       withHooks: true
       withHOC: false

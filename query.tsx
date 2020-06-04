@@ -9,141 +9,12 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /**
-   * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
-   * `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
-   * 8601 standard for representation of dates and times using the Gregorian calendar.
-   */
+  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: Date;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: { [key: string]: any };
   ConstraintString: any;
   ConstraintNumber: any;
-};
-
-export type Author = {
-  __typename?: 'Author';
-  id: Scalars['ID'];
-  uuid: Scalars['ID'];
-  name: Scalars['String'];
-  dynasty?: Maybe<Scalars['String']>;
-  birthYear?: Maybe<Scalars['String']>;
-  deathYear?: Maybe<Scalars['String']>;
-  baikeUrl?: Maybe<Scalars['String']>;
-  star?: Maybe<Scalars['Int']>;
-  intro?: Maybe<Scalars['String']>;
-  poems: Array<Poem>;
-  poemsCount: Scalars['Int'];
-};
-
-
-export type AuthorPoemsArgs = {
-  page?: Maybe<Scalars['Int']>;
-  pageSize?: Maybe<Scalars['Int']>;
-};
-
-
-
-
-
-export type Like = {
-  like: Scalars['String'];
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  /** 登录，如果返回 null，则登录失败 */
-  createUserToken?: Maybe<Scalars['String']>;
-  /** 注册 */
-  createUser: User;
-  /**
-   * 发送邮件
-   * 返回一个 token，注册时需要携带 token，用以校验验证码
-   */
-  sendEmailVerifyCode: Scalars['String'];
-  starPoem: Poem;
-  recitePoem: Poem;
-  createTodo?: Maybe<Todo>;
-  updateTodo?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateUserTokenArgs = {
-  email: Scalars['String'];
-  password: Scalars['String'];
-};
-
-
-export type MutationCreateUserArgs = {
-  name: Scalars['String'];
-  password: Scalars['String'];
-  email: Scalars['String'];
-  verifyCode: Scalars['String'];
-  token: Scalars['String'];
-};
-
-
-export type MutationSendEmailVerifyCodeArgs = {
-  email: Scalars['String'];
-};
-
-
-export type MutationStarPoemArgs = {
-  id: Scalars['ID'];
-  star?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationRecitePoemArgs = {
-  id: Scalars['ID'];
-  recite?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type MutationCreateTodoArgs = {
-  todo: TodoCreate;
-};
-
-
-export type MutationUpdateTodoArgs = {
-  todo: TodoUpdate;
-};
-
-export type Order = {
-  field: Scalars['String'];
-  asc?: Maybe<Scalars['Boolean']>;
-};
-
-export type Phrase = {
-  __typename?: 'Phrase';
-  id: Scalars['ID'];
-  phrase: Scalars['String'];
-  text: Scalars['String'];
-  authorName?: Maybe<Scalars['String']>;
-  poem: Poem;
-};
-
-export type Poem = {
-  __typename?: 'Poem';
-  id: Scalars['ID'];
-  uuid: Scalars['ID'];
-  title: Scalars['String'];
-  kind?: Maybe<Scalars['String']>;
-  baikeUrl?: Maybe<Scalars['String']>;
-  paragraphs: Array<Scalars['String']>;
-  starCount: Scalars['Int'];
-  appreciation?: Maybe<Array<Maybe<Scalars['String']>>>;
-  translation?: Maybe<Array<Maybe<Scalars['String']>>>;
-  intro?: Maybe<Array<Maybe<Scalars['String']>>>;
-  annotations?: Maybe<Scalars['JSON']>;
-  expertComments?: Maybe<Scalars['JSON']>;
-  author?: Maybe<Author>;
-  phrases?: Maybe<Array<Phrase>>;
-  tags?: Maybe<Array<Tag>>;
-  /** 用户是否喜欢该诗词，null 为未登录 */
-  userIsStar?: Maybe<Scalars['Boolean']>;
-  /** 用户是否会背该诗词，null 为未登录 */
-  userIsRecite?: Maybe<Scalars['Boolean']>;
 };
 
 export type Query = {
@@ -235,6 +106,88 @@ export type QueryTagArgs = {
   id: Scalars['ID'];
 };
 
+export type User = {
+  __typename?: 'User';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  email: Scalars['String'];
+  createTime: Scalars['DateTime'];
+  todos?: Maybe<Array<Todo>>;
+  starPoems?: Maybe<Array<Poem>>;
+  starPoemsWithDate?: Maybe<Array<UserPoem>>;
+  recitePoems?: Maybe<Array<Poem>>;
+  recitePoemsWithDate?: Maybe<Array<UserPoem>>;
+};
+
+
+export type Todo = {
+  __typename?: 'Todo';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  createTime: Scalars['DateTime'];
+  user: User;
+  status: TodoStatus;
+};
+
+export enum TodoStatus {
+  DONE = 'DONE',
+  UNDO = 'UNDO'
+}
+
+export type Poem = {
+  __typename?: 'Poem';
+  id: Scalars['ID'];
+  uuid: Scalars['ID'];
+  title: Scalars['String'];
+  kind?: Maybe<Scalars['String']>;
+  baikeUrl?: Maybe<Scalars['String']>;
+  paragraphs: Array<Scalars['String']>;
+  starCount: Scalars['Int'];
+  appreciation?: Maybe<Array<Maybe<Scalars['String']>>>;
+  translation?: Maybe<Array<Maybe<Scalars['String']>>>;
+  intro?: Maybe<Array<Maybe<Scalars['String']>>>;
+  annotations?: Maybe<Scalars['JSON']>;
+  expertComments?: Maybe<Scalars['JSON']>;
+  author?: Maybe<Author>;
+  phrases?: Maybe<Array<Phrase>>;
+  tags?: Maybe<Array<Tag>>;
+  /** 用户是否喜欢该诗词，null 为未登录 */
+  userIsStar?: Maybe<Scalars['Boolean']>;
+  /** 用户是否会背该诗词，null 为未登录 */
+  userIsRecite?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type Author = {
+  __typename?: 'Author';
+  id: Scalars['ID'];
+  uuid: Scalars['ID'];
+  name: Scalars['String'];
+  dynasty?: Maybe<Scalars['String']>;
+  birthYear?: Maybe<Scalars['String']>;
+  deathYear?: Maybe<Scalars['String']>;
+  baikeUrl?: Maybe<Scalars['String']>;
+  star?: Maybe<Scalars['Int']>;
+  intro?: Maybe<Scalars['String']>;
+  poems: Array<Poem>;
+  poemsCount: Scalars['Int'];
+};
+
+
+export type AuthorPoemsArgs = {
+  page?: Maybe<Scalars['Int']>;
+  pageSize?: Maybe<Scalars['Int']>;
+};
+
+export type Phrase = {
+  __typename?: 'Phrase';
+  id: Scalars['ID'];
+  phrase: Scalars['String'];
+  text: Scalars['String'];
+  authorName?: Maybe<Scalars['String']>;
+  poem: Poem;
+};
+
 export type Tag = {
   __typename?: 'Tag';
   id: Scalars['ID'];
@@ -249,28 +202,76 @@ export type TagPoemsArgs = {
   pageSize?: Maybe<Scalars['Int']>;
 };
 
-export type TimeBetween = {
-  /** [DateTime, DateTime] 表示起止时间 */
-  between: Array<Scalars['DateTime']>;
+/** 用户与诗词的喜欢与背诵数据 */
+export type UserPoem = {
+  __typename?: 'UserPoem';
+  updateTime: Scalars['DateTime'];
+  user: User;
+  poem: Poem;
 };
 
-export type Todo = {
-  __typename?: 'Todo';
-  id: Scalars['ID'];
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** 登录，如果返回 null，则登录失败 */
+  createUserToken?: Maybe<Scalars['String']>;
+  /** 注册 */
+  createUser: User;
+  /**
+   * 发送邮件
+   * 返回一个 token，注册时需要携带 token，用以校验验证码
+   */
+  sendEmailVerifyCode: Scalars['String'];
+  starPoem: Poem;
+  recitePoem: Poem;
+  createTodo?: Maybe<Todo>;
+  updateTodo?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationCreateUserTokenArgs = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
+
+export type MutationCreateUserArgs = {
   name: Scalars['String'];
-  createTime: Scalars['DateTime'];
-  user: User;
-  status: TodoStatus;
+  password: Scalars['String'];
+  email: Scalars['String'];
+  verifyCode: Scalars['String'];
+  token: Scalars['String'];
+};
+
+
+export type MutationSendEmailVerifyCodeArgs = {
+  email: Scalars['String'];
+};
+
+
+export type MutationStarPoemArgs = {
+  id: Scalars['ID'];
+  star?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationRecitePoemArgs = {
+  id: Scalars['ID'];
+  recite?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type MutationCreateTodoArgs = {
+  todo: TodoCreate;
+};
+
+
+export type MutationUpdateTodoArgs = {
+  todo: TodoUpdate;
 };
 
 export type TodoCreate = {
   name: Scalars['ConstraintString'];
 };
-
-export enum TodoStatus {
-  DONE = 'DONE',
-  UNDO = 'UNDO'
-}
 
 export type TodoUpdate = {
   id: Scalars['ID'];
@@ -278,25 +279,20 @@ export type TodoUpdate = {
   status?: Maybe<TodoStatus>;
 };
 
-export type User = {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  email: Scalars['String'];
-  createTime: Scalars['DateTime'];
-  todos?: Maybe<Array<Todo>>;
-  starPoems?: Maybe<Array<Poem>>;
-  starPoemsWithDate?: Maybe<Array<UserPoem>>;
-  recitePoems?: Maybe<Array<Poem>>;
-  recitePoemsWithDate?: Maybe<Array<UserPoem>>;
+
+
+export type Like = {
+  like: Scalars['String'];
 };
 
-/** 用户与诗词的喜欢与背诵数据 */
-export type UserPoem = {
-  __typename?: 'UserPoem';
-  updateTime: Scalars['DateTime'];
-  user: User;
-  poem: Poem;
+export type Order = {
+  field: Scalars['String'];
+  asc?: Maybe<Scalars['Boolean']>;
+};
+
+export type TimeBetween = {
+  /** [DateTime, DateTime] 表示起止时间 */
+  between: Array<Scalars['DateTime']>;
 };
 
 export type PoemsQueryVariables = {
