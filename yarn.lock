@@ -1119,13 +1119,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@graphql-codegen/cli@^1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/cli/download/@graphql-codegen/cli-1.15.1.tgz#2c858af9b425dde5b3fa23ab80952cbf1f78470d"
-  integrity sha1-LIWK+bQl3eWz+iOrgJUsvx94Rw0=
+"@graphql-codegen/cli@^1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/cli/download/@graphql-codegen/cli-1.15.3.tgz#633d23c1ed5ffb32aceebabc768914a2595c87be"
+  integrity sha1-Yz0jwe1f+zKs7rq8dokUollch74=
   dependencies:
-    "@graphql-codegen/core" "1.15.1"
-    "@graphql-codegen/plugin-helpers" "1.15.1"
+    "@graphql-codegen/core" "1.15.3"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
     "@graphql-tools/apollo-engine-loader" "^6.0.0"
     "@graphql-tools/code-file-loader" "^6.0.0"
     "@graphql-tools/git-loader" "^6.0.0"
@@ -1138,7 +1138,7 @@
     "@graphql-tools/utils" "^6.0.0"
     ansi-escapes "4.3.1"
     camel-case "4.1.1"
-    chalk "4.0.0"
+    chalk "4.1.0"
     chokidar "3.4.0"
     common-tags "1.8.0"
     constant-case "3.0.3"
@@ -1168,20 +1168,20 @@
     wrap-ansi "7.0.0"
     yargs "15.3.1"
 
-"@graphql-codegen/core@1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/core/download/@graphql-codegen/core-1.15.1.tgz#a14d3c8a0100e0aa90df98673f67ae232ec1e0e3"
-  integrity sha1-oU08igEA4KqQ35hnP2euIy7B4OM=
+"@graphql-codegen/core@1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/core/download/@graphql-codegen/core-1.15.3.tgz#a7d72fefdbc20d111dd33bc1bf964faa565e98b7"
+  integrity sha1-p9cv79vCDREd0zvBv5ZPqlZemLc=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.1"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
     "@graphql-tools/merge" "^6.0.0"
     "@graphql-tools/utils" "^6.0.0"
     tslib "~2.0.0"
 
-"@graphql-codegen/plugin-helpers@1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/plugin-helpers/download/@graphql-codegen/plugin-helpers-1.15.1.tgz#7fce2f93cf42199ca977018bcb8f67e946d5503a"
-  integrity sha1-f84vk89CGZypdwGLy49n6UbVUDo=
+"@graphql-codegen/plugin-helpers@1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/plugin-helpers/download/@graphql-codegen/plugin-helpers-1.15.3.tgz#0e2cf89b8aec3ee7a737157ac1b08fbfce626e07"
+  integrity sha1-Diz4m4rsPuenNxV6wbCPv85ibgc=
   dependencies:
     "@graphql-tools/utils" "^6.0.0"
     camel-case "4.1.1"
@@ -1194,46 +1194,46 @@
     tslib "~2.0.0"
     upper-case "2.0.1"
 
-"@graphql-codegen/typescript-operations@1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-operations/download/@graphql-codegen/typescript-operations-1.15.1.tgz#e4e6b85e2b228547b4e086823ad751df1dca2188"
-  integrity sha1-5Oa4XisihUe04IaCOtdR3x3KIYg=
+"@graphql-codegen/typescript-operations@1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-operations/download/@graphql-codegen/typescript-operations-1.15.3.tgz#b4c7d95f187906149fec17e6c3fdf7834df9229c"
+  integrity sha1-tMfZXxh5BhSf7Bfmw/33g035Ipw=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.1"
-    "@graphql-codegen/typescript" "1.15.1"
-    "@graphql-codegen/visitor-plugin-common" "1.15.1"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
+    "@graphql-codegen/typescript" "1.15.3"
+    "@graphql-codegen/visitor-plugin-common" "1.15.3"
     auto-bind "~4.0.0"
     tslib "~2.0.0"
 
-"@graphql-codegen/typescript-react-apollo@^1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-react-apollo/download/@graphql-codegen/typescript-react-apollo-1.15.1.tgz#39a14d506ab81936c5d8d90526659ae4f1f76d24"
-  integrity sha1-OaFNUGq4GTbF2NkFJmWa5PH3bSQ=
+"@graphql-codegen/typescript-react-apollo@^1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript-react-apollo/download/@graphql-codegen/typescript-react-apollo-1.15.3.tgz#6f3ca63bdf7e7ff147426f8128007f2794204c5a"
+  integrity sha1-bzymO99+f/FHQm+BKAB/J5QgTFo=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.1"
-    "@graphql-codegen/visitor-plugin-common" "1.15.1"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
+    "@graphql-codegen/visitor-plugin-common" "1.15.3"
     auto-bind "~4.0.0"
     camel-case "4.1.1"
     pascal-case "3.1.1"
     tslib "~2.0.0"
 
-"@graphql-codegen/typescript@1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript/download/@graphql-codegen/typescript-1.15.1.tgz#dcb9357cd56289d7e98edc76250d8d6c822b34f4"
-  integrity sha1-3Lk1fNViidfpjtx2JQ2NbIIrNPQ=
+"@graphql-codegen/typescript@1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/typescript/download/@graphql-codegen/typescript-1.15.3.tgz#3067ae374c7cc45a17ff30ed12eb8399af78ad93"
+  integrity sha1-MGeuN0x8xFoX/zDtEuuDma94rZM=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.1"
-    "@graphql-codegen/visitor-plugin-common" "1.15.1"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
+    "@graphql-codegen/visitor-plugin-common" "1.15.3"
     auto-bind "~4.0.0"
     tslib "~2.0.0"
 
-"@graphql-codegen/visitor-plugin-common@1.15.1":
-  version "1.15.1"
-  resolved "https://registry.npm.taobao.org/@graphql-codegen/visitor-plugin-common/download/@graphql-codegen/visitor-plugin-common-1.15.1.tgz#ff01184a0efb02a419e3fb5912f38e94edcbbbe1"
-  integrity sha1-/wEYSg77AqQZ4/tZEvOOlO3Lu+E=
+"@graphql-codegen/visitor-plugin-common@1.15.3":
+  version "1.15.3"
+  resolved "https://registry.npm.taobao.org/@graphql-codegen/visitor-plugin-common/download/@graphql-codegen/visitor-plugin-common-1.15.3.tgz#92ae6b310ac009c67f698cece00a401bb2e6aa73"
+  integrity sha1-kq5rMQrACcZ/aYzs4ApAG7LmqnM=
   dependencies:
-    "@graphql-codegen/plugin-helpers" "1.15.1"
-    "@graphql-tools/relay-operation-optimizer" "6.0.6"
+    "@graphql-codegen/plugin-helpers" "1.15.3"
+    "@graphql-tools/relay-operation-optimizer" "6.0.9"
     array.prototype.flatmap "1.2.3"
     auto-bind "~4.0.0"
     dependency-graph "0.9.0"
@@ -1427,12 +1427,12 @@
     prisma-yml "1.34.10"
     tslib "~2.0.0"
 
-"@graphql-tools/relay-operation-optimizer@6.0.6":
-  version "6.0.6"
-  resolved "https://registry.npm.taobao.org/@graphql-tools/relay-operation-optimizer/download/@graphql-tools/relay-operation-optimizer-6.0.6.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40graphql-tools%2Frelay-operation-optimizer%2Fdownload%2F%40graphql-tools%2Frelay-operation-optimizer-6.0.6.tgz#1da925a70539439f151fcc1cb6049538389da71e"
-  integrity sha1-HaklpwU5Q58VH8wctgSVODidpx4=
+"@graphql-tools/relay-operation-optimizer@6.0.9":
+  version "6.0.9"
+  resolved "https://registry.npm.taobao.org/@graphql-tools/relay-operation-optimizer/download/@graphql-tools/relay-operation-optimizer-6.0.9.tgz#ec808f00e117a0014410e0091b614072febce5bc"
+  integrity sha1-7ICPAOEXoAFEEOAJG2FAcv685bw=
   dependencies:
-    "@graphql-tools/utils" "6.0.6"
+    "@graphql-tools/utils" "6.0.9"
     relay-compiler "9.1.0"
 
 "@graphql-tools/schema@6.0.7":
@@ -1457,17 +1457,17 @@
     valid-url "1.0.9"
     websocket "1.0.31"
 
-"@graphql-tools/utils@6.0.6":
-  version "6.0.6"
-  resolved "https://registry.npm.taobao.org/@graphql-tools/utils/download/@graphql-tools/utils-6.0.6.tgz#49ef23dc96ee92771115c5b35eebaea0b0e3b71a"
-  integrity sha1-Se8j3JbukncRFcWzXuuuoLDjtxo=
-  dependencies:
-    camel-case "4.1.1"
-
 "@graphql-tools/utils@6.0.7", "@graphql-tools/utils@^6.0.0":
   version "6.0.7"
   resolved "https://registry.npm.taobao.org/@graphql-tools/utils/download/@graphql-tools/utils-6.0.7.tgz#0dc8837988b04961162bb76741bfa1072a03418c"
   integrity sha1-DciDeYiwSWEWK7dnQb+hByoDQYw=
+  dependencies:
+    camel-case "4.1.1"
+
+"@graphql-tools/utils@6.0.9":
+  version "6.0.9"
+  resolved "https://registry.npm.taobao.org/@graphql-tools/utils/download/@graphql-tools/utils-6.0.9.tgz#135a56f6520a99a2bbbfaf7d76bd5f681d1ce457"
+  integrity sha1-E1pW9lIKmaK7v699dr1faB0c5Fc=
   dependencies:
     camel-case "4.1.1"
 
@@ -1687,10 +1687,18 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.9.35":
+"@types/react@*":
   version "16.9.35"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.35.tgz?cache=0&sync_timestamp=1589160628652&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.35.tgz#a0830d172e8aadd9bd41709ba2281a3124bbd368"
   integrity sha1-oIMNFy6Krdm9QXCboigaMSS702g=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
+"@types/react@^16.9.36":
+  version "16.9.36"
+  resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.36.tgz#ade589ff51e2a903e34ee4669e05dbfa0c1ce849"
+  integrity sha1-reWJ/1HiqQPjTuRmngXb+gwc6Ek=
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -2861,7 +2869,15 @@ chalk@4.0.0, chalk@^4.0.0:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
 
-chalk@^1.0.0, chalk@^1.1.1, chalk@^1.1.3:
+chalk@4.1.0, chalk@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npm.taobao.org/chalk/download/chalk-4.1.0.tgz?cache=0&sync_timestamp=1591686984650&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fchalk%2Fdownload%2Fchalk-4.1.0.tgz#4e14870a618d9e2edd97dd8345fd9d9dc315646a"
+  integrity sha1-ThSHCmGNni7dl92DRf2dncMVZGo=
+  dependencies:
+    ansi-styles "^4.1.0"
+    supports-color "^7.1.0"
+
+chalk@^1.0.0, chalk@^1.1.3:
   version "1.1.3"
   resolved "https://registry.npm.taobao.org/chalk/download/chalk-1.1.3.tgz#a8115c55e4a702fe4d150abd3872822a7e09fc98"
   integrity sha1-qBFcVeSnAv5NFQq9OHKCKn4J/Jg=
@@ -4736,10 +4752,10 @@ graphql-tools@5.0.0:
     tslib "^1.11.1"
     uuid "^7.0.3"
 
-graphql@^15.0.0:
-  version "15.0.0"
-  resolved "https://registry.npm.taobao.org/graphql/download/graphql-15.0.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fgraphql%2Fdownload%2Fgraphql-15.0.0.tgz#042a5eb5e2506a2e2111ce41eb446a8e570b8be9"
-  integrity sha1-BCpeteJQai4hEc5B60RqjlcLi+k=
+graphql@^15.1.0:
+  version "15.1.0"
+  resolved "https://registry.npm.taobao.org/graphql/download/graphql-15.1.0.tgz#b93e28de805294ec08e1630d901db550cb8960a1"
+  integrity sha1-uT4o3oBSlOwI4WMNkB21UMuJYKE=
 
 gzip-size@^5.0.0:
   version "5.1.1"
@@ -5951,7 +5967,7 @@ lodash.uniqby@^4.7.0:
   resolved "https://registry.npm.taobao.org/lodash.uniqby/download/lodash.uniqby-4.7.0.tgz#d99c07a669e9e6d24e1362dfe266c67616af1302"
   integrity sha1-2ZwHpmnp5tJOE2Lf4mbGdhavEwI=
 
-lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4, lodash@^4.2.0:
+lodash@4.17.15, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.15, lodash@^4.17.4:
   version "4.17.15"
   resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha1-tEf2ZwoEVbv+7dETku/zMOoJdUg=
@@ -6515,14 +6531,6 @@ no-case@^3.0.3:
     lower-case "^2.0.1"
     tslib "^1.10.0"
 
-node-alias@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.npm.taobao.org/node-alias/download/node-alias-1.0.4.tgz#1f1b916b56b9ea241c0135f97ced6940f556f292"
-  integrity sha1-HxuRa1a56iQcATX5fO1pQPVW8pI=
-  dependencies:
-    chalk "^1.1.1"
-    lodash "^4.2.0"
-
 node-fetch@2.1.2:
   version "2.1.2"
   resolved "https://registry.npm.taobao.org/node-fetch/download/node-fetch-2.1.2.tgz#ab884e8e7e57e38a944753cec706f788d1768bb5"
@@ -6672,12 +6680,12 @@ npm-bundled@^1.1.1:
   dependencies:
     npm-normalize-package-bin "^1.0.1"
 
-npm-check-updates@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.npm.taobao.org/npm-check-updates/download/npm-check-updates-6.0.1.tgz#d8bcba08345b8d63b2b605d60c733714ee38d73d"
-  integrity sha1-2Ly6CDRbjWOytgXWDHM3FO441z0=
+npm-check-updates@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.npm.taobao.org/npm-check-updates/download/npm-check-updates-7.0.1.tgz#ba85756f4e8c34261d9a0a17b0a951c9c2279b50"
+  integrity sha1-uoV1b06MNCYdmgoXsKlRycInm1A=
   dependencies:
-    chalk "^4.0.0"
+    chalk "^4.1.0"
     cint "^8.2.1"
     cli-table "^0.3.1"
     commander "^5.1.0"
@@ -6686,7 +6694,6 @@ npm-check-updates@^6.0.1:
     json-parse-helpfulerror "^1.0.3"
     libnpmconfig "^1.2.1"
     lodash "^4.17.15"
-    node-alias "^1.0.4"
     p-map "^4.0.0"
     pacote "^11.1.10"
     progress "^2.0.3"
@@ -9231,10 +9238,10 @@ typedarray@^0.0.6:
   resolved "https://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.9.3:
-  version "3.9.3"
-  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
-  integrity sha1-06yIg6l8JhOeQt9ek+7s4z1hC4o=
+typescript@^3.9.5:
+  version "3.9.5"
+  resolved "https://registry.npm.taobao.org/typescript/download/typescript-3.9.5.tgz?cache=0&sync_timestamp=1591944554828&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ftypescript%2Fdownload%2Ftypescript-3.9.5.tgz#586f0dba300cde8be52dd1ac4f7e1009c1b13f36"
+  integrity sha1-WG8NujAM3ovlLdGsT34QCcGxPzY=
 
 ua-parser-js@^0.7.18:
   version "0.7.21"
