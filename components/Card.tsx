@@ -26,6 +26,7 @@ function Card ({ children, loading, title }: Props) {
         background-color: #fff;
         margin-bottom: 15px;
         transition: all ease-out 0.2s;
+        box-shadow: 0 1px 3px rgba(20,20,20,.1);
         opacity: 1;
       }
 
