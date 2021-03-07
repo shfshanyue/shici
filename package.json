@@ -10,7 +10,8 @@
     "ncu": "ncu",
     "start": "next",
     "stat": "COMMIT=$(git rev-parse --short HEAD) ANALYZE=1 next build",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
     "@apollo/client": "^3.1.1",
@@ -43,6 +44,7 @@
     "@graphql-codegen/typescript": "1.17.6",
     "@graphql-codegen/typescript-operations": "1.17.6",
     "@graphql-codegen/typescript-react-apollo": "^1.17.6",
+    "@next/bundle-analyzer": "^10.0.8",
     "@types/classnames": "^2.2.10",
     "@types/lodash.get": "^4.4.6",
     "@types/lodash.groupby": "^4.6.6",
@@ -54,7 +56,6 @@
     "lodash.template": ">=4.5.0",
     "nodemon": "^2.0.4",
     "npm-check-updates": "^11.1.10",
-    "typescript": "^3.9.7",
-    "webpack-bundle-analyzer": "^3.8.0"
+    "typescript": "^3.9.7"
   }
 }
