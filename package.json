@@ -22,6 +22,7 @@
     "babel-plugin-import": "^1.13.0",
     "classnames": "^2.2.6",
     "dayjs": "^1.8.31",
+    "elliptic": "^6.5.4",
     "graphql": "^15.3.0",
     "graphql-tag": "^2.11.0",
     "isomorphic-unfetch": "^3.0.0",
@@ -30,7 +31,7 @@
     "lodash.merge": "^4.6.2",
     "lodash.uniqby": "^4.7.0",
     "lru-cache": "^6.0.0",
-    "next": "^9.5.1",
+    "next": "^10.0.8",
     "next-routes": "^1.4.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.5",
@@ -52,7 +53,7 @@
     "babel-plugin-import-graphql": "^2.7.0",
     "lodash.template": ">=4.5.0",
     "nodemon": "^2.0.4",
-    "npm-check-updates": "^7.0.2",
+    "npm-check-updates": "^11.1.10",
     "typescript": "^3.9.7",
     "webpack-bundle-analyzer": "^3.8.0"
   }
