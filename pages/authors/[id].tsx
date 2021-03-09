@@ -12,19 +12,19 @@ import AuthorComponent from '../../components/Author'
 import { useRouter } from 'next/router'
 import { useAuthorQuery, useAuthorPoemsQuery } from '../../query'
 
-function Author () {
+function Author() {
   const router = useRouter()
   const { page = 1, id } = router.query as any
   const { data, loading } = useAuthorQuery({
     variables: {
-      id
-    }
+      id,
+    },
   })
   const { data: poemsData, loading: poemsLoading } = useAuthorPoemsQuery({
     variables: {
       id,
-      page: Number(page)
-    }
+      page: Number(page),
+    },
   })
   const author = data?.author
   const poems = poemsData?.author?.poems
@@ -34,47 +34,46 @@ function Author () {
     router.push({
       pathname: router.pathname,
       query: {
-        page
-      }
+        page,
+      },
     })
   }
 
   return (
-    <App title={`${get(author, 'name', '')}_作者`} description={author?.intro || ''}>
+    <App
+      title={`${get(author, 'name', '')}_作者`}
+      description={author?.intro || ''}
+    >
       <style jsx>{`
-          .container {
-            display: flex;
-          }
+        .container {
+          display: flex;
+        }
 
-          .author {
-            flex-grow: 1;
-          }
+        .author {
+          flex-grow: 1;
+        }
 
-          .side {
-            flex-basis: 300px; 
-            flex-shrink: 0;
-            margin-left: 20px;
-          }
-        `}</style>
+        .side {
+          flex-basis: 300px;
+          flex-shrink: 0;
+          margin-left: 20px;
+        }
+      `}</style>
       <div className="container">
         <div className="author">
           <Card loading={loading}>
-            {
-              author && 
-                <AuthorComponent author={author} title="h1" />
-            }
+            {author && <AuthorComponent author={author} title="h1" />}
           </Card>
-          {
-            poems?.map(poem => (
-              <Card key={poem.id} loading={poemsLoading}>
-                {
-                  poem && 
-                    <Poem poem={poem as any} />
-                }
-              </Card>
-            ))
-          }
-          <Pagination current={Number(page)} total={poemsCount} onChange={handleChange} />
+          {poems?.map((poem) => (
+            <Card key={poem.id} loading={poemsLoading}>
+              {poem && <Poem poem={poem as any} />}
+            </Card>
+          ))}
+          <Pagination
+            current={Number(page)}
+            total={poemsCount}
+            onChange={handleChange}
+          />
         </div>
         <aside className="side">
           <QR />
