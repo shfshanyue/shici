@@ -20,7 +20,7 @@ const Author: FC<Props> = ({ author = {}, title = 'h2' }) => {
           title === 'h1' ? (
             author.name
           ) : (
-            <Link href={`authors/${author.id}`}>
+            <Link href={`/authors/${author.id}`}>
               <a>{author.name}</a>
             </Link>
           ),
