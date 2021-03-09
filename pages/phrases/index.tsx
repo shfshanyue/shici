@@ -1,8 +1,6 @@
 import React from 'react'
 
-import * as routes from '../../routes'
-
-const { Link } = routes
+import Link from 'next/link'
 
 import App from '../../components/App'
 import QR from '../../components/QR'
@@ -64,7 +62,7 @@ function Phrases () {
               phrases?.map(phrase => (
                 <Card key={phrase.id}>
                   <div className="phrase">
-                    <Link route="phrase" params={{ id: phrase.poem.id, phraseId: phrase.id }}>
+                    <Link href={`/poems/${phrase.poem.id}/phrase/${phrase.id}`}>
                       <a>
                         {phrase.text}
                       </a>
