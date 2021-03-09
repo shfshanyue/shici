@@ -2,16 +2,15 @@ import React from 'react'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import 'dayjs/locale/zh-cn'
 
-import * as routes from '../routes'
 import Tag from '../components/Tag'
 import { get, highlight } from '../lib/utils'
 
 import dayjs from 'dayjs'
 import { Poem as PoemType, useStarPoemMutation, useRecitePoemMutation, Author, Tag as TagType } from '../query'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 dayjs.extend(relativeTime)
-
-const { Link, Router } = routes
 
 interface Props {
   poem: Partial<Omit<PoemType, 'author' | 'tags'>> &
@@ -31,6 +30,8 @@ function Poem ({
   time,
   title = 'h2'
 }: Props) {
+  const router = useRouter()
+
   const [starPoem] = useStarPoemMutation({
     optimisticResponse({ poemId, star }) {
       return {
@@ -76,7 +77,7 @@ function Poem ({
   }
 
   const goLogin = () => {
-    Router.pushRoute('/login')
+    router.push('/login')
   }
 
   const author = poem.author
@@ -115,7 +116,7 @@ function Poem ({
       {
         React.createElement(title, {
           children: poem.id ?
-            <Link route="poem" params={{ id: poem.id }}>
+            <Link href={`/poems/${poem.id}`}>
               <a>
                 {
                   highlight(poem.title, highlightWords)
@@ -126,7 +127,7 @@ function Poem ({
       }
       {
         author && <div className="author">
-          <Link route="author" params={{ id: author.id }}>
+          <Link href={`/authors/${author.id}`}>
             <a>
               { get(poem, 'author.dynasty') }·{ get(poem, 'author.name') }
             </a>
@@ -166,7 +167,7 @@ function Poem ({
       }
       {
         poem.tags?.map(tag => 
-          <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }} key={tag.id}>
+          <Link href={`/poems?tagId=${tag.id}&tagName=${tag.name}`} key={tag.id}>
             <div className="tag-item">{tag.name}</div>
           </Link>
         )
