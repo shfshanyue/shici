@@ -22,7 +22,7 @@ function Authors () {
     }
   })
   const authors = data?.authors
-  const authorsCount = data?.authorsCount ?? 50
+  const authorsCount = data?.authorsCount ?? 1000
 
   function handleChange(page: number) {
     router.push({

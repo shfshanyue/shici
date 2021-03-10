@@ -31,8 +31,8 @@ const Poems: React.FC = () => {
 
   const poems = merge(data?.poems, starData?.poems)
 
-  const poemsCount = data?.poemsCount ?? 20
-        
+  const poemsCount = data?.poemsCount ?? 1000
+
   function handleChange (page: number) {
     router.push({
       pathname,
