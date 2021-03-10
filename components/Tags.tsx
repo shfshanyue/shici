@@ -1,12 +1,11 @@
 import groupBy from 'lodash.groupby'
 
-import * as routes from '../routes'
 import { useTagsQuery } from '../query'
 
 import Tag from './Tag'
 import Card from './Card'
 
-const { Link } = routes
+import Link from 'next/link'
 
 function Tags () {
   const { data, loading } = useTagsQuery()
@@ -29,7 +28,7 @@ function Tags () {
             {
               tags.map((tag) => (
                 <Tag style={{ marginBottom: '10px' }} key={tag.id}>
-                  <Link route="poems" params={{ tagId: tag.id, tagName: tag.name }}>
+                  <Link href={`/poems?tagId=${tag.id}&tagName=${tag.name}`}>
                     <a>{ tag.name }</a>
                   </Link>
                 </Tag>

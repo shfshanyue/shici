@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { graphql } from 'react-apollo'
 
 import { get, compose } from '../../lib/utils'
-import { Link } from '../../routes'
+import Link from 'next/link'
 
 import Poem from '../../components/Poem'
 import App from '../../components/App'
@@ -76,12 +76,12 @@ class Profile extends Component {
       <div className="container">
         <div className="profile">
           <div className="nav">
-            <Link route="profile" params={{ userId, tag: 'stars' }}>
+              {/* <Link route="profile" params={{ userId, tag: 'stars' }}>
               <a className={`nav-item ${tag === 'stars' ? 'active' : ''}`}>喜欢</a>
             </Link>
             <Link route="profile" params={{ userId, tag: 'recitations' }}>
               <a className={`nav-item ${tag === 'recitations' ? 'active' : ''}`}>会背</a>
-            </Link>
+            </Link> */}
           </div>
           <div className="content">
             {

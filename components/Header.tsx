@@ -3,13 +3,11 @@ import { useRouter } from 'next/router'
 import classNames from 'classnames'
 
 import { get } from '../lib/utils'
-import * as routes from '../routes'
 import { useMeQuery } from '../query'
 
 import Search from './Search'
 import Avator from './Avator'
-
-const { Router, Link } = routes
+import Link from 'next/link'
 
 function Header() {
   const [toggle, setToggle] = useState(false)
@@ -19,12 +17,14 @@ function Header() {
     ssr: false,
   })
 
+  const router = useRouter()
   const userId = get(data, 'me.id')
   const username = get(data, 'me.name')
 
   function handleSearch(value: string) {
-    Router.pushRoute('poems', {
-      q: value,
+    router.push({
+      pathname:'poems',
+      query: `q=${value}`,
     })
   }
 
@@ -59,7 +59,7 @@ function Header() {
           }
         `}</style>
         <div className="item">
-          <Link route="poems">
+          <Link href='/poems'>
             <a
               className={
                 (asPath.startsWith('/poems') &&
@@ -74,7 +74,7 @@ function Header() {
           </Link>
         </div>
         <div className="item">
-          <Link route="authors">
+          <Link href='/authors'>
             <a
               className={classNames({ active: asPath.startsWith('/authors') })}
             >
@@ -83,7 +83,7 @@ function Header() {
           </Link>
         </div>
         <div className="item">
-          <Link route="phrases">
+          <Link href='/poems'>
             <a className={classNames({ active: asPath.includes('phrase') })}>
               名句
             </a>
@@ -107,7 +107,7 @@ function Header() {
           <Link href="/">
             <a className="title">诗词弦歌</a>
           </Link>
-          <Link route="phrases">
+          <Link href="/phrases">
             <a
               className={classNames('hidden-xs', {
                 active: asPath.includes('phrase') || asPath === '/',
@@ -116,7 +116,7 @@ function Header() {
               名句
             </a>
           </Link>
-          <Link route="poems">
+          <Link href="/poems">
             <a
               className={
                 asPath.startsWith('/poems') && asPath.indexOf('phrase') === -1
@@ -127,7 +127,7 @@ function Header() {
               诗词
             </a>
           </Link>
-          <Link route="authors">
+          <Link href="/authors">
             <a
               className={
                 asPath.startsWith('/authors') ? 'active hidden-xs' : 'hidden-xs'
@@ -144,7 +144,7 @@ function Header() {
               style={{ marginLeft: 20 }}
             />
           </div>
-          {loading ? null : username ? (
+          {/* {loading ? null : username ? (
             <a className="active user">
               <Avator name={username} />
             </a>
@@ -154,7 +154,7 @@ function Header() {
                 登录
               </a>
             </Link>
-          )}
+          )} */}
           <div className="button more" onTouchStart={() => setToggle(!toggle)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -170,12 +170,13 @@ function Header() {
             </svg>
           </div>
           <div className="dropdown-menu">
-            <Link
-              route="profile"
+
+            {/* <Link
+              href="/profile"
               params={{ userId: String(userId), tag: 'stars' }}
             >
               <a className="dropdown-item">个人中心</a>
-            </Link>
+            </Link> */}
             <a
               className="dropdown-item"
               href=""

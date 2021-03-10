@@ -1,9 +1,7 @@
 import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import Card from './Card'
-import * as routes from '../routes'
-
-const { Link } = routes
+import Link from 'next/link'
 
 interface Props {
   q?: string
@@ -37,12 +35,12 @@ const SearchBar = ({ q }: Props) => {
       <div className="bar">
         <h3>{q}</h3>
         <div>
-          <Link route="poems" params={{ q }}>
+          <Link href={`/poems?q={q}`}>
             <a className={classNames({ active: pathname === '/poems' })}>
               诗词
           </a>
           </Link>
-          <Link route="authors" params={{ q }}>
+          <Link href={`/authors?q={q}`}>
             <a className={classNames({ active: pathname === '/authors' })}>
               作者
           </a>
