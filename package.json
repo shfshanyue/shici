@@ -14,7 +14,7 @@
     "analyze": "ANALYZE=true yarn build"
   },
   "dependencies": {
-    "@apollo/client": "^3.1.1",
+    "@apollo/client": "^3.3.11",
     "@apollo/react-common": "^3.1.4",
     "@apollo/react-hooks": "^4.0.0",
     "@apollo/react-ssr": "^4.0.0",
@@ -22,11 +22,11 @@
     "apollo-cache-inmemory": "^1.6.6",
     "babel-plugin-import": "^1.13.3",
     "classnames": "^2.2.6",
-    "dayjs": "^1.8.31",
+    "dayjs": "^1.10.4",
     "elliptic": "^6.5.4",
-    "graphql": "^15.3.0",
+    "graphql": "^15.5.0",
     "graphql-tag": "^2.11.0",
-    "isomorphic-unfetch": "^3.0.0",
+    "isomorphic-unfetch": "^3.1.0",
     "lodash.get": "^4.4.2",
     "lodash.groupby": "^4.6.0",
     "lodash.merge": "^4.6.2",
@@ -36,7 +36,7 @@
     "react": "^17.0.1",
     "react-apollo": "^3.1.5",
     "react-dom": "^17.0.1",
-    "react-highlight-words": "^0.16.0"
+    "react-highlight-words": "^0.17.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.21.2",
@@ -53,8 +53,8 @@
     "@types/react-highlight-words": "^0.16.1",
     "babel-plugin-import-graphql": "^2.8.1",
     "lodash.template": ">=4.5.0",
-    "nodemon": "^2.0.4",
-    "npm-check-updates": "^11.1.10",
+    "nodemon": "^2.0.7",
+    "npm-check-updates": "^11.2.1",
     "typescript": "^4.2.3"
   }
 }
