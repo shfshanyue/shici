@@ -33,9 +33,9 @@
     "lodash.uniqby": "^4.7.0",
     "lru-cache": "^6.0.0",
     "next": "^10.0.8",
-    "react": "^16.13.1",
+    "react": "^17.0.1",
     "react-apollo": "^3.1.5",
-    "react-dom": "^16.13.1",
+    "react-dom": "^17.0.1",
     "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
@@ -49,12 +49,12 @@
     "@types/lodash.groupby": "^4.6.6",
     "@types/lodash.merge": "^4.6.6",
     "@types/lodash.uniqby": "^4.7.6",
-    "@types/react": "^16.9.44",
+    "@types/react": "^17.0.3",
     "@types/react-highlight-words": "^0.16.1",
     "babel-plugin-import-graphql": "^2.7.0",
     "lodash.template": ">=4.5.0",
     "nodemon": "^2.0.4",
     "npm-check-updates": "^11.1.10",
-    "typescript": "^3.9.7"
+    "typescript": "^4.2.3"
   }
 }
