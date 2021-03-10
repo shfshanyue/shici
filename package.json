@@ -39,10 +39,10 @@
     "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^1.17.6",
-    "@graphql-codegen/typescript": "1.17.6",
-    "@graphql-codegen/typescript-operations": "1.17.6",
-    "@graphql-codegen/typescript-react-apollo": "^1.17.6",
+    "@graphql-codegen/cli": "^1.21.2",
+    "@graphql-codegen/typescript": "1.21.1",
+    "@graphql-codegen/typescript-operations": "1.17.15",
+    "@graphql-codegen/typescript-react-apollo": "^2.2.2",
     "@next/bundle-analyzer": "^10.0.8",
     "@types/classnames": "^2.2.11",
     "@types/lodash.get": "^4.4.6",
