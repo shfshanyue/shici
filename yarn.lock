@@ -4592,13 +4592,6 @@ native-url@0.3.4:
   dependencies:
     querystring "^0.2.0"
 
-next-routes@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.npm.taobao.org/next-routes/download/next-routes-1.4.2.tgz#736a382579a792ea69f35ae70b449acdfefa7944"
-  integrity sha1-c2o4JXmnkupp81rnC0Sazf76eUQ=
-  dependencies:
-    path-to-regexp "^2.1.0"
-
 next-tick@~1.0.0:
   version "1.0.0"
   resolved "https://registry.npm.taobao.org/next-tick/download/next-tick-1.0.0.tgz?cache=0&sync_timestamp=1581393821295&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fnext-tick%2Fdownload%2Fnext-tick-1.0.0.tgz#ca86d1fe8828169b0120208e3dc8424b9db8342c"
@@ -5182,11 +5175,6 @@ path-root@^0.1.1:
   integrity sha1-mkpoFMrBwM1zNgqV8yCDyOpHRbc=
   dependencies:
     path-root-regex "^0.1.0"
-
-path-to-regexp@^2.1.0:
-  version "2.4.0"
-  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-2.4.0.tgz#35ce7f333d5616f1c1e1bfe266c3aba2e5b2e704"
-  integrity sha1-Nc5/Mz1WFvHB4b/iZsOrouWy5wQ=
 
 path-type@^4.0.0:
   version "4.0.0"

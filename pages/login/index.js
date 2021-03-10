@@ -5,13 +5,15 @@ import { withRouter } from 'next/router'
 import { get, compose } from '../../lib/utils'
 import withApolloClient from '../../lib/with-apollo'
 
-import { Link, Router } from '../../routes'
+import Link from 'next/link'
+// import { useRouter } from 'next/router'
 
 import App from '../../components/App'
 import Card from '../../components/Card'
 
 import { RegisterDocument as REGISTER, LoginDocument as LOGIN, SendVerifyCodeDocument as SEND_VERIFY_CODE } from '../../query'
 
+// const router = useRouter()
 class Login extends Component {
   constructor (props) {
     super(props)
@@ -43,7 +45,7 @@ class Login extends Component {
   handleSubmit (e) {
     e.preventDefault()
     const { email, username, password, verifyCode } = this.state
-    const isLogin = this.props.router.asPath.indexOf('/login') !== -1
+    // const isLogin = this.props.router.asPath.indexOf('/login') !== -1
     if (isLogin) {
       this.props.login({
         variables: {
@@ -56,7 +58,7 @@ class Login extends Component {
           // TODO: 只需要清空带有权限信息 Query 的 cache
           this.props.client.resetStore()
           localStorage.token = createUserToken 
-          Router.pushRoute('/')
+          // router.push('/')
         }
       })
     } else {
@@ -70,7 +72,7 @@ class Login extends Component {
         } 
       }).then(({ data: { createUser } })=> {
         if (get(createUser, 'id')) {
-          Router.pushRoute('/login')
+          // router.push('/login')
         }
       })
     }
@@ -78,7 +80,7 @@ class Login extends Component {
 
   render () {
     const { email, password, verifyCode, canSend, username } = this.state
-    const isLogin = this.props.router.asPath.indexOf('/login') !== -1
+    // const isLogin = this.props.router.asPath.indexOf('/login') !== -1
     return (
       <App title="登录">
         <style jsx>{`
