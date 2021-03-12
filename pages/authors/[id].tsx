@@ -103,7 +103,7 @@ function Author() {
           <Card title="名句" loading={poemsLoading}>
             {
               phrases?.map(phrase =>
-                <Link href="/poems/[id]/phrase/[phraseId]" as={`/poems/${id}/phrase/${phrase.id}`} key={phrase.id}>
+                <Link href="/poems/[id]/phrase/[phraseId]" as={`/poems/${phrase.poem.id}/phrase/${phrase.id}`} key={phrase.id}>
                   <a className="phrase">{phrase.text}</a>
                 </Link>
               )

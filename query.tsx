@@ -602,6 +602,10 @@ export type AuthorPoemsQuery = (
       & { phrases?: Maybe<Array<(
         { __typename?: 'Phrase' }
         & Pick<Phrase, 'id' | 'text'>
+        & { poem: (
+          { __typename?: 'Poem' }
+          & Pick<Poem, 'id'>
+        ) }
       )>>, tags?: Maybe<Array<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'name'>
@@ -1305,6 +1309,9 @@ export const AuthorPoemsDocument = gql`
       phrases {
         id
         text
+        poem {
+          id
+        }
       }
       tags {
         id
