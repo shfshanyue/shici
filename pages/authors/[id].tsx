@@ -99,7 +99,7 @@ function Author() {
           />
         </div>
         <aside className="side">
-          {/* <Card title="名句" loading={poemsLoading}>
+          <Card title="名句" loading={poemsLoading}>
             {
               phrases?.map(phrase =>
                 <Link href="/poems/[id]/phrase/[phraseId]" as={`/poems/${id}/phrase/${phrase.id}`} key={phrase.id}>
@@ -107,7 +107,7 @@ function Author() {
                 </Link>
               )
             }
-          </Card> */}
+          </Card>
           <QR />
         </aside>
       </div>
