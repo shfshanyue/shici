@@ -244,6 +244,9 @@ query AUTHOR_POEMS ($id: ID!, $page: Int) {
       phrases{
         id
         text
+        poem{
+          id
+        }
       }
       tags {
         id
