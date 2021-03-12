@@ -241,6 +241,10 @@ query AUTHOR_POEMS ($id: ID!, $page: Int) {
       id 
       title
       kind
+      phrases{
+        id
+        text
+      }
       tags {
         id
         name

@@ -1,7 +1,7 @@
 import { NextPage, NextPageContext } from 'next'
 import React from 'react'
 import Head from 'next/head'
-import { ApolloProvider } from '@apollo/react-hooks'
+import {ApolloProvider} from '@apollo/client'
 import { ApolloClient, HttpLink } from 'apollo-boost'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
 import fetch from 'isomorphic-unfetch'
