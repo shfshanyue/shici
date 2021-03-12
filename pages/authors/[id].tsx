@@ -15,7 +15,7 @@ import { useAuthorQuery, useAuthorPoemsQuery } from '../../query'
 
 function Author() {
   const router = useRouter()
-  const { page = 1, id } = router.query as any
+  const { id, page = 1 } = router.query as any
   const { data, loading } = useAuthorQuery({
     variables: {
       id,
@@ -37,6 +37,7 @@ function Author() {
     router.push({
       pathname: router.pathname,
       query: {
+        id,
         page,
       },
     })
