@@ -9,6 +9,7 @@ import Poem from '../../components/Poem'
 import Pagination from '../../components/Pagination'
 import AuthorComponent from '../../components/Author'
 
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useAuthorQuery, useAuthorPoemsQuery } from '../../query'
 
@@ -29,6 +30,8 @@ function Author() {
   const author = data?.author
   const poems = poemsData?.author?.poems
   const poemsCount = poemsData?.author?.poemsCount || 10
+
+  const phrases = poems?.flatMap(poem => poem.phrases)
 
   function handleChange(page: number) {
     router.push({
@@ -58,6 +61,26 @@ function Author() {
           flex-shrink: 0;
           margin-left: 20px;
         }
+
+        .phrase {
+          padding: 10px 0;
+          display: block;
+        }
+
+        .phrase:not(:last-child) {
+          border-bottom: 1px solid #eee;
+        }
+
+        .phrase-h1 {
+          margin: 0;
+          border-left: 8px solid #f609;
+          padding-left: 10px;
+          background-color: #fff;
+          color: #666;
+          min-height: 85px;
+
+          padding: 20px; 
+          margin-bottom: 15px;
       `}</style>
       <div className="container">
         <div className="author">
@@ -76,6 +99,15 @@ function Author() {
           />
         </div>
         <aside className="side">
+          {/* <Card title="名句" loading={poemsLoading}>
+            {
+              phrases?.map(phrase =>
+                <Link href="/poems/[id]/phrase/[phraseId]" as={`/poems/${id}/phrase/${phrase.id}`} key={phrase.id}>
+                  <a className="phrase">{phrase.text}</a>
+                </Link>
+              )
+            }
+          </Card> */}
           <QR />
         </aside>
       </div>

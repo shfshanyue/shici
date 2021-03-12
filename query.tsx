@@ -1,7 +1,10 @@
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,6 +19,7 @@ export type Scalars = {
   ConstraintString: any;
   ConstraintNumber: any;
 };
+
 
 export type Query = {
   __typename?: 'Query';
@@ -295,11 +299,11 @@ export type TimeBetween = {
   between: Array<Scalars['DateTime']>;
 };
 
-export type PoemsQueryVariables = {
+export type PoemsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   tagId?: Maybe<Scalars['ID']>;
-};
+}>;
 
 
 export type PoemsQuery = (
@@ -318,11 +322,11 @@ export type PoemsQuery = (
   )> }
 );
 
-export type PoemsUserStarQueryVariables = {
+export type PoemsUserStarQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   tagId?: Maybe<Scalars['ID']>;
-};
+}>;
 
 
 export type PoemsUserStarQuery = (
@@ -333,9 +337,9 @@ export type PoemsUserStarQuery = (
   )> }
 );
 
-export type PoemUserStarQueryVariables = {
+export type PoemUserStarQueryVariables = Exact<{
   id: Scalars['ID'];
-};
+}>;
 
 
 export type PoemUserStarQuery = (
@@ -346,10 +350,10 @@ export type PoemUserStarQuery = (
   )> }
 );
 
-export type RecitePoemMutationVariables = {
+export type RecitePoemMutationVariables = Exact<{
   poemId: Scalars['ID'];
   recite?: Maybe<Scalars['Boolean']>;
-};
+}>;
 
 
 export type RecitePoemMutation = (
@@ -360,10 +364,10 @@ export type RecitePoemMutation = (
   ) }
 );
 
-export type StarPoemMutationVariables = {
+export type StarPoemMutationVariables = Exact<{
   poemId: Scalars['ID'];
   star?: Maybe<Scalars['Boolean']>;
-};
+}>;
 
 
 export type StarPoemMutation = (
@@ -374,11 +378,11 @@ export type StarPoemMutation = (
   ) }
 );
 
-export type PoemQueryVariables = {
+export type PoemQueryVariables = Exact<{
   poemId?: Maybe<Scalars['ID']>;
   poemUUID?: Maybe<Scalars['ID']>;
   phraseId?: Maybe<Scalars['ID']>;
-};
+}>;
 
 
 export type PoemQuery = (
@@ -420,13 +424,13 @@ export type PoemQuery = (
   )> }
 );
 
-export type RegisterMutationVariables = {
+export type RegisterMutationVariables = Exact<{
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
   token: Scalars['String'];
   verifyCode: Scalars['String'];
-};
+}>;
 
 
 export type RegisterMutation = (
@@ -437,10 +441,10 @@ export type RegisterMutation = (
   ) }
 );
 
-export type LoginMutationVariables = {
+export type LoginMutationVariables = Exact<{
   email: Scalars['String'];
   password: Scalars['String'];
-};
+}>;
 
 
 export type LoginMutation = (
@@ -448,9 +452,9 @@ export type LoginMutation = (
   & Pick<Mutation, 'createUserToken'>
 );
 
-export type SendVerifyCodeMutationVariables = {
+export type SendVerifyCodeMutationVariables = Exact<{
   email: Scalars['String'];
-};
+}>;
 
 
 export type SendVerifyCodeMutation = (
@@ -458,10 +462,10 @@ export type SendVerifyCodeMutation = (
   & { token: Mutation['sendEmailVerifyCode'] }
 );
 
-export type PhrasesQueryVariables = {
+export type PhrasesQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   pageSize?: Maybe<Scalars['Int']>;
-};
+}>;
 
 
 export type PhrasesQuery = (
@@ -481,9 +485,9 @@ export type PhrasesQuery = (
   )> }
 );
 
-export type StarPoemsQueryVariables = {
+export type StarPoemsQueryVariables = Exact<{
   userId: Scalars['ID'];
-};
+}>;
 
 
 export type StarPoemsQuery = (
@@ -506,9 +510,9 @@ export type StarPoemsQuery = (
   )> }
 );
 
-export type RecitePoemsQueryVariables = {
+export type RecitePoemsQueryVariables = Exact<{
   userId: Scalars['ID'];
-};
+}>;
 
 
 export type RecitePoemsQuery = (
@@ -531,7 +535,7 @@ export type RecitePoemsQuery = (
   )> }
 );
 
-export type MeQueryVariables = {};
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type MeQuery = (
@@ -542,7 +546,7 @@ export type MeQuery = (
   )> }
 );
 
-export type TagsQueryVariables = {};
+export type TagsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TagsQuery = (
@@ -553,10 +557,10 @@ export type TagsQuery = (
   )> }
 );
 
-export type AuthorsQueryVariables = {
+export type AuthorsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-};
+}>;
 
 
 export type AuthorsQuery = (
@@ -568,9 +572,9 @@ export type AuthorsQuery = (
   )> }
 );
 
-export type AuthorQueryVariables = {
+export type AuthorQueryVariables = Exact<{
   id: Scalars['ID'];
-};
+}>;
 
 
 export type AuthorQuery = (
@@ -581,10 +585,10 @@ export type AuthorQuery = (
   )> }
 );
 
-export type AuthorPoemsQueryVariables = {
+export type AuthorPoemsQueryVariables = Exact<{
   id: Scalars['ID'];
   page?: Maybe<Scalars['Int']>;
-};
+}>;
 
 
 export type AuthorPoemsQuery = (
@@ -595,7 +599,10 @@ export type AuthorPoemsQuery = (
     & { poems: Array<(
       { __typename?: 'Poem' }
       & Pick<Poem, 'id' | 'title' | 'kind' | 'userIsRecite' | 'userIsStar' | 'paragraphs'>
-      & { tags?: Maybe<Array<(
+      & { phrases?: Maybe<Array<(
+        { __typename?: 'Phrase' }
+        & Pick<Phrase, 'id' | 'text'>
+      )>>, tags?: Maybe<Array<(
         { __typename?: 'Tag' }
         & Pick<Tag, 'id' | 'name'>
       )>> }
@@ -643,11 +650,13 @@ export const PoemsDocument = gql`
  *   },
  * });
  */
-export function usePoemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PoemsQuery, PoemsQueryVariables>) {
-        return ApolloReactHooks.useQuery<PoemsQuery, PoemsQueryVariables>(PoemsDocument, baseOptions);
+export function usePoemsQuery(baseOptions?: Apollo.QueryHookOptions<PoemsQuery, PoemsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PoemsQuery, PoemsQueryVariables>(PoemsDocument, options);
       }
-export function usePoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PoemsQuery, PoemsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PoemsQuery, PoemsQueryVariables>(PoemsDocument, baseOptions);
+export function usePoemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoemsQuery, PoemsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PoemsQuery, PoemsQueryVariables>(PoemsDocument, options);
         }
 export type PoemsQueryHookResult = ReturnType<typeof usePoemsQuery>;
 export type PoemsLazyQueryHookResult = ReturnType<typeof usePoemsLazyQuery>;
@@ -679,11 +688,13 @@ export const PoemsUserStarDocument = gql`
  *   },
  * });
  */
-export function usePoemsUserStarQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PoemsUserStarQuery, PoemsUserStarQueryVariables>) {
-        return ApolloReactHooks.useQuery<PoemsUserStarQuery, PoemsUserStarQueryVariables>(PoemsUserStarDocument, baseOptions);
+export function usePoemsUserStarQuery(baseOptions?: Apollo.QueryHookOptions<PoemsUserStarQuery, PoemsUserStarQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PoemsUserStarQuery, PoemsUserStarQueryVariables>(PoemsUserStarDocument, options);
       }
-export function usePoemsUserStarLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PoemsUserStarQuery, PoemsUserStarQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PoemsUserStarQuery, PoemsUserStarQueryVariables>(PoemsUserStarDocument, baseOptions);
+export function usePoemsUserStarLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoemsUserStarQuery, PoemsUserStarQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PoemsUserStarQuery, PoemsUserStarQueryVariables>(PoemsUserStarDocument, options);
         }
 export type PoemsUserStarQueryHookResult = ReturnType<typeof usePoemsUserStarQuery>;
 export type PoemsUserStarLazyQueryHookResult = ReturnType<typeof usePoemsUserStarLazyQuery>;
@@ -713,11 +724,13 @@ export const PoemUserStarDocument = gql`
  *   },
  * });
  */
-export function usePoemUserStarQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PoemUserStarQuery, PoemUserStarQueryVariables>) {
-        return ApolloReactHooks.useQuery<PoemUserStarQuery, PoemUserStarQueryVariables>(PoemUserStarDocument, baseOptions);
+export function usePoemUserStarQuery(baseOptions: Apollo.QueryHookOptions<PoemUserStarQuery, PoemUserStarQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PoemUserStarQuery, PoemUserStarQueryVariables>(PoemUserStarDocument, options);
       }
-export function usePoemUserStarLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PoemUserStarQuery, PoemUserStarQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PoemUserStarQuery, PoemUserStarQueryVariables>(PoemUserStarDocument, baseOptions);
+export function usePoemUserStarLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoemUserStarQuery, PoemUserStarQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PoemUserStarQuery, PoemUserStarQueryVariables>(PoemUserStarDocument, options);
         }
 export type PoemUserStarQueryHookResult = ReturnType<typeof usePoemUserStarQuery>;
 export type PoemUserStarLazyQueryHookResult = ReturnType<typeof usePoemUserStarLazyQuery>;
@@ -729,7 +742,7 @@ export const RecitePoemDocument = gql`
   }
 }
     `;
-export type RecitePoemMutationFn = ApolloReactCommon.MutationFunction<RecitePoemMutation, RecitePoemMutationVariables>;
+export type RecitePoemMutationFn = Apollo.MutationFunction<RecitePoemMutation, RecitePoemMutationVariables>;
 
 /**
  * __useRecitePoemMutation__
@@ -749,11 +762,12 @@ export type RecitePoemMutationFn = ApolloReactCommon.MutationFunction<RecitePoem
  *   },
  * });
  */
-export function useRecitePoemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RecitePoemMutation, RecitePoemMutationVariables>) {
-        return ApolloReactHooks.useMutation<RecitePoemMutation, RecitePoemMutationVariables>(RecitePoemDocument, baseOptions);
+export function useRecitePoemMutation(baseOptions?: Apollo.MutationHookOptions<RecitePoemMutation, RecitePoemMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RecitePoemMutation, RecitePoemMutationVariables>(RecitePoemDocument, options);
       }
 export type RecitePoemMutationHookResult = ReturnType<typeof useRecitePoemMutation>;
-export type RecitePoemMutationOptions = ApolloReactCommon.BaseMutationOptions<RecitePoemMutation, RecitePoemMutationVariables>;
+export type RecitePoemMutationOptions = Apollo.BaseMutationOptions<RecitePoemMutation, RecitePoemMutationVariables>;
 export const StarPoemDocument = gql`
     mutation STAR_POEM($poemId: ID!, $star: Boolean) {
   starPoem(id: $poemId, star: $star) {
@@ -762,7 +776,7 @@ export const StarPoemDocument = gql`
   }
 }
     `;
-export type StarPoemMutationFn = ApolloReactCommon.MutationFunction<StarPoemMutation, StarPoemMutationVariables>;
+export type StarPoemMutationFn = Apollo.MutationFunction<StarPoemMutation, StarPoemMutationVariables>;
 
 /**
  * __useStarPoemMutation__
@@ -782,11 +796,12 @@ export type StarPoemMutationFn = ApolloReactCommon.MutationFunction<StarPoemMuta
  *   },
  * });
  */
-export function useStarPoemMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<StarPoemMutation, StarPoemMutationVariables>) {
-        return ApolloReactHooks.useMutation<StarPoemMutation, StarPoemMutationVariables>(StarPoemDocument, baseOptions);
+export function useStarPoemMutation(baseOptions?: Apollo.MutationHookOptions<StarPoemMutation, StarPoemMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StarPoemMutation, StarPoemMutationVariables>(StarPoemDocument, options);
       }
 export type StarPoemMutationHookResult = ReturnType<typeof useStarPoemMutation>;
-export type StarPoemMutationOptions = ApolloReactCommon.BaseMutationOptions<StarPoemMutation, StarPoemMutationVariables>;
+export type StarPoemMutationOptions = Apollo.BaseMutationOptions<StarPoemMutation, StarPoemMutationVariables>;
 export const PoemDocument = gql`
     query POEM($poemId: ID, $poemUUID: ID, $phraseId: ID) {
   phrase(id: $phraseId) {
@@ -868,22 +883,30 @@ export const PoemDocument = gql`
  *   },
  * });
  */
-export function usePoemQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PoemQuery, PoemQueryVariables>) {
-        return ApolloReactHooks.useQuery<PoemQuery, PoemQueryVariables>(PoemDocument, baseOptions);
+export function usePoemQuery(baseOptions?: Apollo.QueryHookOptions<PoemQuery, PoemQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PoemQuery, PoemQueryVariables>(PoemDocument, options);
       }
-export function usePoemLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PoemQuery, PoemQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PoemQuery, PoemQueryVariables>(PoemDocument, baseOptions);
+export function usePoemLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PoemQuery, PoemQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PoemQuery, PoemQueryVariables>(PoemDocument, options);
         }
 export type PoemQueryHookResult = ReturnType<typeof usePoemQuery>;
 export type PoemLazyQueryHookResult = ReturnType<typeof usePoemLazyQuery>;
 export const RegisterDocument = gql`
     mutation REGISTER($email: String!, $name: String!, $password: String!, $token: String!, $verifyCode: String!) {
-  createUser(email: $email, name: $name, password: $password, token: $token, verifyCode: $verifyCode) {
+  createUser(
+    email: $email
+    name: $name
+    password: $password
+    token: $token
+    verifyCode: $verifyCode
+  ) {
     id
   }
 }
     `;
-export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
  * __useRegisterMutation__
@@ -906,17 +929,18 @@ export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMuta
  *   },
  * });
  */
-export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
-export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const LoginDocument = gql`
     mutation LOGIN($email: String!, $password: String!) {
   createUserToken(email: $email, password: $password)
 }
     `;
-export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
  * __useLoginMutation__
@@ -936,17 +960,18 @@ export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, 
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const SendVerifyCodeDocument = gql`
     mutation SEND_VERIFY_CODE($email: String!) {
   token: sendEmailVerifyCode(email: $email)
 }
     `;
-export type SendVerifyCodeMutationFn = ApolloReactCommon.MutationFunction<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
+export type SendVerifyCodeMutationFn = Apollo.MutationFunction<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
 
 /**
  * __useSendVerifyCodeMutation__
@@ -965,11 +990,12 @@ export type SendVerifyCodeMutationFn = ApolloReactCommon.MutationFunction<SendVe
  *   },
  * });
  */
-export function useSendVerifyCodeMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>) {
-        return ApolloReactHooks.useMutation<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>(SendVerifyCodeDocument, baseOptions);
+export function useSendVerifyCodeMutation(baseOptions?: Apollo.MutationHookOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>(SendVerifyCodeDocument, options);
       }
 export type SendVerifyCodeMutationHookResult = ReturnType<typeof useSendVerifyCodeMutation>;
-export type SendVerifyCodeMutationOptions = ApolloReactCommon.BaseMutationOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
+export type SendVerifyCodeMutationOptions = Apollo.BaseMutationOptions<SendVerifyCodeMutation, SendVerifyCodeMutationVariables>;
 export const PhrasesDocument = gql`
     query PHRASES($page: Int, $pageSize: Int) {
   phrases(page: $page, pageSize: $pageSize) {
@@ -1007,11 +1033,13 @@ export const PhrasesDocument = gql`
  *   },
  * });
  */
-export function usePhrasesQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<PhrasesQuery, PhrasesQueryVariables>) {
-        return ApolloReactHooks.useQuery<PhrasesQuery, PhrasesQueryVariables>(PhrasesDocument, baseOptions);
+export function usePhrasesQuery(baseOptions?: Apollo.QueryHookOptions<PhrasesQuery, PhrasesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PhrasesQuery, PhrasesQueryVariables>(PhrasesDocument, options);
       }
-export function usePhrasesLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<PhrasesQuery, PhrasesQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<PhrasesQuery, PhrasesQueryVariables>(PhrasesDocument, baseOptions);
+export function usePhrasesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PhrasesQuery, PhrasesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PhrasesQuery, PhrasesQueryVariables>(PhrasesDocument, options);
         }
 export type PhrasesQueryHookResult = ReturnType<typeof usePhrasesQuery>;
 export type PhrasesLazyQueryHookResult = ReturnType<typeof usePhrasesLazyQuery>;
@@ -1056,11 +1084,13 @@ export const StarPoemsDocument = gql`
  *   },
  * });
  */
-export function useStarPoemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StarPoemsQuery, StarPoemsQueryVariables>) {
-        return ApolloReactHooks.useQuery<StarPoemsQuery, StarPoemsQueryVariables>(StarPoemsDocument, baseOptions);
+export function useStarPoemsQuery(baseOptions: Apollo.QueryHookOptions<StarPoemsQuery, StarPoemsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StarPoemsQuery, StarPoemsQueryVariables>(StarPoemsDocument, options);
       }
-export function useStarPoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StarPoemsQuery, StarPoemsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StarPoemsQuery, StarPoemsQueryVariables>(StarPoemsDocument, baseOptions);
+export function useStarPoemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StarPoemsQuery, StarPoemsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StarPoemsQuery, StarPoemsQueryVariables>(StarPoemsDocument, options);
         }
 export type StarPoemsQueryHookResult = ReturnType<typeof useStarPoemsQuery>;
 export type StarPoemsLazyQueryHookResult = ReturnType<typeof useStarPoemsLazyQuery>;
@@ -1105,11 +1135,13 @@ export const RecitePoemsDocument = gql`
  *   },
  * });
  */
-export function useRecitePoemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<RecitePoemsQuery, RecitePoemsQueryVariables>) {
-        return ApolloReactHooks.useQuery<RecitePoemsQuery, RecitePoemsQueryVariables>(RecitePoemsDocument, baseOptions);
+export function useRecitePoemsQuery(baseOptions: Apollo.QueryHookOptions<RecitePoemsQuery, RecitePoemsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<RecitePoemsQuery, RecitePoemsQueryVariables>(RecitePoemsDocument, options);
       }
-export function useRecitePoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<RecitePoemsQuery, RecitePoemsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<RecitePoemsQuery, RecitePoemsQueryVariables>(RecitePoemsDocument, baseOptions);
+export function useRecitePoemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<RecitePoemsQuery, RecitePoemsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<RecitePoemsQuery, RecitePoemsQueryVariables>(RecitePoemsDocument, options);
         }
 export type RecitePoemsQueryHookResult = ReturnType<typeof useRecitePoemsQuery>;
 export type RecitePoemsLazyQueryHookResult = ReturnType<typeof useRecitePoemsLazyQuery>;
@@ -1137,11 +1169,13 @@ export const MeDocument = gql`
  *   },
  * });
  */
-export function useMeQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MeQuery, MeQueryVariables>) {
-        return ApolloReactHooks.useQuery<MeQuery, MeQueryVariables>(MeDocument, baseOptions);
+export function useMeQuery(baseOptions?: Apollo.QueryHookOptions<MeQuery, MeQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MeQuery, MeQueryVariables>(MeDocument, options);
       }
-export function useMeLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, baseOptions);
+export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery, MeQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MeQuery, MeQueryVariables>(MeDocument, options);
         }
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
@@ -1170,11 +1204,13 @@ export const TagsDocument = gql`
  *   },
  * });
  */
-export function useTagsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<TagsQuery, TagsQueryVariables>) {
-        return ApolloReactHooks.useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, baseOptions);
+export function useTagsQuery(baseOptions?: Apollo.QueryHookOptions<TagsQuery, TagsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
       }
-export function useTagsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<TagsQuery, TagsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<TagsQuery, TagsQueryVariables>(TagsDocument, baseOptions);
+export function useTagsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TagsQuery, TagsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TagsQuery, TagsQueryVariables>(TagsDocument, options);
         }
 export type TagsQueryHookResult = ReturnType<typeof useTagsQuery>;
 export type TagsLazyQueryHookResult = ReturnType<typeof useTagsLazyQuery>;
@@ -1209,11 +1245,13 @@ export const AuthorsDocument = gql`
  *   },
  * });
  */
-export function useAuthorsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AuthorsQuery, AuthorsQueryVariables>) {
-        return ApolloReactHooks.useQuery<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, baseOptions);
+export function useAuthorsQuery(baseOptions?: Apollo.QueryHookOptions<AuthorsQuery, AuthorsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, options);
       }
-export function useAuthorsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AuthorsQuery, AuthorsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, baseOptions);
+export function useAuthorsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AuthorsQuery, AuthorsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AuthorsQuery, AuthorsQueryVariables>(AuthorsDocument, options);
         }
 export type AuthorsQueryHookResult = ReturnType<typeof useAuthorsQuery>;
 export type AuthorsLazyQueryHookResult = ReturnType<typeof useAuthorsLazyQuery>;
@@ -1246,11 +1284,13 @@ export const AuthorDocument = gql`
  *   },
  * });
  */
-export function useAuthorQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AuthorQuery, AuthorQueryVariables>) {
-        return ApolloReactHooks.useQuery<AuthorQuery, AuthorQueryVariables>(AuthorDocument, baseOptions);
+export function useAuthorQuery(baseOptions: Apollo.QueryHookOptions<AuthorQuery, AuthorQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AuthorQuery, AuthorQueryVariables>(AuthorDocument, options);
       }
-export function useAuthorLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AuthorQuery, AuthorQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<AuthorQuery, AuthorQueryVariables>(AuthorDocument, baseOptions);
+export function useAuthorLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AuthorQuery, AuthorQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AuthorQuery, AuthorQueryVariables>(AuthorDocument, options);
         }
 export type AuthorQueryHookResult = ReturnType<typeof useAuthorQuery>;
 export type AuthorLazyQueryHookResult = ReturnType<typeof useAuthorLazyQuery>;
@@ -1262,6 +1302,10 @@ export const AuthorPoemsDocument = gql`
       id
       title
       kind
+      phrases {
+        id
+        text
+      }
       tags {
         id
         name
@@ -1292,11 +1336,13 @@ export const AuthorPoemsDocument = gql`
  *   },
  * });
  */
-export function useAuthorPoemsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<AuthorPoemsQuery, AuthorPoemsQueryVariables>) {
-        return ApolloReactHooks.useQuery<AuthorPoemsQuery, AuthorPoemsQueryVariables>(AuthorPoemsDocument, baseOptions);
+export function useAuthorPoemsQuery(baseOptions: Apollo.QueryHookOptions<AuthorPoemsQuery, AuthorPoemsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AuthorPoemsQuery, AuthorPoemsQueryVariables>(AuthorPoemsDocument, options);
       }
-export function useAuthorPoemsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AuthorPoemsQuery, AuthorPoemsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<AuthorPoemsQuery, AuthorPoemsQueryVariables>(AuthorPoemsDocument, baseOptions);
+export function useAuthorPoemsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AuthorPoemsQuery, AuthorPoemsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AuthorPoemsQuery, AuthorPoemsQueryVariables>(AuthorPoemsDocument, options);
         }
 export type AuthorPoemsQueryHookResult = ReturnType<typeof useAuthorPoemsQuery>;
 export type AuthorPoemsLazyQueryHookResult = ReturnType<typeof useAuthorPoemsLazyQuery>;
