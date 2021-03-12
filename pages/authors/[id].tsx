@@ -32,7 +32,6 @@ function Author() {
   const poemsCount = poemsData?.author?.poemsCount || 10
 
   const phrases = poems?.flatMap(poem => poem.phrases)
-  console.log(poems)
 
   function handleChange(page: number) {
     router.push({
