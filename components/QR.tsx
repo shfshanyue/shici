@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import Card from './Card'
+import Image from 'next/image'
 
 function QR () {
   return useMemo(() => (
@@ -18,7 +19,7 @@ function QR () {
       }
     `}</style>
       <div className="cunyin">
-        <img src="/static/wechat.jpg" width="180px" height="180px" />
+        <Image src="/static/wechat.jpg" width="180px" height="180px" />
         <span>每天一首古诗词</span>
       </div>
     </Card>
