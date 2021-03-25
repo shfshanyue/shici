@@ -17,6 +17,7 @@ function Author() {
   const router = useRouter()
   const { id, page = 1 } = router.query as any
   const { data, loading } = useAuthorQuery({
+    ssr:true,
     variables: {
       id,
     },
