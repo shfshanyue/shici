@@ -35,12 +35,12 @@ const SearchBar = ({ q }: Props) => {
       <div className="bar">
         <h3>{q}</h3>
         <div>
-          <Link href={`/poems?q={q}`}>
+          <Link href={`/poems?q=${q}`}>
             <a className={classNames({ active: pathname === '/poems' })}>
               诗词
           </a>
           </Link>
-          <Link href={`/authors?q={q}`}>
+          <Link href={`/authors?q=${q}`}>
             <a className={classNames({ active: pathname === '/authors' })}>
               作者
           </a>
